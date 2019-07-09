@@ -2,7 +2,7 @@
 import React from "react";
 import { jsx } from "@emotion/core";
 
-import { Card } from "../components/ui";
+import { Card, Circle } from "../components/ui";
 
 const section = {
   display: "flex",
@@ -16,30 +16,24 @@ const section = {
   }
 };
 
+const card = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center"
+};
+
+const name = {
+  width: "80%"
+};
+
 function ListProjects() {
   return (
     <main>
       <section css={section}>
-        <Card>Project Run</Card>
-        <Card>Project Crib</Card>
-        <Card>Project Codeable</Card>
-        <Card>Project Qumi</Card>
-        <Card>Project Quchi</Card>
-        <Card>Project Run</Card>
-        <Card>Project Crib</Card>
-        <Card>Project Codeable</Card>
-        <Card>Project Qumi</Card>
-        <Card>Project Quchi</Card>
-        <Card>Project Run</Card>
-        <Card>Project Crib</Card>
-        <Card>Project Codeable</Card>
-        <Card>Project Qumi</Card>
-        <Card>Project Quchi</Card>
-        <Card>Project Run</Card>
-        <Card>Project Crib</Card>
-        <Card>Project Codeable</Card>
-        <Card>Project Qumi</Card>
-        <Card>Project Quchi</Card>
+        <Card styles={card}>
+          <div css={name}>Project Run</div>
+          <Circle>30%</Circle>
+        </Card>
       </section>
     </main>
   );
