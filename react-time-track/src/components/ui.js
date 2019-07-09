@@ -37,7 +37,7 @@ function Card({ styles, ...props }) {
       css={{
         width: "33%",
         margin: "5px 0",
-        padding: "1rem",
+        padding: ".5rem",
         fontSize: "1.3rem",
         boxSizing: "border-box",
         boxShadow: "0px 2px 5px 0px rgba(0, 0, 0, .12)",
@@ -46,6 +46,25 @@ function Card({ styles, ...props }) {
         "@media (max-width: 768px)": {
           width: "90%"
         },
+        ...styles
+      }}
+    />
+  );
+}
+
+function Circle({ styles, ...props }) {
+  return (
+    <div
+      {...props}
+      css={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "60px",
+        height: "60px",
+        color: "#fff",
+        borderRadius: "50%",
+        background: "#000",
         ...styles
       }}
     />
@@ -66,4 +85,4 @@ function Subtitle({ styles, ...props }) {
   );
 }
 
-export { Button, Card, Subtitle };
+export { Button, Card, Circle, Subtitle };

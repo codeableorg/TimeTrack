@@ -8,6 +8,7 @@ function Center({ styles, ...props }) {
       css={{
         display: "flex",
         justifyContent: "center",
+        alignItems: "center",
         ...styles
       }}
     />
