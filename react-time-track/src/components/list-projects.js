@@ -3,38 +3,42 @@ import React from "react";
 import { jsx } from "@emotion/core";
 
 import { Card, Circle } from "../components/ui";
-
-const section = {
-  display: "flex",
-  flexWrap: "wrap",
-  margin: "0 25px",
-  justifyContent: "space-between",
-  "@media (max-width: 768px)": {
-    flexDirection: "column",
-    alignItems: "center",
-    margin: "0"
-  }
-};
+import { Section } from "../components/helpers";
 
 const card = {
   display: "flex",
   justifyContent: "space-between",
-  alignItems: "center"
+  alignItems: "center",
+  "&:firstChild": {
+    width: "80%"
+  }
 };
 
-const name = {
-  width: "80%"
-};
+const red = { borderColor: "#f24636" };
+const ambar = { borderColor: "#fec235" };
+const green = { borderColor: "#52af50" };
 
 function ListProjects() {
   return (
     <main>
-      <section css={section}>
+      <Section>
         <Card styles={card}>
-          <div css={name}>Project Run</div>
-          <Circle>30%</Circle>
+          <div>Project Run</div>
+          <Circle styles={red}>30%</Circle>
         </Card>
-      </section>
+        <Card styles={card}>
+          <div>Project Run</div>
+          <Circle styles={ambar}>50%</Circle>
+        </Card>
+        <Card styles={card}>
+          <div>Project Run</div>
+          <Circle styles={green}>40%</Circle>
+        </Card>
+        <Card styles={card}>
+          <div>Project Run</div>
+          <Circle>40%</Circle>
+        </Card>
+      </Section>
     </main>
   );
 }

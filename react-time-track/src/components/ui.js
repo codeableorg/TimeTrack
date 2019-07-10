@@ -10,19 +10,22 @@ function Button({ styles, ...props }) {
         margin: "5px 25px",
         padding: "1rem",
         fontSize: "1rem",
+        fontWeight: "bold",
         textAlign: "center",
         textTransform: "uppercase",
-        border: "1px solid #f60",
+        border: "1px solid currentcolor",
         borderRadius: ".25rem",
-        color: "white",
-        background: "#f60",
+        color: "#fff",
+        background: "#000",
+        transition: "all 200ms ease",
         "@media (max-width: 768px)": {
           width: "90%",
           margin: "5px 0"
         },
         "&:hover": {
-          background: "white",
-          color: "#f60"
+          cursor: "pointer",
+          background: "#fff",
+          color: "#000"
         },
         ...styles
       }}
@@ -60,11 +63,14 @@ function Circle({ styles, ...props }) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        width: "60px",
-        height: "60px",
-        color: "#fff",
+        width: "55px",
+        height: "55px",
+        fontSize: "1.1rem",
+        fontWeight: "bold",
+        color: "#666",
         borderRadius: "50%",
-        background: "#000",
+        border: "5px solid #000",
+        background: "#fff",
         ...styles
       }}
     />
