@@ -2,7 +2,7 @@ module Api
   class Api::ProjectsController < ApplicationController
 
     def index
-      render json: Project.all
+      render json: Project.where(closed: false)
     end
 
     rescue_from ActiveRecord::RecordNotFound do |e|

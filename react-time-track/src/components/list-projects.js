@@ -19,25 +19,33 @@ const ambar = { borderColor: "#fec235" };
 const green = { borderColor: "#52af50" };
 
 function ListProjects() {
+  const [projects, setProjects] = React.useState([]);
+
+  React.useEffect(() => {
+    async function listProjects() {
+      const list = await fetch("http://localhost:3000/api/projects", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(response => response.json());
+      setProjects(list);
+    }
+    listProjects();
+  }, []);
+
   return (
     <main>
       <Section>
-        <Card styles={card}>
-          <div>Project Run</div>
-          <Circle styles={red}>30%</Circle>
-        </Card>
-        <Card styles={card}>
-          <div>Project Run</div>
-          <Circle styles={ambar}>50%</Circle>
-        </Card>
-        <Card styles={card}>
-          <div>Project Run</div>
-          <Circle styles={green}>40%</Circle>
-        </Card>
-        <Card styles={card}>
-          <div>Project Run</div>
-          <Circle>40%</Circle>
-        </Card>
+        {projects.map(project => {
+          return (
+            <Card styles={card} key={project.id}>
+              <div>{project.name}</div>
+              <Circle>30%</Circle>
+            </Card>
+          );
+        })}
       </Section>
     </main>
   );
