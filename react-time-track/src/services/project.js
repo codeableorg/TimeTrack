@@ -11,4 +11,15 @@ async function listProjects() {
   return list;
 }
 
-export { listProjects };
+async function closedProjects() {
+  const list = await fetch(API_ALL_PROJECTS, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(response => response.json());
+  return list;
+}
+
+export { listProjects, closedProjects };
