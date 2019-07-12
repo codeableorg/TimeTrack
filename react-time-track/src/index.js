@@ -12,6 +12,12 @@ const global = {
     fontFamily: "'Nunito',sans-serif",
     fontSize: "15px",
     background: "#f2f3f5"
+    // color: "#34495e"
+  },
+  "li, ul": {
+    listStyle: "none",
+    margin: "0",
+    padding: "0"
   }
 };
 

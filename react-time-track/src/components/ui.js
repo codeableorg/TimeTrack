@@ -94,4 +94,23 @@ function Subtitle({ styles, ...props }) {
   );
 }
 
-export { Button, Card, Circle, Subtitle };
+function NavBarItem({ styles, ...props }) {
+  return (
+    <li
+      {...props}
+      css={{
+        display: "flex",
+        alignItems: "center",
+        padding: "0 0.5em",
+        "&:hover": {
+          cursor: "pointer",
+          background: "#222",
+          color: "#FFF"
+        },
+        ...styles
+      }}
+    />
+  );
+}
+
+export { Button, Card, Circle, Subtitle, NavBarItem };
