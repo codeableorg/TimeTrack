@@ -3,6 +3,12 @@ require 'rails_helper'
 RSpec.describe Api::HistoriesController, type: :controller do
 
   before do
+    @project =  Project.create(
+      name: "Project Space",
+      client: "Frank",
+      category: "Education",
+      closed: false
+    )
     @history =  Project.create(
       name: "Project Space",
       client: "Frank",
