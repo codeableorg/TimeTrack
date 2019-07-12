@@ -1,3 +1,3 @@
 class DailyLog < ApplicationRecord
-  belongs_to :project_members
+  belongs_to :project_member
 end
