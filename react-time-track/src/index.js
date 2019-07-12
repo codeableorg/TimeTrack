@@ -4,6 +4,7 @@ import { Router } from "@reach/router";
 import { jsx, Global } from "@emotion/core";
 
 import AllProjects from "./views/all-projects";
+import History from "./views/history";
 
 const global = {
   body: {
@@ -20,6 +21,7 @@ function App() {
       <Global styles={global} />
       <Router>
         <AllProjects path="/" />
+        <History path="/history" />
       </Router>
     </>
   );

@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render close projects 1`] = `
+<DocumentFragment>
+  <h1
+    class="css-1jtcojf-Subtitle"
+  >
+    Closed Projects:
+  </h1>
+  <main>
+    <section
+      class="css-10oyw64-Section"
+    />
+  </main>
+</DocumentFragment>
+`;
