@@ -9,6 +9,12 @@ RSpec.describe Api::ProjectsController, type: :controller do
       category: "Eduaction",
       closed: false
     )
+    @histories = Project.create(
+      name: "Project Rumi",
+      client: "MINEDU",
+      category: "Eduaction",
+      closed: true
+    )
   end
 
   describe 'GET index' do
