@@ -4,6 +4,7 @@ import { jsx } from "@emotion/core";
 
 import { Card, Circle } from "../components/ui";
 import { Section } from "../components/helpers";
+import { listProjects } from "../services/project";
 
 const card = {
   display: "flex",
@@ -22,17 +23,7 @@ function ListProjects() {
   const [projects, setProjects] = React.useState([]);
 
   React.useEffect(() => {
-    async function listProjects() {
-      const list = await fetch("http://localhost:3000/api/projects", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }).then(response => response.json());
-      setProjects(list);
-    }
-    listProjects();
+    listProjects().then(list => setProjects(list));
   }, []);
 
   return (
@@ -40,7 +31,7 @@ function ListProjects() {
       <Section>
         {projects.map(project => {
           return (
-            <Card styles={card} key={project.id}>
+            <Card styles={card} key={project.id} role="card">
               <div>{project.name}</div>
               <Circle>30%</Circle>
             </Card>

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render all projects 1`] = `
+<DocumentFragment>
+  <h1
+    class="css-1jtcojf-Subtitle"
+  >
+    All Projects:
+  </h1>
+  <main>
+    <section
+      class="css-10oyw64-Section"
+    />
+  </main>
+  <div
+    class="css-1dbpol2-Center"
+  >
+    <button
+      class="css-1sac3qe-Button"
+    >
+      New Project
+    </button>
+  </div>
+</DocumentFragment>
+`;
