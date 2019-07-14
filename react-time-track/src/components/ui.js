@@ -8,7 +8,7 @@ function Button({ styles, ...props }) {
       {...props}
       css={{
         width: "100%",
-        margin: "5px 25px",
+        margin: "5rem auto",
         padding: "1rem",
         fontSize: "1rem",
         fontWeight: "bold",
@@ -21,7 +21,9 @@ function Button({ styles, ...props }) {
         transition: "all 200ms ease",
         "@media (max-width: 768px)": {
           width: "90%",
-          margin: "5px 0"
+          margin: "2rem auto",
+          borderRadius: "0.5em",
+          boxSizing: "border-box"
         },
         "&:hover": {
           cursor: "pointer",
@@ -49,9 +51,6 @@ function Card({ styles, ...props }) {
         background: "white",
         span: {
           width: "80%"
-        },
-        "@media (max-width: 768px)": {
-          width: "90%"
         },
         ...styles
       }}
