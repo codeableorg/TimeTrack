@@ -8,7 +8,8 @@ import AllProjects from "./views/all-projects";
 import History from "./views/history";
 import NavBar from "./components/navbar";
 import Header from "./components/header";
-import UserList from "./views/users"
+import UserList from "./views/users";
+import MemberStatus from "./components/member-status";
 
 const global = {
   body: {
@@ -76,6 +77,7 @@ function App() {
         <Header tittle="Projects" path="/" />
         <Header tittle="History" path="/history" />
         <Header tittle="Members" path="/members" />
+        <Header tittle="Member Status" path="memberstatus" />
       </Router>
 
       <NavBar navBarActive={navBarActive} togleNavBar={togleNavBar} />

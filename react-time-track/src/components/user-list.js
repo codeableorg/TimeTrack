@@ -31,6 +31,7 @@ const circle = {
   marginRight: "2%",
   width: "3em",
   height: "3em",
+  border: "5px solid green",
   "@media (max-width: 768px)": {
     fontSize: "14px"
   }
@@ -109,7 +110,6 @@ function UserList() {
                         <div css={eachNameStyle}>{name}</div>
                         <div css={roleStyle}>{roles[count]}</div>
                       </div>
-                      <Circle styles={circle}>30%</Circle>
                     </div>
                   );
                 })}
