@@ -7,8 +7,15 @@ async function userList() {
     headers: {
       "Content-Type": "application/json"
     }
-  }).then(response => response.json());
-  return userList;
+  })
+  
+  if (!userList.ok) {
+    const { errors } = await userList.json();
+    console.log(errors);
+    throw new Error(errors);
+  }
+
+  return userList.json();
 }
 
 export { userList};

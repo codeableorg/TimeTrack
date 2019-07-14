@@ -53,7 +53,7 @@ const nameStyle = {
 
 const roleStyle = {
   color: "gray",
-  fontSize: "18px"
+  fontSize: "14px"
 };
 
 const button = {
@@ -64,6 +64,9 @@ const button = {
 
 const eachNameStyle = {
   cursor: "Pointer",
+  "@media (max-width: 768px)": {
+    fontSize: "18px"
+  },
   "&:hover": {
     cursor: "pointer",
     fontWeight: "bold"
