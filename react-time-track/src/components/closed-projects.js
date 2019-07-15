@@ -9,10 +9,7 @@ import { closedProjects } from "../services/project";
 const card = {
   display: "flex",
   justifyContent: "space-between",
-  alignItems: "center",
-  "&:firstChild": {
-    width: "80%"
-  }
+  alignItems: "center"
 };
 
 const red = { borderColor: "#f24636" };
@@ -32,7 +29,7 @@ function ClosedProjects() {
         {projects.map(project => {
           return (
             <Card styles={card} key={project.id} role="card">
-              <div>{project.name}</div>
+              <span>{project.name}</span>
               <Circle>30%</Circle>
             </Card>
           );
