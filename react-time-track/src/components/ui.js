@@ -46,6 +46,9 @@ function Card({ styles, ...props }) {
         boxShadow: "0px 2px 5px 0px rgba(0, 0, 0, .12)",
         borderRadius: ".25rem",
         background: "white",
+        span: {
+          width: "80%"
+        },
         "@media (max-width: 768px)": {
           width: "90%"
         },
