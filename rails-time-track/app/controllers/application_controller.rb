@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
   before_action :require_login
 
   def require_login
-    authenticate_token || render :unauthorize
+    authenticate_token || render_unauthorized('Access denied')
   end
 
   def current_user
@@ -13,9 +13,9 @@ class ApplicationController < ActionController::API
 
   private
 
-  def render_authorized(message)
+  def render_unauthorized(message)
     errors = { errors: { message: message } }
-    render json: errors, status :unauthorized
+    render json: errors, status: :unauthorized
   end
 
   def authenticate_token
