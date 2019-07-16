@@ -12,7 +12,8 @@ function Header({ tittle }) {
         display: "flex",
         margin: "0 25px",
         alignItems: "center",
-        borderBottom: "1px solid #e8e8eb"
+        borderBottom: "1px solid #e8e8eb",
+        height: "100%"
       }}
     >
       <h2

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { jsx } from "@emotion/core";
 import { NavBarItem } from "../components/ui";
 import { FaTimes } from "react-icons/fa";
+import { Link } from "@reach/router";
 
 function NavBar({ navBarActive, togleNavBar }) {
   const navBar = {
@@ -55,12 +56,21 @@ function NavBar({ navBarActive, togleNavBar }) {
           flexDirection: "column"
         }}
       >
-        <NavBarItem>My status</NavBarItem>
-        <NavBarItem>Projects</NavBarItem>
-        <NavBarItem>Members</NavBarItem>
-        <NavBarItem>History</NavBarItem>
-        <NavBarItem>Reports</NavBarItem>
-        <NavBarItem>User Settings</NavBarItem>
+        <Link to="/" onClick={togleNavBar}>
+          <NavBarItem>My status</NavBarItem>
+        </Link>
+        <Link to="/" onClick={togleNavBar}>
+          <NavBarItem>Projects</NavBarItem>
+        </Link>
+        <Link to="/" onClick={togleNavBar}>
+          <NavBarItem>Members</NavBarItem>
+        </Link>
+        <Link to="/history" onClick={togleNavBar}>
+          <NavBarItem>History</NavBarItem>
+        </Link>
+        <Link to="/" onClick={togleNavBar}>
+          <NavBarItem>User Settings</NavBarItem>
+        </Link>
       </ul>
     </nav>
   );

@@ -20,6 +20,10 @@ const global = {
     listStyle: "none",
     margin: "0",
     padding: "0"
+  },
+  a: {
+    textDecoration: "none",
+    color: "inherit"
   }
 };
 
@@ -63,7 +67,15 @@ function App() {
       <div css={menuIcon} onClick={togleNavBar}>
         <FaBars />
       </div>
-      <Header tittle="Projects" />
+      <Router
+        css={{
+          gridArea: "header"
+        }}
+      >
+        <Header tittle="Projects" path="/" />
+        <Header tittle="History" path="/history" />
+      </Router>
+
       <NavBar navBarActive={navBarActive} togleNavBar={togleNavBar} />
       <Router
         css={{
