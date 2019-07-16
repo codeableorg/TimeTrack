@@ -8,12 +8,7 @@ import ListProjects from "../components/list-projects";
 
 function AllProjects() {
   return (
-    <div
-      css={{
-        gridArea: "main",
-        marginTop: "0.5em"
-      }}
-    >
+    <div>
       <Subtitle>All Projects:</Subtitle>
       <ListProjects />
       <Center>

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { jsx } from "@emotion/core";
 import { NavBarItem } from "./ui";
-import { FaUser, FaClock, FaBars } from "react-icons/fa";
+import { FaUser, FaClock } from "react-icons/fa";
 
 function Header({ tittle }) {
   return (
@@ -15,21 +15,16 @@ function Header({ tittle }) {
         borderBottom: "1px solid #e8e8eb"
       }}
     >
-      <div
+      <h2
         css={{
-          margin: " 0 0.25em 0 -0.75em",
-          fontSize: "1.5em",
-          display: "flex",
-          zIndex: "1",
-          cursor: "pointer",
-          "@media (min-width: 768px)": {
-            display: "none"
+          marginLeft: "1.5em",
+          "@media (min-width: 960px)": {
+            marginLeft: "0"
           }
         }}
       >
-        <FaBars />
-      </div>
-      <h2>{tittle}</h2>
+        {tittle}
+      </h2>
       <div
         css={{
           display: "flex",
@@ -59,10 +54,7 @@ function Header({ tittle }) {
         </NavBarItem>
         <div
           css={{
-            display: "flex",
-            "@media (max-width: 768px)": {
-              display: "none"
-            }
+            display: "flex"
           }}
         >
           <div

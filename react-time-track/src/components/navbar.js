@@ -4,41 +4,28 @@ import { jsx } from "@emotion/core";
 import { NavBarItem } from "../components/ui";
 import { FaTimes } from "react-icons/fa";
 
-function NavBar() {
-  const [navBarClass, setNavBarClass] = useState("");
-
-  function togleNavBar() {
-    navBarClass === "" ? setNavBarClass("hide") : setNavBarClass("");
-  }
-
-  const hide = {
-    "@media (max-width: 768px)": {
-      display: "none"
+function NavBar({ navBarActive, togleNavBar }) {
+  const navBar = {
+    gridArea: "sidenav",
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
+    width: "200px",
+    position: "fixed",
+    overflowY: "auto",
+    zIndex: "2",
+    transform: navBarActive,
+    transition: "all .6s ease-in-out",
+    backgroundColor: "#fff",
+    boxShadow: "2px 0px 5px 1px rgba(0,0,0,.05)",
+    padding: "0 1em",
+    "@media (min-width: 960px)": {
+      transform: "translateX(0)"
     }
   };
 
   return (
-    <nav
-      css={{
-        gridArea: "sidenav",
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-        width: "200px",
-        position: "fixed",
-        overflowY: "auto",
-        zndex: "2",
-        transform: "translateX(-245px)",
-        transition: "all .6s ease-in-out",
-        backgroundColor: "#fff",
-        boxShadow: "2px 0px 5px 1px rgba(0,0,0,.05)",
-        padding: "0 1em",
-        "@media (min-width: 768px)": {
-          display: "flex",
-          flexDirection: "column"
-        }
-      }}
-    >
+    <nav css={navBar}>
       <div
         css={{
           fontSize: "1.5em",
@@ -53,10 +40,11 @@ function NavBar() {
         <span
           css={{
             display: "flex",
-            "@media (min-width: 768px)": {
-              display: "none"
+            "@media (min-width: 960px)": {
+              visibility: "hidden"
             }
           }}
+          onClick={togleNavBar}
         >
           <FaTimes />
         </span>

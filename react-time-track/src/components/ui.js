@@ -85,7 +85,7 @@ function Subtitle({ styles, ...props }) {
     <h1
       {...props}
       css={{
-        marginLeft: "1rem",
+        marginLeft: "25px",
         fontSize: "1.2rem",
         fontWeight: "100",
         ...styles
