@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { jsx } from "@emotion/core";
 import { NavBarItem } from "../components/ui";
+import { FaTimes } from "react-icons/fa";
 
 function NavBar() {
   const [navBarClass, setNavBarClass] = useState("");
@@ -19,36 +20,51 @@ function NavBar() {
   return (
     <nav
       css={{
+        gridArea: "sidenav",
         display: "flex",
         flexDirection: "column",
+        height: "100%",
+        width: "200px",
+        position: "fixed",
+        overflowY: "auto",
+        zndex: "2",
+        transform: "translateX(-245px)",
+        transition: "all .6s ease-in-out",
         backgroundColor: "#fff",
-        boxShadow: "0px 2px 5px 0px rgba(0,0,0,.12)",
-        height: "3em",
+        boxShadow: "2px 0px 5px 1px rgba(0,0,0,.05)",
         padding: "0 1em",
-        gridArea: "navbar"
+        "@media (min-width: 768px)": {
+          display: "flex",
+          flexDirection: "column"
+        }
       }}
     >
       <div
         css={{
-          display: "flex",
-          alignItems: "center",
-          fontSize: "1.2em",
+          fontSize: "1.5em",
           fontWeight: "bold",
-          "@media (max-width: 768px)": {
-            display: "none"
-          }
+          padding: "0.5em 0",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center"
         }}
       >
-        Timer Tracker
+        <span>Timer Tracker</span>
+        <span
+          css={{
+            display: "flex",
+            "@media (min-width: 768px)": {
+              display: "none"
+            }
+          }}
+        >
+          <FaTimes />
+        </span>
       </div>
       <ul
         css={{
           display: "flex",
-          flexDirection: "column",
-          marginLeft: "0.5em",
-          "@media (max-width: 768px)": {
-            display: "none"
-          }
+          flexDirection: "column"
         }}
       >
         <NavBarItem>My status</NavBarItem>

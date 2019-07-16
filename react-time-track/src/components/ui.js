@@ -101,7 +101,7 @@ function NavBarItem({ styles, ...props }) {
       css={{
         display: "flex",
         alignItems: "center",
-        padding: "0 0.5em",
+        padding: "0.5em 0.5em",
         "&:hover": {
           cursor: "pointer",
           background: "#222",

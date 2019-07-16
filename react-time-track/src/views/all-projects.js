@@ -10,7 +10,8 @@ function AllProjects() {
   return (
     <div
       css={{
-        gridArea: "main"
+        gridArea: "main",
+        marginTop: "0.5em"
       }}
     >
       <Subtitle>All Projects:</Subtitle>
