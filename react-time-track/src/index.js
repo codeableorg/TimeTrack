@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React, { useState } from "react";
+import { useState } from "react";
 import { render } from "react-dom";
 import { Router } from "@reach/router";
 import { jsx, Global } from "@emotion/core";

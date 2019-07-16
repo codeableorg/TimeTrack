@@ -25,7 +25,7 @@ test("testing api", async () => {
   const { getAllByRole } = render(<ListProjects />);
   let cards;
   await wait(() => {
-    cards = getAllByRole("card");
+    cards = getAllByRole("listitem");
   });
 
   expect(cards.length).toEqual(1);

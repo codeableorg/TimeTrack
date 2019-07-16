@@ -25,10 +25,10 @@ function ClosedProjects() {
 
   return (
     <main>
-      <Section>
+      <Section role="list">
         {projects.map(project => {
           return (
-            <Card styles={card} key={project.id} role="card">
+            <Card styles={card} key={project.id} role="listitem">
               <span>{project.name}</span>
               <Circle>30%</Circle>
             </Card>

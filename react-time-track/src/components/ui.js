@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
+import { Link } from "@reach/router";
 
 function Button({ styles, ...props }) {
   return (
@@ -96,20 +97,22 @@ function Subtitle({ styles, ...props }) {
 
 function NavBarItem({ styles, ...props }) {
   return (
-    <li
-      {...props}
-      css={{
-        display: "flex",
-        alignItems: "center",
-        padding: "0.5em 0.5em",
-        "&:hover": {
-          cursor: "pointer",
-          background: "#222",
-          color: "#FFF"
-        },
-        ...styles
-      }}
-    />
+    <Link to={"" + props.link} onClick={props.onClick}>
+      <div
+        {...props}
+        css={{
+          display: "flex",
+          adivgnItems: "center",
+          padding: "0.5em 0.5em",
+          "&:hover": {
+            cursor: "pointer",
+            background: "#222",
+            color: "#FFF"
+          },
+          ...styles
+        }}
+      />
+    </Link>
   );
 }
 

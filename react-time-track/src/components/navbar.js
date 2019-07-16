@@ -50,28 +50,28 @@ function NavBar({ navBarActive, togleNavBar }) {
           <FaTimes />
         </span>
       </div>
-      <ul
+      <div
         css={{
           display: "flex",
           flexDirection: "column"
         }}
       >
-        <Link to="/" onClick={togleNavBar}>
-          <NavBarItem>My status</NavBarItem>
-        </Link>
-        <Link to="/" onClick={togleNavBar}>
-          <NavBarItem>Projects</NavBarItem>
-        </Link>
-        <Link to="/" onClick={togleNavBar}>
-          <NavBarItem>Members</NavBarItem>
-        </Link>
-        <Link to="/history" onClick={togleNavBar}>
-          <NavBarItem>History</NavBarItem>
-        </Link>
-        <Link to="/" onClick={togleNavBar}>
-          <NavBarItem>User Settings</NavBarItem>
-        </Link>
-      </ul>
+        <NavBarItem link="/" onClick={togleNavBar}>
+          My status
+        </NavBarItem>
+        <NavBarItem link="/" onClick={togleNavBar}>
+          Projects
+        </NavBarItem>
+        <NavBarItem link="/" onClick={togleNavBar}>
+          Members
+        </NavBarItem>
+        <NavBarItem link="/history" onClick={togleNavBar}>
+          History
+        </NavBarItem>
+        <NavBarItem link="/" onClick={togleNavBar}>
+          User Settings
+        </NavBarItem>
+      </div>
     </nav>
   );
 }
