@@ -56,7 +56,7 @@ exports[`login component 1`] = `
         </a>
       </label>
       <button
-        class="css-nxgp5n-Login"
+        class="css-gkqvdy-Login"
         type="submit"
       >
         Log In

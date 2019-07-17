@@ -43,6 +43,7 @@ function Header({ tittle }) {
             },
             padding: "0 1em"
           }}
+          link="#"
         >
           <FaClock />
           <span

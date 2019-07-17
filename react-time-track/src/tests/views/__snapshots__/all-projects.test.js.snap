@@ -18,7 +18,11 @@ exports[`Render all projects 1`] = `
       class="css-1dbpol2-Center"
     >
       <button
+<<<<<<< HEAD
         class="css-lc2rpa-Button"
+=======
+        class="css-12x0r7s-Button"
+>>>>>>> Merge with develop branch
       >
         New Project
       </button>

@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useState } from "react";
+import React from "react";
 import { render } from "react-dom";
 import { Router, Redirect } from "@reach/router";
 import { jsx, Global } from "@emotion/core";
@@ -62,12 +62,12 @@ function App() {
     JSON.parse(localStorage.getItem("user")) || {}
   );
 
+  const [navBarActive, setNavBarActive] = React.useState("translateX(-245px)");
+
   function handleCurrentUser(newValue) {
     localStorage.setItem("user", JSON.stringify(newValue));
     setCurrentUser(newValue);
   }
-
-  const [navBarActive, setNavBarActive] = useState("translateX(-245px)");
 
   function togleNavBar() {
     navBarActive === "translateX(-245px)"
