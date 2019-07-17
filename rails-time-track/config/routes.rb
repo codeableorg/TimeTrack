@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     resources :projects, :only => [:index, :show]
     resources :weekly_project_reports, :only => [:show]
     resources :histories, :only => [:index]
-    resources :users, :only => [:index]
+
+    resources :users, only: [:index, :show] do
+      resources :projects, only: :index
+     end
   end
 end

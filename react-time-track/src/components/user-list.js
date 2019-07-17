@@ -1,9 +1,10 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import { Button, Card, Circle } from "./ui";
+import { Button, Card, Circle, NavBarItem } from "./ui";
 import { Section } from "./helpers";
 import { userList } from "../services/user";
+import { Link } from "@reach/router";
 
 const userStyle = {
   width: "70%",
@@ -91,8 +92,8 @@ function UserList() {
   }, {});
 
   const roles = users.map(user => {
-    return user.role;
-  });
+    return user.role;})
+    console.log("roles: ",roles);
   let count = -1;
 
   const firstLetter = Object.keys(members);
@@ -110,7 +111,9 @@ function UserList() {
                   return (
                     <div css={eachUser} key={name}>
                       <div css={nameStyle}>
-                        <div css={eachNameStyle}>{name}</div>
+                        <Link to={`/users/${user.id}`}>
+                          <div css={eachNameStyle}>{name}</div>
+                        </Link>
                         <div css={roleStyle}>{roles[count]}</div>
                       </div>
                     </div>

@@ -20,4 +20,22 @@ async function userList() {
   return userList.json();
 }
 
-export { userList };
+async function getProjectUser(userId) {
+  const response = await fetch(`${API_USERS}/${userId}`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+
+  if (!response.ok) {
+    const { errors } = await response.json();
+    console.log(errors);
+    throw new Error(errors);
+  }
+
+  return response.json();
+}
+
+export { userList, getProjectUser };

@@ -13,6 +13,7 @@ import History from "./views/history";
 import Project from "./views/project";
 import UserList from "./components/user-list";
 import ResetPassword from "./views/reset-password";
+import MemberStatus from "./components/member-status";
 
 const global = {
   body: {
@@ -71,6 +72,7 @@ function App() {
           <History path="/history" />
           <UserList path="/members" />
           <Project path="/projects/:project_id" />
+          <MemberStatus path="/members/:id" />
         </Home>
       </Router>
     </UserProvider>
