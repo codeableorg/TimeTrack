@@ -52,6 +52,9 @@ function Card({ styles, ...props }) {
         span: {
           width: "80%"
         },
+        "@media (max-width: 768px)": {
+          width: "90%"
+        },
         ...styles
       }}
     />
