@@ -3,13 +3,16 @@ module Api
     skip_before_action :require_login, only: :create
 
     def create
-      user = User.valid_login?(params[:email], params[:password])
-      if user
-        regenerate_and_signed_token(user)
-        render json: user
+      if params.has_key?("email") && params.has_key?("password")
+        user = User.valid_login?(params[:email], params[:password])
+        if user
+          regenerate_and_signed_token(user)
+          render json: user
+        else
+          render_errors("Incorrect email or password", :bad_request)
+        end
       else
-        render json: { errors: "Incorrect email or password" },
-              status: :bad_request
+        render_errors("You have to pass the parameters 'email' and 'password'", :bad_request)
       end
     end
 
