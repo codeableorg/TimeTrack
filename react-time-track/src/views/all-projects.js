@@ -8,13 +8,13 @@ import ListProjects from "../components/list-projects";
 
 function AllProjects() {
   return (
-    <>
+    <div>
       <Subtitle>All Projects:</Subtitle>
       <ListProjects />
       <Center>
         <Button>New Project</Button>
       </Center>
-    </>
+    </div>
   );
 }
 
