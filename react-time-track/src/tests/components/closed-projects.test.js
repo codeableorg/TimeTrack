@@ -19,7 +19,7 @@ test("Testing API history", async () => {
   const { getAllByRole } = render(<ClosedProjects />);
   let cards;
   await wait(() => {
-    cards = getAllByRole("card");
+    cards = getAllByRole("listitem");
   });
 
   expect(cards.length).toEqual(1);
