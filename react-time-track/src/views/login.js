@@ -3,7 +3,7 @@ import React from "react";
 import { jsx } from "@emotion/core";
 
 import { Button } from "../components/ui";
-import { login } from "../services/user";
+import { login } from "../services/session";
 import { navigate } from "@reach/router";
 import { useConsumer } from "../contexts/user";
 
@@ -13,6 +13,7 @@ function Login() {
 
   const { setUser } = useConsumer();
   const [action, setAction] = React.useState("Log In");
+  const [error, setError] = React.useState(null);
 
   function handleChangeEmail(event) {
     setEmail(event.target.value);
@@ -32,6 +33,7 @@ function Login() {
       })
       .catch(response => {
         setAction("Log In");
+        setError(response.message);
       });
   }
 
@@ -119,6 +121,18 @@ function Login() {
         <Button type="submit" css={{ margin: "1em 0" }}>
           {action}
         </Button>
+        {error && (
+          <div
+            css={{
+              color: "red",
+              fontWeight: "bold",
+              fontSize: "1em",
+              textAlign: "center"
+            }}
+          >
+            {error}
+          </div>
+        )}
       </form>
     </div>
   );

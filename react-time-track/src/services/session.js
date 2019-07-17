@@ -44,7 +44,7 @@ async function login({ email, password }) {
 
   if (!response.ok) {
     const { errors } = await response.json();
-    throw new Error(errors);
+    throw new Error(errors.message);
   }
 
   return response.json();
