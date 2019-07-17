@@ -1,5 +1,5 @@
 module Api
-  class SessionController < ApplicationController
+  class Api::SessionsController < ApplicationController
     skip_before_action :require_login, only: :create
 
     def create

@@ -10,4 +10,8 @@ class User < ApplicationRecord
     user = find_by(email: email)
     user if user&.authenticate(password)
   end
+
+  def invalidate_token
+    update(token: nil)
+  end
 end
