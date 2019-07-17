@@ -1,9 +1,12 @@
 /** @jsx jsx */
 import { useState } from "react";
 import { render } from "react-dom";
-import { Router } from "@reach/router";
+import { Router, Redirect } from "@reach/router";
 import { jsx, Global } from "@emotion/core";
 import { FaBars } from "react-icons/fa";
+
+import { UserProvider } from "./contexts/user";
+import Login from "./views/login";
 import AllProjects from "./views/all-projects";
 import History from "./views/history";
 import NavBar from "./components/navbar";
@@ -55,6 +58,15 @@ const menuIcon = {
 };
 
 function App() {
+  const [currentUser, setCurrentUser] = React.useState(
+    JSON.parse(localStorage.getItem("user")) || {}
+  );
+
+  function handleCurrentUser(newValue) {
+    localStorage.setItem("user", JSON.stringify(newValue));
+    setCurrentUser(newValue);
+  }
+
   const [navBarActive, setNavBarActive] = useState("translateX(-245px)");
 
   function togleNavBar() {
@@ -63,33 +75,47 @@ function App() {
       : setNavBarActive("translateX(-245px)");
   }
   return (
-    <div css={gridContainer}>
+    <UserProvider user={currentUser} setUser={handleCurrentUser}>
       <Global styles={global} />
-      <div css={menuIcon} onClick={togleNavBar}>
-        <FaBars />
-      </div>
-      <Router
-        css={{
-          gridArea: "header"
-        }}
-      >
-        <Header tittle="Projects" path="/" />
-        <Header tittle="History" path="/history" />
-        <Header tittle="Members" path="/members" />
+      <Router>
+        <Login path="/login" />
       </Router>
+      {currentUser.name ? (
+        <>
+          <Redirect from="/login" to="/" noThrow />
+          <div css={gridContainer}>
+            <div css={menuIcon} onClick={togleNavBar}>
+              <FaBars />
+            </div>
+            <Router
+              css={{
+                gridArea: "header"
+              }}
+            >
+              <Header tittle="Projects" path="/" />
+              <Header tittle="History" path="/history" />
+              <Header tittle="Members" path="/members" />
+            </Router>
 
-      <NavBar navBarActive={navBarActive} togleNavBar={togleNavBar} />
-      <Router
-        css={{
-          gridArea: "main",
-          marginTop: "0.5em"
-        }}
-      >
-        <AllProjects path="/" />
-        <History path="/history" />
-        <UserList path="/members" />
-      </Router>
-    </div>
+            <NavBar navBarActive={navBarActive} togleNavBar={togleNavBar} />
+            <Router
+              css={{
+                gridArea: "main",
+                marginTop: "0.5em"
+              }}
+            >
+              <AllProjects path="/" />
+              <History path="/history" />
+              <UserList path="/members" />
+            </Router>
+          </div>
+        </>
+      ) : (
+        window.location.pathname !== "/login" && (
+          <Redirect from={window.location.pathname} to="/login" noThrow />
+        )
+      )}
+    </UserProvider>
   );
 }
 

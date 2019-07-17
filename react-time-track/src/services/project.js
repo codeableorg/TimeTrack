@@ -1,5 +1,7 @@
-const API_ALL_PROJECTS = "http://localhost:3000/api/projects";
-const API_CLOSED_PROJECTS = "http://localhost:3000/api/histories";
+import { apiUrl } from "../util";
+
+const API_ALL_PROJECTS = `${apiUrl}projects`;
+const API_CLOSED_PROJECTS = `${apiUrl}histories`;
 
 async function listProjects() {
   const list = await fetch(API_ALL_PROJECTS, {

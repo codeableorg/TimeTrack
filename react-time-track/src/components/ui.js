@@ -20,10 +20,14 @@ function Button({ styles, ...props }) {
         background: "#000",
         transition: "all 200ms ease",
         "@media (max-width: 768px)": {
+<<<<<<< HEAD
           width: "90%",
           margin: "2rem auto",
           borderRadius: "0.5em",
           boxSizing: "border-box"
+=======
+          margin: "5px 0"
+>>>>>>> Add login component, user services, user context
         },
         "&:hover": {
           cursor: "pointer",
