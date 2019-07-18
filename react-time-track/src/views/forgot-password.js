@@ -1,0 +1,115 @@
+/** @jsx jsx */
+import React from "react";
+import { jsx } from "@emotion/core";
+
+import { Button } from "../components/ui";
+import { findUser } from "../services/password";
+import { navigate } from "@reach/router";
+
+function ForgotPassword() {
+  const [email, setEmail] = React.useState("");
+
+  const [action, setAction] = React.useState("Reset Password");
+  const [error, setError] = React.useState(null);
+
+  function handleChangeEmail(event) {
+    setEmail(event.target.value);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    setAction("Loading...");
+    findUser({ email })
+      .then(response => {
+        navigate("/login");
+      })
+      .catch(response => {
+        setAction("Reset Password");
+        setError(response.message);
+      });
+  }
+
+  const formStyle = {
+    height: "350px",
+    justifyContent: "space-around",
+    display: "flex",
+    flexDirection: "column",
+    boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.5)",
+    padding: "1.5em",
+    backgroundColor: "#eeeeee",
+    borderRadius: "0.5em",
+    width: "80%",
+    "@media (min-width: 600px)": {
+      width: "50%"
+    }
+  };
+
+  const labelStyle = {
+    fontSize: "1.5em",
+    fontWeight: "bold"
+  };
+
+  const inputStyle = {
+    fontSize: "20px",
+    padding: "10px",
+    outline: "none",
+    border: "1px solid white",
+    textAlign: "center",
+    "&:focus": { borderBottom: "1px solid #000" }
+  };
+
+  const h1Style = {
+    textAlign: "center",
+    color: "#000",
+    margin: 0
+  };
+
+  return (
+    <div
+      css={{
+        minHeight: "100vh",
+        margin: "0 0 0 0",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+      }}
+    >
+      <form css={formStyle} onSubmit={handleSubmit}>
+        <h1 css={h1Style}>Forgot your password</h1>
+
+        <label css={labelStyle} htmlFor="Username">
+          Username
+        </label>
+        <input
+          css={inputStyle}
+          aria-label="Enter your email"
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+          onChange={handleChangeEmail}
+          value={email}
+          autoComplete="off"
+          required
+        />
+
+        <Button type="submit" css={{ margin: "1em 0" }}>
+          {action}
+        </Button>
+        {error && (
+          <div
+            css={{
+              color: "red",
+              fontWeight: "bold",
+              fontSize: "1em",
+              textAlign: "center"
+            }}
+          >
+            {error}
+          </div>
+        )}
+      </form>
+    </div>
+  );
+}
+
+export default ForgotPassword;
