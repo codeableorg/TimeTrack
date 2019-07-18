@@ -1,4 +1,6 @@
-const API_USERS = "http://localhost:3000/api/users";
+import { apiUrl } from "../util";
+
+const API_USERS = `${apiUrl}users`;
 
 async function userList() {
   const userList = await fetch(API_USERS, {
@@ -7,8 +9,8 @@ async function userList() {
     headers: {
       "Content-Type": "application/json"
     }
-  })
-  
+  });
+
   if (!userList.ok) {
     const { errors } = await userList.json();
     console.log(errors);
@@ -18,4 +20,4 @@ async function userList() {
   return userList.json();
 }
 
-export { userList};
+export { userList };

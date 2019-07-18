@@ -1,26 +1,42 @@
-const API_ALL_PROJECTS = "http://localhost:3000/api/projects";
-const API_CLOSED_PROJECTS = "http://localhost:3000/api/histories";
+import { apiUrl } from "../util";
+
+const API_ALL_PROJECTS = `${apiUrl}projects`;
+const API_CLOSED_PROJECTS = `${apiUrl}histories`;
 
 async function listProjects() {
-  const list = await fetch(API_ALL_PROJECTS, {
+  const response = await fetch(API_ALL_PROJECTS, {
     method: "GET",
     credentials: "include",
     headers: {
       "Content-Type": "application/json"
     }
-  }).then(response => response.json());
-  return list;
+  });
+
+  if (!response.ok) {
+    const { errors } = await response.json();
+    console.log(errors);
+    throw new Error(errors);
+  }
+
+  return response.json();
 }
 
 async function closedProjects() {
-  const list = await fetch(API_CLOSED_PROJECTS, {
+  const response = await fetch(API_CLOSED_PROJECTS, {
     method: "GET",
     credentials: "include",
     headers: {
       "Content-Type": "application/json"
     }
-  }).then(response => response.json());
-  return list;
+  });
+
+  if (!response.ok) {
+    const { errors } = await response.json();
+    console.log(errors);
+    throw new Error(errors);
+  }
+
+  return response.json();
 }
 
 export { listProjects, closedProjects };

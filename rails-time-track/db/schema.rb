@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_09_225925) do
+ActiveRecord::Schema.define(version: 2019_07_16_000553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2019_07_09_225925) do
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["project_member_id"], name: "index_daily_logs_on_project_members_id"
+    t.index ["project_member_id"], name: "index_daily_logs_on_project_member_id"
   end
 
   create_table "project_members", force: :cascade do |t|
@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(version: 2019_07_09_225925) do
     t.integer "rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "token"
+    t.index ["token"], name: "index_users_on_token"
   end
 
   create_table "weekly_project_reports", force: :cascade do |t|

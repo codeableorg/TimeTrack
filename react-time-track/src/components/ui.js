@@ -19,6 +19,7 @@ function Button({ styles, ...props }) {
         color: "#fff",
         background: "#000",
         transition: "all 200ms ease",
+        outline: "0",
         "@media (max-width: 768px)": {
           width: "90%",
           margin: "2rem auto",
@@ -96,12 +97,12 @@ function Subtitle({ styles, ...props }) {
 
 function NavBarItem({ styles, ...props }) {
   return (
-    <Link to={"" + props.link} onClick={props.onClick}>
+    <Link to={props.link} onClick={props.onClick}>
       <div
         {...props}
         css={{
           display: "flex",
-          adivgnItems: "center",
+          alignItems: "center",
           padding: "0.5em 0.5em",
           "&:hover": {
             cursor: "pointer",

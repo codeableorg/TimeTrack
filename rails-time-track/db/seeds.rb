@@ -5,6 +5,7 @@ require 'faker'
   owner = User.create(
     name: Faker::Name.name,
     email: Faker::Internet.email,
+    password: "123456",
     role: "Owner",
     rate:1800
   )
@@ -12,6 +13,7 @@ require 'faker'
   manager1 = User.create(
     name: Faker::Name.name,
     email: Faker::Internet.email,
+    password: "123456",
     role: "Manager",
     rate: 1600
   )
@@ -19,6 +21,7 @@ require 'faker'
   manager2 = User.create(
     name: Faker::Name.name,
     email: Faker::Internet.email,
+    password: "123456",
     role: "Manager",
     rate: 1550
   )
@@ -26,6 +29,7 @@ require 'faker'
   analyst1 = User.create(
     name: Faker::Name.name,
     email: Faker::Internet.email,
+    password: "123456",
     role: "Analyst",
     rate: 1200
   )
@@ -33,6 +37,7 @@ require 'faker'
   analyst2 = User.create(
     name: Faker::Name.name,
     email: Faker::Internet.email,
+    password: "123456",
     role: "Analyst",
     rate: 1100
   )
@@ -40,6 +45,7 @@ require 'faker'
   analyst3 = User.create(
     name: Faker::Name.name,
     email: Faker::Internet.email,
+    password: "123456",
     role: "Analyst",
     rate: 1150
   )
@@ -167,3 +173,5 @@ end
     )
   end
 
+
+p "Data created"
