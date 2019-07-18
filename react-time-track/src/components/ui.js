@@ -102,7 +102,7 @@ function NavBarItem({ styles, ...props }) {
         {...props}
         css={{
           display: "flex",
-          adivgnItems: "center",
+          alignItems: "center",
           padding: "0.5em 0.5em",
           "&:hover": {
             cursor: "pointer",
