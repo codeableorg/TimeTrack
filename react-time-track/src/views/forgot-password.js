@@ -9,7 +9,7 @@ import { navigate } from "@reach/router";
 function ForgotPassword() {
   const [email, setEmail] = React.useState("");
 
-  const [action, setAction] = React.useState("Reset Password");
+  const [action, setAction] = React.useState("Send Email");
   const [error, setError] = React.useState(null);
 
   function handleChangeEmail(event) {
@@ -24,7 +24,7 @@ function ForgotPassword() {
         navigate("/login");
       })
       .catch(response => {
-        setAction("Reset Password");
+        setAction("Send Email");
         setError(response.message);
       });
   }
@@ -61,7 +61,7 @@ function ForgotPassword() {
   const h1Style = {
     textAlign: "center",
     color: "#000",
-    margin: 0
+    margin: "0.5em 0"
   };
 
   return (
@@ -77,8 +77,14 @@ function ForgotPassword() {
       <form css={formStyle} onSubmit={handleSubmit}>
         <h1 css={h1Style}>Forgot your password</h1>
 
+        <h3
+          css={{ fontSize: "1em", fontWeight: "normal", textAlign: "center" }}
+        >
+          If you don't remember it, calm down. You can reset it
+        </h3>
+
         <label css={labelStyle} htmlFor="Username">
-          Username
+          Email
         </label>
         <input
           css={inputStyle}

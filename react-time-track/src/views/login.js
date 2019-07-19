@@ -69,7 +69,7 @@ function Login() {
   const h1Style = {
     textAlign: "center",
     color: "#000",
-    margin: 0
+    margin: "0.5em 0"
   };
 
   return (
@@ -86,7 +86,7 @@ function Login() {
         <h1 css={h1Style}>TimeTracker</h1>
 
         <label css={labelStyle} htmlFor="Username">
-          Username
+          Email
         </label>
         <input
           css={inputStyle}
@@ -99,7 +99,7 @@ function Login() {
           autoComplete="off"
           required
         />
-
+        <br />
         <label css={labelStyle} htmlFor="Username">
           Password
         </label>
@@ -116,13 +116,18 @@ function Login() {
         />
         <br />
         <label css={{ textAlign: "center" }}>
-          <a href="/">Forgot your password?</a>
+          <a href="/forgot-password">Forgot your password?</a>
         </label>
-        <Button type="submit" css={{ margin: "1em 0" }}>
+        <Button
+          type="submit"
+          css={{ margin: "1em 0" }}
+          aria-label="Sign in user"
+        >
           {action}
         </Button>
         {error && (
           <div
+            aria-label="Error messages during signing in user"
             css={{
               color: "red",
               fontWeight: "bold",

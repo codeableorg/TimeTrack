@@ -11,6 +11,7 @@ import ForgotPassword from "./views/forgot-password";
 import AllProjects from "./views/all-projects";
 import History from "./views/history";
 import UserList from "./components/user-list";
+import ResetPassword from "./views/reset-password";
 
 const global = {
   body: {
@@ -56,12 +57,14 @@ function App() {
           />
         ) : (
           window.location.pathname !== "/login" &&
+          window.location.pathname.indexOf("/reset-password") === -1 &&
           window.location.pathname !== "/forgot-password" && (
             <Redirect from={window.location.pathname} to="/login" noThrow />
           )
         )}
         <Login path="/login" />
         <ForgotPassword path="/forgot-password" />
+        <ResetPassword path="/reset-password/:token" />
         <Home path="/">
           <AllProjects path="/" />
           <History path="/history" />

@@ -9,7 +9,7 @@ exports[`login component 1`] = `
       class="css-7zc9xd-Login"
     >
       <h1
-        class="css-b55j7b-Login"
+        class="css-q6ww2i-Login"
       >
         TimeTracker
       </h1>
@@ -17,7 +17,7 @@ exports[`login component 1`] = `
         class="css-jidqlr-Login"
         for="Username"
       >
-        Username
+        Email
       </label>
       <input
         aria-label="Enter your email"
@@ -29,6 +29,7 @@ exports[`login component 1`] = `
         type="email"
         value=""
       />
+      <br />
       <label
         class="css-jidqlr-Login"
         for="Username"
@@ -50,12 +51,13 @@ exports[`login component 1`] = `
         class="css-dlvh0q-Login"
       >
         <a
-          href="/"
+          href="/forgot-password"
         >
           Forgot your password?
         </a>
       </label>
       <button
+        aria-label="Sign in user"
         class="css-mc4n3l-Login"
         type="submit"
       >
