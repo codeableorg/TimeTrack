@@ -70,7 +70,7 @@ function App() {
           <AllProjects path="/" />
           <History path="/history" />
           <UserList path="/members" />
-          <Project path="/projects/1" />
+          <Project path="/projects/:project_id" />
         </Home>
       </Router>
     </UserProvider>

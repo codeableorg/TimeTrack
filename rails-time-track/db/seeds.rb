@@ -3,16 +3,16 @@ require 'faker'
 #Create users
 
   owner = User.create(
-    name: "Maria Owner",
-    email: "owner@mail.com",
+    name: "Diego Owner",
+    email: "diegotc86@gmail.com",
     password: "123456",
     role: "Owner",
     rate: 6200
   )
   
   manager1 = User.create(
-    name: "Juan Manager",
-    email: "manager1@mail.com",
+    name: "Brayan Manager",
+    email: "linzeur@hotmail.com ",
     password: "123456",
     role: "Manager",
     rate: 4300
@@ -27,8 +27,8 @@ require 'faker'
   )
   
   analyst1 = User.create(
-    name: "Pepe Analyst",
-    email: "analyst1@mail.com",
+    name: "Jonathan Analyst",
+    email: "jcmendozar10@gmail.com",
     password: "123456",
     role: "Analyst",
     rate: 1200
