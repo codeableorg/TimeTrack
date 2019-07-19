@@ -53,4 +53,4 @@ yarn-error.log*
 
 /rails-time-track/Gemfile.lock
 
-.env
+/rails-time-track/.env
