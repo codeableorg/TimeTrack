@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     post "/reset-password", to: "passwords#reset"
 
     resources :projects, :only => [:index, :show]
+    resources :weekly_project_reports, :only => [:show]
     resources :histories, :only => [:index]
     resources :users, :only => [:index]
   end
