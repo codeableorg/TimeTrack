@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
   namespace :api do
-    resources :projects, :only => [:index]
+    post "/login", to: "sessions#create"
+    delete "/logout", to: "sessions#destroy"
+
+    post "/change-password", to: "passwords#change"
+    post "/reset-password", to: "passwords#reset"
+
+    resources :projects, :only => [:index, :show]
+    resources :weekly_project_reports, :only => [:show]
     resources :histories, :only => [:index]
+    resources :users, :only => [:index]
   end
 end
