@@ -56,12 +56,14 @@ function Home({ children }) {
         <Header tittle="Projects" path="/" />
         <Header tittle="History" path="/history" />
         <Header tittle="Members" path="/members" />
+        <Header tittle="Project" path="/projects/:id" />
       </Router>
 
       <div
         css={{
           gridArea: "main",
-          marginTop: "0.5em"
+          marginTop: "0.5em",
+          overflow: "auto"
         }}
       >
         {children}
