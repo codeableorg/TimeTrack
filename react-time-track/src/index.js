@@ -10,6 +10,7 @@ import Home from "./views/home";
 import ForgotPassword from "./views/forgot-password";
 import AllProjects from "./views/all-projects";
 import History from "./views/history";
+import Project from "./views/project";
 import UserList from "./components/user-list";
 import ResetPassword from "./views/reset-password";
 
@@ -69,6 +70,7 @@ function App() {
           <AllProjects path="/" />
           <History path="/history" />
           <UserList path="/members" />
+          <Project path="/projects/1" />
         </Home>
       </Router>
     </UserProvider>
