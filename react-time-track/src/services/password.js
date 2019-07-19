@@ -1,7 +1,7 @@
 import { apiUrl } from "../util";
 
-const API_CHANGE = `${apiUrl}reset`;
-const API_RESET = `${apiUrl}create-password`;
+const API_CHANGE = `${apiUrl}change-password`;
+const API_RESET = `${apiUrl}reset-password`;
 
 async function findUser({ email }) {
   const response = await fetch(API_CHANGE, {

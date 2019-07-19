@@ -2,7 +2,7 @@ module Api
   class Api::PasswordsController < ApplicationController
     skip_before_action :require_login
 
-    def reset
+    def change
       if params[:email]
         user = User.find_by_email(params[:email])
         if user
@@ -17,13 +17,13 @@ module Api
       end
     end
 
-    def create
+    def reset
       if params[:token] && params[:password]
         user = User.find_by(reset_digest: params[:token])
         if user
-          
+
           if user.reset_token_expired?
-            render_errors("Expired token", :bad_request)  
+            render_errors("Token expired", :bad_request)  
           elsif params[:password].empty?
             render_errors("Password can't be empty", :bad_request)  
           elsif user.update_attributes(password: params[:password])

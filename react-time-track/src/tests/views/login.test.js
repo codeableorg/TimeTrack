@@ -41,15 +41,10 @@ test("Test", async () => {
 
   InputPassword.value = "123asdsd";
 
-  console.log(InputEmail.value);
-  console.log(InputPassword.value);
-
   fireEvent.click(Button);
   expect(getNodeText(Button)).toBe("Loading...");
   Button = await waitForElement(() => getByLabelText("Sign in user"));
   const ErrorMessage = getByLabelText("Error messages during signing in user");
-  console.log(getNodeText(ErrorMessage));
-  console.log("sadasd");
   expect(getNodeText(ErrorMessage)).not.toBeNull();
 
   // expect(setUser).toHaveBeenCalled();
