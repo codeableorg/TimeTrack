@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_09_225925) do
+ActiveRecord::Schema.define(version: 2019_07_18_160915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,10 @@ ActiveRecord::Schema.define(version: 2019_07_09_225925) do
     t.integer "rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "token"
+    t.string "reset_digest"
+    t.string "reset_created_at"
+    t.index ["token"], name: "index_users_on_token"
   end
 
   create_table "weekly_project_reports", force: :cascade do |t|

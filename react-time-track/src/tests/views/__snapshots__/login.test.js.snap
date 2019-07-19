@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`login component 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1s2t2fo-Login"
+  >
+    <form
+      class="css-7zc9xd-Login"
+    >
+      <h1
+        class="css-q6ww2i-Login"
+      >
+        TimeTracker
+      </h1>
+      <label
+        class="css-jidqlr-Login"
+        for="Username"
+      >
+        Email
+      </label>
+      <input
+        aria-label="Enter your email"
+        autocomplete="off"
+        class="css-ulpja2-Login"
+        name="email"
+        placeholder="Enter your email"
+        required=""
+        type="email"
+        value=""
+      />
+      <br />
+      <label
+        class="css-jidqlr-Login"
+        for="Username"
+      >
+        Password
+      </label>
+      <input
+        aria-label="Enter your password"
+        autocomplete="off"
+        class="css-ulpja2-Login"
+        name="password"
+        placeholder="Enter your password"
+        required=""
+        type="password"
+        value=""
+      />
+      <br />
+      <label
+        class="css-dlvh0q-Login"
+      >
+        <a
+          href="/forgot-password"
+        >
+          Forgot your password?
+        </a>
+      </label>
+      <button
+        aria-label="Sign in user"
+        class="css-mc4n3l-Login"
+        type="submit"
+      >
+        Log In
+      </button>
+    </form>
+  </div>
+</DocumentFragment>
+`;

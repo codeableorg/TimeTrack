@@ -8,7 +8,7 @@ function Button({ styles, ...props }) {
       {...props}
       css={{
         width: "100%",
-        margin: "5px 25px",
+        margin: "5rem auto",
         padding: "1rem",
         fontSize: "1rem",
         fontWeight: "bold",
@@ -19,9 +19,12 @@ function Button({ styles, ...props }) {
         color: "#fff",
         background: "#000",
         transition: "all 200ms ease",
+        outline: "0",
         "@media (max-width: 768px)": {
           width: "90%",
-          margin: "5px 0"
+          margin: "2rem auto",
+          borderRadius: "0.5em",
+          boxSizing: "border-box"
         },
         "&:hover": {
           cursor: "pointer",
@@ -67,8 +70,8 @@ function Circle({ styles, ...props }) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        width: "55px",
-        height: "55px",
+        minWidth: "55px",
+        minHeight: "55px",
         fontSize: "1.1rem",
         fontWeight: "bold",
         color: "#666",
@@ -97,12 +100,12 @@ function Subtitle({ styles, ...props }) {
 
 function NavBarItem({ styles, ...props }) {
   return (
-    <Link to={"" + props.link} onClick={props.onClick}>
+    <Link to={props.link} onClick={props.onClick}>
       <div
         {...props}
         css={{
           display: "flex",
-          adivgnItems: "center",
+          alignItems: "center",
           padding: "0.5em 0.5em",
           "&:hover": {
             cursor: "pointer",

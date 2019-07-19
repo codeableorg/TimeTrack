@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
+import { navigate } from "@reach/router";
 
 import { Card, Circle } from "../components/ui";
 import { Section } from "../components/helpers";
@@ -20,7 +21,9 @@ function ClosedProjects() {
   const [projects, setProjects] = React.useState([]);
 
   React.useEffect(() => {
-    closedProjects().then(list => setProjects(list));
+    closedProjects()
+      .then(list => setProjects(list))
+      .catch(response => navigate("/login"));
   }, []);
 
   return (

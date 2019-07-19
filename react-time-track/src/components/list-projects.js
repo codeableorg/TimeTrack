@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
+import { navigate, Link } from "@reach/router";
 
 import { Card, Circle } from "../components/ui";
 import { Section } from "../components/helpers";
@@ -20,7 +21,9 @@ function ListProjects() {
   const [projects, setProjects] = React.useState([]);
 
   React.useEffect(() => {
-    listProjects().then(list => setProjects(list));
+    listProjects()
+      .then(list => setProjects(list))
+      .catch(response => navigate("/login"));
   }, []);
 
   return (
@@ -29,7 +32,9 @@ function ListProjects() {
         {projects.map(project => {
           return (
             <Card styles={card} key={project.id} role="listitem">
-              <span>{project.name}</span>
+              <Link to={`/projects/${project.id}`}>
+                <span>{project.name}</span>
+              </Link>
               <Circle>30%</Circle>
             </Card>
           );

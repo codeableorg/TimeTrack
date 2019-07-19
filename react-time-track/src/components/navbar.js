@@ -62,7 +62,7 @@ function NavBar({ navBarActive, togleNavBar }) {
         <NavBarItem link="/" onClick={togleNavBar}>
           Projects
         </NavBarItem>
-        <NavBarItem link="/" onClick={togleNavBar}>
+        <NavBarItem link="/members" onClick={togleNavBar}>
           Members
         </NavBarItem>
         <NavBarItem link="/history" onClick={togleNavBar}>
