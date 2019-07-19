@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     post "/change-password", to: "passwords#change"
     post "/reset-password", to: "passwords#reset"
 
-    resources :projects, :only => [:index]
+    resources :projects, :only => [:index, :show]
     resources :histories, :only => [:index]
     resources :users, :only => [:index]
   end
