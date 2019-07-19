@@ -3,36 +3,37 @@ import React from "react";
 import { jsx } from "@emotion/core";
 
 import { Button } from "../components/ui";
-import { login } from "../services/session";
+import { reset } from "../services/password";
 import { navigate } from "@reach/router";
-import { useConsumer } from "../contexts/user";
 
-function Login() {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+function ResetPassword({ token }) {
+  const [newPassword, setNewPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
 
-  const { setUser } = useConsumer();
-  const [action, setAction] = React.useState("Log In");
+  const [action, setAction] = React.useState("Confirm");
   const [error, setError] = React.useState(null);
 
-  function handleChangeEmail(event) {
-    setEmail(event.target.value);
+  function handleChangeNewPassword(event) {
+    setNewPassword(event.target.value);
   }
 
-  function handleChangePassword(event) {
-    setPassword(event.target.value);
+  function handleChangeConfirmPassword(event) {
+    setConfirmPassword(event.target.value);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
+    if (newPassword !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
     setAction("Loading...");
-    login({ email, password })
+    reset(token, newPassword)
       .then(response => {
-        setUser(response);
-        navigate("/");
+        navigate("/login");
       })
       .catch(response => {
-        setAction("Log In");
+        setAction("Confirm");
         setError(response.message);
       });
   }
@@ -83,51 +84,43 @@ function Login() {
       }}
     >
       <form css={formStyle} onSubmit={handleSubmit}>
-        <h1 css={h1Style}>TimeTracker</h1>
+        <h1 css={h1Style}>Reset Password</h1>
 
         <label css={labelStyle} htmlFor="Username">
-          Email
+          New password
         </label>
         <input
           css={inputStyle}
-          aria-label="Enter your email"
-          type="email"
-          name="email"
-          placeholder="Enter your email"
-          onChange={handleChangeEmail}
-          value={email}
+          aria-label="Enter your new password"
+          type="password"
+          name="password"
+          placeholder="Enter your new password"
+          onChange={handleChangeNewPassword}
+          value={newPassword}
           autoComplete="off"
           required
         />
         <br />
         <label css={labelStyle} htmlFor="Username">
-          Password
+          Confirm new password
         </label>
         <input
           css={inputStyle}
-          aria-label="Enter your password"
+          aria-label="Confirm your new password"
           type="password"
-          name="password"
-          placeholder="Enter your password"
-          onChange={handleChangePassword}
-          value={password}
+          name="confirmPassword"
+          placeholder="Confirm your new password"
+          onChange={handleChangeConfirmPassword}
+          value={confirmPassword}
           autoComplete="off"
           required
         />
-        <br />
-        <label css={{ textAlign: "center" }}>
-          <a href="/forgot-password">Forgot your password?</a>
-        </label>
-        <Button
-          type="submit"
-          css={{ margin: "1em 0" }}
-          aria-label="Sign in user"
-        >
+
+        <Button type="submit" css={{ margin: "1em 0" }}>
           {action}
         </Button>
         {error && (
           <div
-            aria-label="Error messages during signing in user"
             css={{
               color: "red",
               fontWeight: "bold",
@@ -143,4 +136,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default ResetPassword;

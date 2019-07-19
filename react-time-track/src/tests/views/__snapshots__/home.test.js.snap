@@ -57,7 +57,7 @@ exports[`Home component 1`] = `
           href="/"
         >
           <div
-            class="css-vqxv6i-NavBarItem"
+            class="css-1hpvyxb-NavBarItem"
             link="/"
           >
             My status
@@ -68,7 +68,7 @@ exports[`Home component 1`] = `
           href="/"
         >
           <div
-            class="css-vqxv6i-NavBarItem"
+            class="css-1hpvyxb-NavBarItem"
             link="/"
           >
             Projects
@@ -78,7 +78,7 @@ exports[`Home component 1`] = `
           href="/members"
         >
           <div
-            class="css-vqxv6i-NavBarItem"
+            class="css-1hpvyxb-NavBarItem"
             link="/members"
           >
             Members
@@ -88,7 +88,7 @@ exports[`Home component 1`] = `
           href="/history"
         >
           <div
-            class="css-vqxv6i-NavBarItem"
+            class="css-1hpvyxb-NavBarItem"
             link="/history"
           >
             History
@@ -99,7 +99,7 @@ exports[`Home component 1`] = `
           href="/"
         >
           <div
-            class="css-vqxv6i-NavBarItem"
+            class="css-1hpvyxb-NavBarItem"
             link="/"
           >
             User Settings
@@ -128,7 +128,7 @@ exports[`Home component 1`] = `
             href="/#"
           >
             <div
-              class="css-3ommgr-NavBarItem"
+              class="css-12x38jx-NavBarItem"
               link="#"
             >
               <svg

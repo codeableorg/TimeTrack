@@ -3,36 +3,28 @@ import React from "react";
 import { jsx } from "@emotion/core";
 
 import { Button } from "../components/ui";
-import { login } from "../services/session";
+import { findUser } from "../services/password";
 import { navigate } from "@reach/router";
-import { useConsumer } from "../contexts/user";
 
-function Login() {
+function ForgotPassword() {
   const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
 
-  const { setUser } = useConsumer();
-  const [action, setAction] = React.useState("Log In");
+  const [action, setAction] = React.useState("Send Email");
   const [error, setError] = React.useState(null);
 
   function handleChangeEmail(event) {
     setEmail(event.target.value);
   }
 
-  function handleChangePassword(event) {
-    setPassword(event.target.value);
-  }
-
   function handleSubmit(event) {
     event.preventDefault();
     setAction("Loading...");
-    login({ email, password })
+    findUser({ email })
       .then(response => {
-        setUser(response);
-        navigate("/");
+        navigate("/login");
       })
       .catch(response => {
-        setAction("Log In");
+        setAction("Send Email");
         setError(response.message);
       });
   }
@@ -83,7 +75,13 @@ function Login() {
       }}
     >
       <form css={formStyle} onSubmit={handleSubmit}>
-        <h1 css={h1Style}>TimeTracker</h1>
+        <h1 css={h1Style}>Forgot your password</h1>
+
+        <h3
+          css={{ fontSize: "1em", fontWeight: "normal", textAlign: "center" }}
+        >
+          If you don't remember it, calm down. You can reset it
+        </h3>
 
         <label css={labelStyle} htmlFor="Username">
           Email
@@ -99,35 +97,12 @@ function Login() {
           autoComplete="off"
           required
         />
-        <br />
-        <label css={labelStyle} htmlFor="Username">
-          Password
-        </label>
-        <input
-          css={inputStyle}
-          aria-label="Enter your password"
-          type="password"
-          name="password"
-          placeholder="Enter your password"
-          onChange={handleChangePassword}
-          value={password}
-          autoComplete="off"
-          required
-        />
-        <br />
-        <label css={{ textAlign: "center" }}>
-          <a href="/forgot-password">Forgot your password?</a>
-        </label>
-        <Button
-          type="submit"
-          css={{ margin: "1em 0" }}
-          aria-label="Sign in user"
-        >
+
+        <Button type="submit" css={{ margin: "1em 0" }}>
           {action}
         </Button>
         {error && (
           <div
-            aria-label="Error messages during signing in user"
             css={{
               color: "red",
               fontWeight: "bold",
@@ -143,4 +118,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default ForgotPassword;
