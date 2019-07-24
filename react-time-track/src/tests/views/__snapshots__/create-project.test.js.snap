@@ -3,24 +3,50 @@
 exports[`create-project component 1`] = `
 <DocumentFragment>
   <section
-    class="css-1y69pia-InputProjectInfo"
+    class="css-suowlv-InputProjectInfo"
   >
     <form
-      class="css-ntwt0t-InputProjectInfo"
+      class="css-6rksa7-InputProjectInfo"
     >
+      <h2>
+        Step 1: Enter general information
+      </h2>
+      <hr />
       <fieldset
-        class="css-14ljpwi-InputProjectInfo"
+        class="css-xeagov"
       >
         <label
-          class="css-1ktmb7r-InputProjectInfo"
+          class="css-ooi7h"
+        >
+          Title
+        </label>
+        <div
+          class="css-16q0q7d"
+        >
+          <input
+            aria-label="Enter the Title of the project"
+            class="css-pldvt4"
+            name="txtTitle"
+            required=""
+            type="text"
+            value=""
+          />
+        </div>
+      </fieldset>
+      <fieldset
+        class="css-xeagov"
+      >
+        <label
+          class="css-ooi7h"
         >
           Client
         </label>
         <div
-          class="css-2wl3q5-InputProjectInfo"
+          class="css-16q0q7d"
         >
           <input
-            class="css-rzmpyt-InputProjectInfo"
+            aria-label="Enter the Client of the project"
+            class="css-pldvt4"
             name="txtClient"
             required=""
             type="text"
@@ -29,19 +55,20 @@ exports[`create-project component 1`] = `
         </div>
       </fieldset>
       <fieldset
-        class="css-14ljpwi-InputProjectInfo"
+        class="css-xeagov"
       >
         <label
-          class="css-1ktmb7r-InputProjectInfo"
+          class="css-ooi7h"
         >
-          Project
+          Category
         </label>
         <div
-          class="css-2wl3q5-InputProjectInfo"
+          class="css-16q0q7d"
         >
           <input
-            class="css-rzmpyt-InputProjectInfo"
-            name="txtProject"
+            aria-label="Enter the Category of the project"
+            class="css-pldvt4"
+            name="txtCategory"
             required=""
             type="text"
             value=""
@@ -49,92 +76,79 @@ exports[`create-project component 1`] = `
         </div>
       </fieldset>
       <fieldset
-        class="css-14ljpwi-InputProjectInfo"
+        class="css-xeagov"
       >
         <label
-          class="css-1ktmb7r-InputProjectInfo"
-        >
-          Category
-        </label>
-        <div
-          class="css-2wl3q5-InputProjectInfo"
-        >
-          <input
-            class="css-rzmpyt-InputProjectInfo"
-            name="Category"
-            required=""
-            type="text"
-          />
-        </div>
-      </fieldset>
-      <fieldset
-        class="css-14ljpwi-InputProjectInfo"
-      >
-        <label
-          class="css-1ktmb7r-InputProjectInfo"
+          class="css-ooi7h"
         >
           Product
         </label>
         <div
-          class="css-2wl3q5-InputProjectInfo"
+          class="css-16q0q7d"
         >
           <input
-            class="css-rzmpyt-InputProjectInfo"
-            name="Product"
+            aria-label="Enter the Product of the project"
+            class="css-pldvt4"
+            name="txtProduct"
             required=""
             type="text"
+            value=""
           />
         </div>
       </fieldset>
       <fieldset
-        class="css-14ljpwi-InputProjectInfo"
+        class="css-xeagov"
       >
         <label
-          class="css-1ktmb7r-InputProjectInfo"
+          class="css-ooi7h"
         >
           Start
         </label>
         <div
-          class="css-2wl3q5-InputProjectInfo"
+          class="css-16q0q7d"
         >
           <input
-            class="css-1gyw4au-InputProjectInfo"
+            aria-label="Enter the Start of the project"
+            class="css-1ue9bta"
             name="txtStart"
             required=""
             type="date"
+            value="2019-07-24"
           />
         </div>
       </fieldset>
       <fieldset
-        class="css-14ljpwi-InputProjectInfo"
+        class="css-xeagov"
       >
         <label
-          class="css-1ktmb7r-InputProjectInfo"
+          class="css-ooi7h"
         >
           End
         </label>
         <div
-          class="css-2wl3q5-InputProjectInfo"
+          class="css-16q0q7d"
         >
           <input
-            class="css-1gyw4au-InputProjectInfo"
+            aria-label="Enter the End of the project"
+            class="css-1ue9bta"
             name="txtEnd"
             required=""
             type="date"
+            value="2019-07-24"
           />
         </div>
       </fieldset>
       <fieldset
-        class="css-14ljpwi-InputProjectInfo"
+        class="css-q4ppwv-InputProjectInfo"
       >
         <button
-          class="css-frnet4-InputProjectInfo"
+          class="css-c7mk19-InputProjectInfo"
           type="button"
         >
           Cancel
         </button>
         <button
-          class="css-frnet4-InputProjectInfo"
+          class="css-c7mk19-InputProjectInfo"
           type="submit"
         >
           Next

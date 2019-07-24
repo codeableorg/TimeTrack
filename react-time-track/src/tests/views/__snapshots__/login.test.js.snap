@@ -58,7 +58,7 @@ exports[`login component 1`] = `
       </label>
       <button
         aria-label="Sign in user"
-        class="css-mc4n3l-Login"
+        class="css-ipjlmu-Login"
         type="submit"
       >
         Log In

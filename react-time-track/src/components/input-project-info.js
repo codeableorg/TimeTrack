@@ -131,6 +131,7 @@ function InputProjectInfo() {
             <div css={divStyle}>
               <input
                 type={value[1]}
+                aria-label={"Enter the " + value[0] + " of the project"}
                 name={"txt" + value[0]}
                 css={value[1] === "text" ? inputTextStyle : inputDateStyle}
                 value={infoProject[value[0].toLowerCase()]}
