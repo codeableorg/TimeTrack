@@ -3,9 +3,9 @@ import React from "react";
 import { jsx } from "@emotion/core";
 import { navigate } from "@reach/router";
 
-import { Button } from "../components/ui";
+import { Button } from "./ui";
 
-function InputProjectInfo() {
+function InputInfoProject() {
   const today = new Date()
     .toLocaleDateString("es-PE", {
       year: "numeric",
@@ -154,4 +154,4 @@ function InputProjectInfo() {
   );
 }
 
-export default InputProjectInfo;
+export default InputInfoProject;

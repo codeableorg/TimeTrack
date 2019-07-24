@@ -3,10 +3,10 @@
 exports[`input-project-info component 1`] = `
 <DocumentFragment>
   <section
-    class="css-suowlv-InputProjectInfo"
+    class="css-qvlzl1-InputInfoProject"
   >
     <form
-      class="css-6rksa7-InputProjectInfo"
+      class="css-avrx2w-InputInfoProject"
     >
       <h2>
         Step 1: Enter general information
@@ -139,16 +139,16 @@ exports[`input-project-info component 1`] = `
         </div>
       </fieldset>
       <fieldset
-        class="css-q4ppwv-InputProjectInfo"
+        class="css-1pfy88f-InputInfoProject"
       >
         <button
-          class="css-c7mk19-InputProjectInfo"
+          class="css-1uutyn6-InputInfoProject"
           type="button"
         >
           Cancel
         </button>
         <button
-          class="css-c7mk19-InputProjectInfo"
+          class="css-1uutyn6-InputInfoProject"
           type="submit"
         >
           Next

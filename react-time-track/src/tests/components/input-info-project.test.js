@@ -1,7 +1,7 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 
-import InputProjectInfo from "../../components/input-project-info";
+import InputProjectInfo from "../../components/input-info-project";
 
 test("input-project-info component", () => {
   const { asFragment } = render(<InputProjectInfo />);

@@ -2,10 +2,10 @@
 import React from "react";
 import { jsx } from "@emotion/core";
 
-import InputProjectInfo from "../components/input-project-info";
+import InputInfoProject from "../components/input-info-project";
 
 function CreateProject() {
-  return <InputProjectInfo />;
+  return <InputInfoProject />;
 }
 
 export default CreateProject;
