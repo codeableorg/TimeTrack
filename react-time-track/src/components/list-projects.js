@@ -17,6 +17,10 @@ const red = { borderColor: "#f24636" };
 const ambar = { borderColor: "#fec235" };
 const green = { borderColor: "#52af50" };
 
+function calculateProgress(real, estimated) {
+  return ((parseInt(real) / parseInt(estimated)) * 100).toFixed(0) + "%";
+}
+
 function ListProjects() {
   const [projects, setProjects] = React.useState([]);
 
@@ -35,7 +39,9 @@ function ListProjects() {
               <Link to={`/projects/${project.id}`}>
                 <span>{project.name}</span>
               </Link>
-              <Circle>30%</Circle>
+              <Circle>
+                {calculateProgress(project.real_cost, project.estimated_cost)}
+              </Circle>
             </Card>
           );
         })}
