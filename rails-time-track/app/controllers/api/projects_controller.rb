@@ -4,7 +4,11 @@ module Api
     before_action :set_project, only: [:show]
 
     def index
-      render json: Project.where(closed: false)
+      if params[:user_id]
+        render json: User.find(params[:user_id]).projects.where(closed: false)
+      else
+        render json: Project.where(closed: false)
+      end
     end
 
     def show
