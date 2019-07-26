@@ -76,12 +76,9 @@ function App() {
           <UserList path="/members" />
           <Project path="/projects/:project_id" />
           <CreateProject path="/create-project" />
-<<<<<<< HEAD
-          <CreateUser path="/create-user"/>
-          <Users path="/users"/>
-=======
-          <DailyLog path="/daily-log" />
->>>>>>> Add basic frontend for Daily Log
+          <CreateUser path="/create-user" />
+          <Users path="/users" />
+          <DailyLog path="/daily-log" currentUser={currentUser} />
         </Home>
       </Router>
     </UserProvider>
