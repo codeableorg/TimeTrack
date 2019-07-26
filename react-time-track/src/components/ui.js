@@ -200,29 +200,6 @@ const styleInput = {
   }
 };
 
-function LittleCard({ styles, ...props }) {
-  return (
-    <div
-      {...props}
-      css={{      
-        zIndex: 0,
-        width: "100%",
-        display: "flex",
-      }}
-    >
-      <div {...props} css={{
-        margin: "30px auto",
-        width: "300px",
-        height: "300px",
-        borderRadius: "40px",
-        boxShadow: "2px 2px 10px 5px rgba(0,0,0,0.25), -5px -5px 10px 7px rgba(0,0,0,0.22)",
-        cursor: "pointer",
-        transition: "0.4s"
-      }}/>
-    </div>
-  );
-}
-
 function UserInput({ styles, ...props }) {
   return (
     <input
@@ -246,5 +223,4 @@ export {
   UserInput,  
   Label,
   Li,
-  LittleCard
 };
