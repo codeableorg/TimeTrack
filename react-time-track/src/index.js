@@ -14,6 +14,8 @@ import Project from "./views/project";
 import UserList from "./components/user-list";
 import ResetPassword from "./views/reset-password";
 import CreateProject from "./views/create-project";
+import CreateUser from "./views/create-user";
+import Users from "./views/users";
 
 const global = {
   body: {
@@ -74,6 +76,8 @@ function App() {
           <Project path="/projects/:project_id" />
           <CreateProject path="/create-project" />
         </Home>
+        <CreateUser path="/create-user"/>
+        <Users path="/users"/>
       </Router>
     </UserProvider>
   );

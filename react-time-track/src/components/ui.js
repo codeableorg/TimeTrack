@@ -8,7 +8,7 @@ function Button({ styles, ...props }) {
       {...props}
       css={{
         width: "100%",
-        margin: "5rem auto",
+        margin: "0.7rem auto",
         padding: "1rem",
         fontSize: "1rem",
         fontWeight: "bold",
@@ -22,9 +22,9 @@ function Button({ styles, ...props }) {
         transition: "all 200ms ease",
         outline: "0",
         "@media (max-width: 768px)": {
-          // width: "90%",
-          // margin: "2rem auto",
-          // borderRadius: "0.5em",
+          width: "90%",
+          margin: "0.5rem auto",
+          borderRadius: "0.5em",
           boxSizing: "border-box"
         },
         "&:hover": {
@@ -120,4 +120,131 @@ function NavBarItem({ styles, ...props }) {
   );
 }
 
-export { Button, Card, Circle, Subtitle, NavBarItem };
+function Title({ styles, ...props }) {
+  return (
+    <p
+      {...props}
+      css={{
+        fontSize: "1.1em",
+        fontWeight: "bold",
+        margin: "1em 0",
+        ...styles
+      }}
+    />
+  );
+}
+
+function Label({ styles, ...props }) {
+  return (
+    <label
+      {...props}
+      css={{
+        display: "block",
+        fontWeight: "600",
+        padding: "0 8px 8px 0",
+        fontSize: "16px",
+        lineHeight: "24px",
+        color: "#888888"
+      }}
+    />
+  );
+}
+
+function Li({ styles, ...props }) {
+  return (
+    <p
+      {...props}
+      css={{
+        display: "block",
+        fontWeight: "600",
+        fontSize: "12px",
+        paddingLeft: "100px",
+        // paddingBottom: "30px",
+        lineHeight: "24px",
+        color: "#888888"
+      }}
+    />
+  );
+}
+
+function UserCard({ styles, ...props }) {
+  return (
+    <div
+      {...props}
+      css={{
+        background: "white",
+        borderRadius: ".5em",
+        boxShadow: "0px 2px 5px 0px rgba(0, 0, 0, .12)",
+        boxSizing: "border-box",
+        padding: "2rem",
+        width: "100%",
+        ...styles
+      }}
+    />
+  );
+}
+
+const styleInput = {
+  background: "none",
+  border: "1px solid #eaeaea",
+  borderRadius: ".25rem",
+  boxSizing: "border-box",
+  display: "block",
+  fontSize: "1rem",
+  padding: ".5rem",
+  color: "#333",
+  width: "100%",
+  "&:focus": {
+    outline: "none",
+    borderColor: "#00b7c6"
+  }
+};
+
+function LittleCard({ styles, ...props }) {
+  return (
+    <div
+      {...props}
+      css={{      
+        zIndex: 0,
+        width: "100%",
+        display: "flex",
+      }}
+    >
+      <div {...props} css={{
+        margin: "30px auto",
+        width: "300px",
+        height: "300px",
+        borderRadius: "40px",
+        boxShadow: "2px 2px 10px 5px rgba(0,0,0,0.25), -5px -5px 10px 7px rgba(0,0,0,0.22)",
+        cursor: "pointer",
+        transition: "0.4s"
+      }}/>
+    </div>
+  );
+}
+
+function UserInput({ styles, ...props }) {
+  return (
+    <input
+      {...props}
+      css={{
+        ...styleInput,
+        ...styles
+      }}
+    />
+  );
+}
+
+export { 
+  Button,
+  Card, 
+  Circle, 
+  Subtitle, 
+  NavBarItem, 
+  Title, 
+  UserCard, 
+  UserInput,  
+  Label,
+  Li,
+  LittleCard
+};
