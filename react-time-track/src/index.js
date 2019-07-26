@@ -75,9 +75,9 @@ function App() {
           <UserList path="/members" />
           <Project path="/projects/:project_id" />
           <CreateProject path="/create-project" />
+          <CreateUser path="/create-user"/>
+          <Users path="/users"/>
         </Home>
-        <CreateUser path="/create-user"/>
-        <Users path="/users"/>
       </Router>
     </UserProvider>
   );
