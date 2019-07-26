@@ -57,7 +57,6 @@ function Home({ children }) {
         <Header tittle="History" path="/history" />
         <Header tittle="Members" path="/members" />
         <Header tittle="Project" path="/projects/:id" />
-        <Header tittle="Create Project" path="/create-project" />
       </Router>
 
       <div

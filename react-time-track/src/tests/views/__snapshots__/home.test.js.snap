@@ -186,7 +186,7 @@ exports[`Home component 1`] = `
       </div>
     </div>
     <div
-      class="css-1ugqmjg-Home"
+      class="css-1uyhewu-Home"
     >
       <div>
         <h1
@@ -204,7 +204,7 @@ exports[`Home component 1`] = `
           class="css-1dbpol2-Center"
         >
           <button
-            class="css-1s4gzjr-Button"
+            class="css-nluivw-Button"
           >
             New Project
           </button>
