@@ -248,6 +248,5 @@ export {
   UserCard,
   UserInput,
   Label,
-  Li,
-  LittleCard
+  Li
 };

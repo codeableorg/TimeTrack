@@ -29,7 +29,7 @@ function Users() {
         {user.map(usr => {
           return (
             <>
-              <LittleCard css={{ marginTop: "2em" }}>
+              {/* <LittleCard css={{ marginTop: "2em" }}> */}
                 <ol css={{
                   color: "#ccc",
                   listStyleType: "none"
@@ -54,13 +54,12 @@ function Users() {
                     <Li>Rate: {usr.rate}.00 USD</Li> 
                   </li>
                 </ol>
-              </LittleCard>          
+              {/* </LittleCard>           */}
             </>
           );
         })}
         <div css={{ marginTop: "2em" }}>
             <Button>CREATE USER</Button>
-            <Button>HOME</Button>
           </div>
     </UserCard>
   );
