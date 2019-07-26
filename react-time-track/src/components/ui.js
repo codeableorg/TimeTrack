@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { Link } from "@reach/router";
+import { FaUser, FaPlus, FaMinus } from "react-icons/fa";
 
 function Button({ styles, ...props }) {
   return (
@@ -211,6 +212,47 @@ function UserInput({ styles, ...props }) {
   );
 }
 
+function IconUserSmall() {
+  return (
+    <div
+      css={{
+        border: "1px solid black",
+        borderRadius: "50%",
+        width: 25,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: 25
+      }}
+    >
+      <FaUser />
+    </div>
+  );
+}
+
+function IconGenericSmall({ icon }) {
+  let iconResult = <FaMinus />;
+  if (icon === "add") iconResult = <FaPlus />;
+
+  return (
+    <div
+      role="button"
+      css={{
+        border: "1px solid black",
+        borderRadius: "50%",
+        width: 25,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: 25,
+        cursor: "pointer"
+      }}
+    >
+      {iconResult}
+    </div>
+  );
+}
+
 export {
   Button,
   Card,
@@ -221,5 +263,7 @@ export {
   UserCard,
   UserInput,
   Label,
-  Li
+  Li,
+  IconGenericSmall,
+  IconUserSmall
 };
