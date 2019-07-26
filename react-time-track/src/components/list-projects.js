@@ -33,7 +33,14 @@ function ListProjects() {
               <Link to={`/projects/${project.id}`}>
                 <span>{project.name}</span>
               </Link>
-              <Circle styles={calculateRisk(project)}>
+              <Circle
+                styles={calculateRisk(
+                  project.start_date,
+                  project.end_date,
+                  project.estimated_cost,
+                  project.real_cost
+                )}
+              >
                 {calculateProgress(project.real_cost, project.estimated_cost)}
               </Circle>
             </Card>
