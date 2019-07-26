@@ -7,11 +7,15 @@ import { Button } from "./ui";
 function AddMemberProject({ listMember, addMemberFn }) {
   const [selectedMember, setSelectedMember] = React.useState(listMember[0]);
 
-  function handleCancelAddMember() {
+  function handleChangeMember(event) {
+    setSelectedMember(listMember[event.target.selectedIndex]);
+  }
+
+  function handleCancelMember() {
     console.log("Cancel Add Member");
   }
 
-  function handleSubmitAddMember(event) {
+  function handleSubmitMember(event) {
     console.dir(event.target);
     event.preventDefault();
 
@@ -34,6 +38,7 @@ function AddMemberProject({ listMember, addMemberFn }) {
       marginTop: "0"
     }
   };
+
   const formStyle = {
     width: "80%",
     backgroundColor: "white",
@@ -44,8 +49,9 @@ function AddMemberProject({ listMember, addMemberFn }) {
       height: "90%"
     }
   };
+
   const fieldsetStyle = {
-    width: "92%",
+    width: "94%",
     border: "none",
     padding: "12px 30px",
     textAlign: "center",
@@ -62,6 +68,7 @@ function AddMemberProject({ listMember, addMemberFn }) {
       width: ""
     }
   };
+
   const labelStyle = {
     width: "35%",
     display: "inline-block",
@@ -71,6 +78,7 @@ function AddMemberProject({ listMember, addMemberFn }) {
       width: 80
     }
   };
+
   const divStyle = {
     display: "inline-block",
     width: "65%",
@@ -101,6 +109,37 @@ function AddMemberProject({ listMember, addMemberFn }) {
     }
   };
 
+  const fieldsetGeneralStyle = {
+    border: "1px solid black",
+    margin: "12px 42px",
+    padding: "10px 0",
+    textAlign: "center",
+    "@media (max-width: 800px)": {
+      margin: "12px 27px"
+    },
+    "@media (max-width: 500px)": {
+      margin: "12px 20px"
+    },
+    "@media (max-width: 450px)": {
+      margin: "16px 20px"
+    }
+  };
+
+  const fieldsetDetailStyle = {
+    ...fieldsetGeneralStyle,
+    border: "1px solid gray",
+    width: "63%",
+    "@media (max-width: 800px)": {
+      ...fieldsetGeneralStyle["@media (max-width: 800px)"],
+      width: "65%"
+    }
+  };
+
+  const rowWeekStyle = {
+    display: "flex",
+    justifyContent: "space-around"
+  };
+
   const buttonStyle = {
     width: 135,
     margin: "0 10px",
@@ -111,7 +150,7 @@ function AddMemberProject({ listMember, addMemberFn }) {
 
   return (
     <section css={sectionStyle}>
-      <form css={formStyle} onSubmit={handleSubmitAddMember}>
+      <form css={formStyle} onSubmit={handleSubmitMember}>
         <h2>Add Employee</h2>
         <hr />
         <div
@@ -124,7 +163,11 @@ function AddMemberProject({ listMember, addMemberFn }) {
           <fieldset css={fieldsetStyle}>
             <label css={labelStyle}>Employee</label>
             <div css={divStyle}>
-              <select name="ddlEmployee" css={selectStyle}>
+              <select
+                name="ddlEmployee"
+                css={selectStyle}
+                onChange={handleChangeMember}
+              >
                 {listMember.map(value => (
                   <option value={value.id} key={value.id}>
                     {value.name}
@@ -143,25 +186,35 @@ function AddMemberProject({ listMember, addMemberFn }) {
                 }
                 name="txtTime"
                 css={inputTextStyle}
+                defaultValue="0"
                 required
               />
               <span> %</span>
             </div>
           </fieldset>
         </div>
+        <fieldset css={fieldsetGeneralStyle}>
+          <label css={rowWeekStyle}>
+            <span>31/07 - 09/08</span>
+            <span>20%</span>
+            <button>+</button>
+          </label>
+        </fieldset>
+        <fieldset css={fieldsetDetailStyle}>
+          <label css={rowWeekStyle}>
+            <span>31/07 - 02/08</span>
+            <span>20%</span>
+          </label>
+          <label css={rowWeekStyle}>
+            <span>05/07 - 09/08</span>
+            <span>20%</span>
+          </label>
+        </fieldset>
         <fieldset css={fieldsetStyle}>
-          <Button
-            type="button"
-            css={buttonStyle}
-            onClick={handleCancelAddMember}
-          >
+          <Button type="button" css={buttonStyle} onClick={handleCancelMember}>
             Cancel
           </Button>
-          <Button
-            type="submit"
-            css={buttonStyle}
-            onClick={handleSubmitAddMember}
-          >
+          <Button type="submit" css={buttonStyle} onClick={handleSubmitMember}>
             Add
           </Button>
         </fieldset>

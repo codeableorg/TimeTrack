@@ -2,7 +2,6 @@
 import React from "react";
 import { jsx } from "@emotion/core";
 
-import { Button, IconGenericSmall, IconUserSmall } from "./ui";
 import AddMemberProject from "../components/add-member-project";
 
 function ListMemberProject() {
