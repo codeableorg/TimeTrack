@@ -78,7 +78,7 @@ function App() {
           <CreateProject path="/create-project" />
           <CreateUser path="/create-user" />
           <Users path="/users" />
-          <DailyLog path="/daily-log" />
+          <DailyLog path="/daily-log" currentUser={currentUser} />
         </Home>
       </Router>
     </UserProvider>
