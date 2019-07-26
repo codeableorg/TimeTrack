@@ -15,15 +15,16 @@ function Button({ styles, ...props }) {
         textAlign: "center",
         textTransform: "uppercase",
         border: "1px solid currentcolor",
-        borderRadius: ".25rem",
+        // borderRadius: ".25rem",
+        borderRadius: ".5rem",
         color: "#fff",
         background: "#000",
         transition: "all 200ms ease",
         outline: "0",
         "@media (max-width: 768px)": {
-          width: "90%",
-          margin: "2rem auto",
-          borderRadius: "0.5em",
+          // width: "90%",
+          // margin: "2rem auto",
+          // borderRadius: "0.5em",
           boxSizing: "border-box"
         },
         "&:hover": {
