@@ -68,7 +68,7 @@ function NavBar({ navBarActive, togleNavBar }) {
         <NavBarItem link="/history" onClick={togleNavBar}>
           History
         </NavBarItem>
-        <NavBarItem link="/users" onClick={togleNavBar}>
+        <NavBarItem link="/" onClick={togleNavBar}>
           User Settings
         </NavBarItem>
       </div>

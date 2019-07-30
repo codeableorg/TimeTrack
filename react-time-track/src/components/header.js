@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { jsx } from "@emotion/core";
 import { NavBarItem } from "./ui";
 import { FaUser, FaClock } from "react-icons/fa";
-import { Link } from "@reach/router";
 
 function Header({ tittle }) {
   return (
@@ -44,7 +43,7 @@ function Header({ tittle }) {
             },
             padding: "0 1em"
           }}
-          link="/daily-log"
+          link="#"
         >
           <FaClock />
           <span
