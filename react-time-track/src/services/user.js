@@ -41,7 +41,7 @@ async function createUser(userData) {
 
 async function getUser(userId) {
   console.log(userId);
-  const response = await fetch(`API_USERS/userId`, {
+  const response = await fetch(`${API_USERS}/${userId}`, {
     method: "GET",
     credentials: "include",
     headers: {

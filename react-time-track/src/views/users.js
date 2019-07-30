@@ -1,9 +1,10 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import { navigate } from "@reach/router";
+import { Link } from "@reach/router";
 import { Li, Title, UserCard,Card, Button } from "../components/ui";
 import { userList } from "../services/user";
+import { FaEdit } from "react-icons/fa";
 
 function Users() {
   const [user, setUser] = React.useState([]);
@@ -42,6 +43,10 @@ function Users() {
                   <Card css={{"p": {padding: "0"}}}>
                     <Li>Name: {usr.name}</Li>
                     <Li>Role: {usr.role}</Li>  
+                    <Link to={`/edit-user/${usr.id}`}>                  
+                      <FaEdit/>
+                    </Link>
+                    
                     </Card>                                                              
                   </li>                            
           );

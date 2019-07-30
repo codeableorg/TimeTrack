@@ -78,7 +78,7 @@ function App() {
           <CreateProject path="/create-project" />
           <CreateUser path="/create-user"/>
           <Users path="/users"/>
-          <EditUser path="/edit-user/:id"/>
+          <EditUser path="/edit-user/:user_id"/>
         </Home>
       </Router>
     </UserProvider>

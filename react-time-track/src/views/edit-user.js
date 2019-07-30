@@ -5,11 +5,12 @@ import { navigate } from "@reach/router";
 import { Li, Title, UserCard,Card, Button } from "../components/ui";
 import { getUser } from "../services/user";
 
-function EditUser() {
+function EditUser({user_id}) {
   const [editUser, setEditUser] = React.useState([]);
 
   React.useEffect(() => {
-   getUser()
+   console.log(user_id)
+   getUser(user_id)
    .then(data => { setEditUser(data);
    });  
  }, []);
