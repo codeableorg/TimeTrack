@@ -6,16 +6,14 @@ import { navigate, Link } from "@reach/router";
 import { Card, Circle } from "../components/ui";
 import { Section } from "../components/helpers";
 import { listProjects } from "../services/project";
+import calculateProgress from "../utils/calculateProgress";
+import calculateRisk from "../utils/calculateRisk";
 
 const card = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center"
 };
-
-const red = { borderColor: "#f24636" };
-const ambar = { borderColor: "#fec235" };
-const green = { borderColor: "#52af50" };
 
 function ListProjects() {
   const [projects, setProjects] = React.useState([]);
@@ -35,7 +33,16 @@ function ListProjects() {
               <Link to={`/projects/${project.id}`}>
                 <span>{project.name}</span>
               </Link>
-              <Circle>30%</Circle>
+              <Circle
+                styles={calculateRisk(
+                  project.start_date,
+                  project.end_date,
+                  project.estimated_cost,
+                  project.real_cost
+                )}
+              >
+                {calculateProgress(project.real_cost, project.estimated_cost)}
+              </Circle>
             </Card>
           );
         })}
