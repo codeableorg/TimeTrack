@@ -15,15 +15,18 @@ function Button({ styles, ...props }) {
         textAlign: "center",
         textTransform: "uppercase",
         border: "1px solid currentcolor",
-        // borderRadius: ".25rem",
-        borderRadius: ".5rem",
+        borderRadius: ".25rem",
         color: "#fff",
         background: "#000",
         transition: "all 200ms ease",
         outline: "0",
         "@media (max-width: 768px)": {
           width: "90%",
+<<<<<<< HEAD
           margin: "0.5rem auto",
+=======
+          margin: "2rem auto",
+>>>>>>> master
           borderRadius: "0.5em",
           boxSizing: "border-box"
         },
