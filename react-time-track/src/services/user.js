@@ -39,5 +39,22 @@ async function createUser(userData) {
   return response.json();
 } 
 
+async function getUser(userId) {
+  console.log(userId);
+  const response = await fetch(`API_USERS/userId`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
 
-export { userList, createUser };
+  if (!response.ok) {
+    const { errors } = await response.json();
+    throw new Error(errors.message);
+  }
+
+  return response.json();
+} 
+
+export { userList, createUser, getUser };

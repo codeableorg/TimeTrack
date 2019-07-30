@@ -59,6 +59,7 @@ function Home({ children }) {
         <Header tittle="Project" path="/projects/:id" />
         <Header tittle="Create Project" path="/create-project" />
         <Header tittle="Manage Users" path="/users" />
+        <Header tittle="Edit User" path="/edit-user/:id"/>
       </Router>
 
       <div
