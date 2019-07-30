@@ -22,11 +22,7 @@ function Button({ styles, ...props }) {
         outline: "0",
         "@media (max-width: 768px)": {
           width: "90%",
-<<<<<<< HEAD
           margin: "0.5rem auto",
-=======
-          margin: "2rem auto",
->>>>>>> master
           borderRadius: "0.5em",
           boxSizing: "border-box"
         },
@@ -215,15 +211,15 @@ function UserInput({ styles, ...props }) {
   );
 }
 
-export { 
+export {
   Button,
-  Card, 
-  Circle, 
-  Subtitle, 
-  NavBarItem, 
-  Title, 
-  UserCard, 
-  UserInput,  
+  Card,
+  Circle,
+  Subtitle,
+  NavBarItem,
+  Title,
+  UserCard,
+  UserInput,
   Label,
-  Li,
+  Li
 };
