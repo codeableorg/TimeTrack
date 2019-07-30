@@ -14,8 +14,8 @@ async function listProjects() {
 
   if (!response.ok) {
     const { errors } = await response.json();
-    console.log(errors.message);
-    throw new Error(errors.message);
+    console.log(errors);
+    throw new Error(errors);
   }
 
   return response.json();

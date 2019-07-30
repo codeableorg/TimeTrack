@@ -1,10 +1,4 @@
 class User < ApplicationRecord
-
-  validates :email, format: { with: /[a-zA-Z0-9]*@[a-zA-Z]*.[a-zA-Z0-9]*/, message: "Bad format"  }, presence: true, uniqueness: true
-  # validates :name, presence: true
-  # validates :role, presence true
-  # validates :rate, presence true
-
   has_secure_password
   has_secure_token
   has_secure_token :reset_digest
