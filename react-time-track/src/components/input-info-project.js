@@ -5,7 +5,7 @@ import { navigate } from "@reach/router";
 
 import { Button } from "./ui";
 
-function InputInfoProject() {
+function InputInfoProject({ nextFn }) {
   const today = new Date()
     .toLocaleDateString("es-PE", {
       year: "numeric",
@@ -33,13 +33,15 @@ function InputInfoProject() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    let title = event.target.elements.txtProject.value;
+    console.dir(event.target);
+    let title = event.target.elements.txtTitle.value;
     let client = event.target.elements.txtClient.value;
     let category = event.target.elements.txtCategory.value;
     let product = event.target.elements.txtProduct.value;
     let start = event.target.elements.txtStart.value;
     let end = event.target.elements.txtEnd.value;
     setInfoNewProject({ title, client, category, product, start, end });
+    nextFn();
   }
 
   function handleCancel() {
@@ -145,7 +147,7 @@ function InputInfoProject() {
           <Button type="button" css={buttonStyle} onClick={handleCancel}>
             Cancel
           </Button>
-          <Button type="submit" css={buttonStyle} onClick={handleSubmit}>
+          <Button type="submit" css={buttonStyle}>
             Next
           </Button>
         </fieldset>

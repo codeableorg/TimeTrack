@@ -230,7 +230,7 @@ function IconUserSmall() {
   );
 }
 
-function IconGenericSmall({ icon }) {
+function IconGenericSmall({ icon, ...props }) {
   let iconResult = <FaMinus />;
   if (icon === "add") iconResult = <FaPlus />;
 
@@ -247,6 +247,7 @@ function IconGenericSmall({ icon }) {
         height: 25,
         cursor: "pointer"
       }}
+      {...props}
     >
       {iconResult}
     </div>

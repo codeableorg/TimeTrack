@@ -1,8 +1,10 @@
 /**@jsx jsx */
 import React from "react";
+import { createPortal } from "react-dom";
 import { jsx } from "@emotion/core";
 
 import AddMemberProject from "../components/add-member-project";
+import { Button, IconGenericSmall, IconUserSmall } from "../components/ui";
 
 function ListMemberProject() {
   let fakeListMember = [
@@ -77,7 +79,7 @@ function ListMemberProject() {
       availableTime: [50, 50, 50, 50, 50, 50, 50, 50]
     }
   ];
-  const [listMember, setListMember] = React.useState(fakeListMember || []);
+  const [listMember, setListMember] = React.useState([]);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const titleProject = JSON.parse(sessionStorage.getItem("InfoNewProject"))[
     "title"
@@ -88,8 +90,8 @@ function ListMemberProject() {
     setListMember(listMember.concat(newMember));
   }
 
-  function handleOpenModal(event) {
-    setIsModalOpen(true);
+  function handleOpenModal() {
+    setIsModalOpen(!isModalOpen);
   }
 
   const sectionStyle = {
@@ -150,103 +152,108 @@ function ListMemberProject() {
     }
   };
 
-  // return (
-  //   <section css={sectionStyle}>
-  //     <div css={divFormStyle}>
-  //       <h2>Step 2: Add members</h2>
-  //       <hr />
-  //       <div css={divContainerList}>
-  //         <div css={divList}>
-  //           <h3 css={{ textAlign: "center", margin: "0.5em" }}>
-  //             {titleProject || "Titulo del Proyecto"}
-  //           </h3>
-  //           <label
-  //             css={{
-  //               display: "flex",
-  //               width: 150,
-  //               justifyContent: "space-between",
-  //               margin: "0.5em 0"
-  //             }}
-  //           >
-  //             <h4 css={{ textAlign: "left" }}>Total</h4>
-  //             <h4>{`S/. ${totalCost}`}</h4>
-  //           </label>
-  //           <label
-  //             css={{
-  //               display: "flex",
-  //               width: "100%",
-  //               justifyContent: "space-between",
-  //               alignItems: "center",
-  //               padding: "0.5em 0",
-  //               borderBottom: "1px solid black"
-  //             }}
-  //           >
-  //             <h4 css={{ textAlign: "left" }}>Team Members</h4>
-  //             <IconGenericSmall icon="add" />
-  //           </label>
-  //           {/* <hr css={{ width: "100%" }} /> */}
-  //           <ul css={{ overflowY: "auto", height: 200 }}>
-  //             {listMember.length === 0 ? (
-  //               <li>There are no members</li>
-  //             ) : (
-  //               listMember.map(member => (
-  //                 <li>
-  //                   <div
-  //                     css={{
-  //                       display: "flex",
-  //                       alignItems: "center",
-  //                       padding: "0.5em 0"
-  //                     }}
-  //                   >
-  //                     <span css={{ width: "10%" }}>
-  //                       <IconUserSmall />
-  //                     </span>
-  //                     <span
-  //                       css={{
-  //                         width: "40%",
-  //                         "@media (max-width: 450px)": {
-  //                           width: "30%",
-  //                           padding: "0 5px"
-  //                         }
-  //                       }}
-  //                     >
-  //                       {member.name}
-  //                     </span>
-  //                     <span css={{ width: "15%" }}>{`${member.time}%`}</span>
-  //                     <span
-  //                       css={{
-  //                         width: "25%",
-  //                         "@media (max-width: 450px)": {
-  //                           width: "30%",
-  //                           padding: "0 5px"
-  //                         }
-  //                       }}
-  //                     >
-  //                       {`S/. ${member.cost}`}
-  //                     </span>
-  //                     <span css={{ width: "10%" }}>
-  //                       <IconGenericSmall icon="del" />
-  //                     </span>
-  //                   </div>
-  //                 </li>
-  //               ))
-  //             )}
-  //           </ul>
-  //         </div>
-  //       </div>
-  //       <fieldset css={fieldsetStyle}>
-  //         <Button type="button" css={buttonStyle}>
-  //           Back
-  //         </Button>
-  //         <Button type="button" css={buttonStyle}>
-  //           Next
-  //         </Button>
-  //       </fieldset>
-  //     </div>
-  //   </section>
-  // );
-
-  return <AddMemberProject listMember={listMember} addMemberFn={addMember} />;
+  return (
+    <section css={sectionStyle}>
+      <div css={divFormStyle}>
+        <h2>Step 2: Add members</h2>
+        <hr />
+        <div css={divContainerList}>
+          <div css={divList}>
+            <h3 css={{ textAlign: "center", margin: "0.5em" }}>
+              {titleProject || "Titulo del Proyecto"}
+            </h3>
+            <label
+              css={{
+                display: "flex",
+                width: 150,
+                justifyContent: "space-between",
+                margin: "0.5em 0"
+              }}
+            >
+              <h4 css={{ textAlign: "left" }}>Total</h4>
+              <h4>{`S/. ${totalCost}`}</h4>
+            </label>
+            <label
+              css={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: "0.5em 0",
+                borderBottom: "1px solid black"
+              }}
+            >
+              <h4 css={{ textAlign: "left" }}>Team Members</h4>
+              <IconGenericSmall icon="add" onClick={handleOpenModal} />
+              {isModalOpen && (
+                <AddMemberProject
+                  listMember={fakeListMember}
+                  addMemberFn={addMember}
+                  closeModalFn={handleOpenModal}
+                />
+              )}
+            </label>
+            {/* <hr css={{ width: "100%" }} /> */}
+            <ul css={{ overflowY: "auto", height: 200 }}>
+              {listMember.length === 0 ? (
+                <li>There are no members</li>
+              ) : (
+                listMember.map(member => (
+                  <li>
+                    <div
+                      css={{
+                        display: "flex",
+                        alignItems: "center",
+                        padding: "0.5em 0"
+                      }}
+                    >
+                      <span css={{ width: "10%" }}>
+                        <IconUserSmall />
+                      </span>
+                      <span
+                        css={{
+                          width: "40%",
+                          "@media (max-width: 450px)": {
+                            width: "30%",
+                            padding: "0 5px"
+                          }
+                        }}
+                      >
+                        {member.name}
+                      </span>
+                      <span css={{ width: "15%" }}>{`${member.time}%`}</span>
+                      <span
+                        css={{
+                          width: "25%",
+                          "@media (max-width: 450px)": {
+                            width: "30%",
+                            padding: "0 5px"
+                          }
+                        }}
+                      >
+                        {`S/. ${member.cost}`}
+                      </span>
+                      <span css={{ width: "10%" }}>
+                        <IconGenericSmall icon="del" />
+                      </span>
+                    </div>
+                  </li>
+                ))
+              )}
+            </ul>
+          </div>
+        </div>
+        <fieldset css={fieldsetStyle}>
+          <Button type="button" css={buttonStyle}>
+            Back
+          </Button>
+          <Button type="button" css={buttonStyle}>
+            Next
+          </Button>
+        </fieldset>
+      </div>
+    </section>
+  );
 }
 
 export default ListMemberProject;

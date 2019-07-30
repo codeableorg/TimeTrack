@@ -1,41 +1,101 @@
 /**@jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 
 import { Button } from "./ui";
 
-function AddMemberProject({ listMember, addMemberFn }) {
+function AddMemberProject({ listMember, addMemberFn, closeModalFn }) {
+  let infoProject = JSON.parse(sessionStorage.getItem("InfoNewProject"));
+  const startDate = new Date(infoProject.start.split("-").join("/"));
+  const endDate = new Date(infoProject.end.split("-").join("/"));
+
   const [selectedMember, setSelectedMember] = React.useState(listMember[0]);
+  const [availableTime, setAvailableTime] = React.useState(
+    selectedMember["availableTime"].sort()[0]
+  );
+
+  const millisecondsInADay = 86400000;
+  const formatDate = { day: "2-digit", month: "2-digit", year: "2-digit" };
+  const getTimeWeekly = React.useMemo(() => {
+    let startNumberDay = startDate.getDay();
+    return selectedMember.availableTime.reduce(
+      (result, value) => {
+        let lastElement = result.slice(-1)[0];
+        if (startNumberDay > 5) {
+          startNumberDay = 1;
+          let newStartDate = new Date(
+            lastElement[1].getTime() + 3 * millisecondsInADay
+          );
+          result.push([newStartDate, newStartDate, value]);
+        } else {
+          if (value < lastElement[2]) lastElement[2] = value;
+
+          lastElement[1] = new Date(
+            lastElement[1].getTime() + millisecondsInADay
+          );
+        }
+        startNumberDay++;
+        return result;
+      },
+      [
+        [
+          startDate,
+          new Date(startDate.getTime() - millisecondsInADay),
+          selectedMember.availableTime[0]
+        ]
+      ]
+    );
+  }, [selectedMember.availableTime, startDate]);
+
+  const [detailTimeByWeek, setDetailTimeByWeek] = React.useState(getTimeWeekly);
+  const [isShownDetailTime, setIsShownDetailTime] = React.useState(false);
 
   function handleChangeMember(event) {
     setSelectedMember(listMember[event.target.selectedIndex]);
   }
 
   function handleCancelMember() {
-    console.log("Cancel Add Member");
+    closeModalFn();
+  }
+
+  function handleExpandCollapse() {
+    setIsShownDetailTime(!isShownDetailTime);
   }
 
   function handleSubmitMember(event) {
-    console.dir(event.target);
     event.preventDefault();
 
     const ddlEmployee = event.target.elements.ddlEmployee;
     let id = ddlEmployee.value;
-    let name = listMember[ddlEmployee.selectedIndex][1];
+    let name = listMember[ddlEmployee.selectedIndex].name;
     let time = event.target.elements.txtTime.value;
-    let cost = listMember[ddlEmployee.selectedIndex][2] * time;
+    let cost = listMember[ddlEmployee.selectedIndex].cost * time;
+
     addMemberFn([{ id, name, time, cost }]);
+    closeModalFn();
   }
+
+  React.useEffect(() => {
+    setAvailableTime(selectedMember["availableTime"].sort()[0]);
+    setDetailTimeByWeek(getTimeWeekly);
+  }, [getTimeWeekly, selectedMember, startDate]);
+
+  //Declaration for styles
 
   const sectionStyle = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginTop: "2em",
+    justifyContent: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     "@media (max-width: 450px)": {
-      height: "calc(100vh - 51px - 0.5em)",
-      justifyContent: "center",
-      marginTop: "0"
+      justifyContent: "center"
     }
   };
 
@@ -44,10 +104,7 @@ function AddMemberProject({ listMember, addMemberFn }) {
     backgroundColor: "white",
     padding: 10,
     boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.5)",
-    borderRadius: "0.5em",
-    "@media (max-width: 450px)": {
-      height: "90%"
-    }
+    borderRadius: "0.5em"
   };
 
   const fieldsetStyle = {
@@ -128,10 +185,14 @@ function AddMemberProject({ listMember, addMemberFn }) {
   const fieldsetDetailStyle = {
     ...fieldsetGeneralStyle,
     border: "1px solid gray",
-    width: "63%",
+    width: "64%",
     "@media (max-width: 800px)": {
       ...fieldsetGeneralStyle["@media (max-width: 800px)"],
-      width: "65%"
+      width: "66%"
+    },
+    "@media (max-width: 500px)": {
+      ...fieldsetGeneralStyle["@media (max-width: 500px)"],
+      width: "69%"
     }
   };
 
@@ -186,7 +247,8 @@ function AddMemberProject({ listMember, addMemberFn }) {
                 }
                 name="txtTime"
                 css={inputTextStyle}
-                defaultValue="0"
+                min="0"
+                max="100"
                 required
               />
               <span> %</span>
@@ -194,27 +256,38 @@ function AddMemberProject({ listMember, addMemberFn }) {
           </fieldset>
         </div>
         <fieldset css={fieldsetGeneralStyle}>
-          <label css={rowWeekStyle}>
-            <span>31/07 - 09/08</span>
-            <span>20%</span>
-            <button>+</button>
-          </label>
+          <div css={rowWeekStyle}>
+            <span>
+              {`${startDate.toLocaleDateString("es-PE", formatDate)} - 
+            ${endDate.toLocaleDateString("es-PE", formatDate)}`}
+            </span>
+            <span>{availableTime}%</span>
+            <button type="button" onClick={handleExpandCollapse}>
+              {isShownDetailTime ? <FaAngleUp /> : <FaAngleDown />}
+            </button>
+          </div>
         </fieldset>
-        <fieldset css={fieldsetDetailStyle}>
-          <label css={rowWeekStyle}>
-            <span>31/07 - 02/08</span>
-            <span>20%</span>
-          </label>
-          <label css={rowWeekStyle}>
-            <span>05/07 - 09/08</span>
-            <span>20%</span>
-          </label>
-        </fieldset>
+        {isShownDetailTime && (
+          <fieldset css={fieldsetDetailStyle}>
+            {detailTimeByWeek.map(week => {
+              return (
+                <div css={rowWeekStyle} key={week[0].getTime()}>
+                  <span>
+                    {`${week[0].toLocaleDateString("es-PE", formatDate)} - 
+                    ${week[1].toLocaleDateString("es-PE", formatDate)}`}
+                  </span>
+                  <span>{week[2]}%</span>
+                </div>
+              );
+            })}
+          </fieldset>
+        )}
+
         <fieldset css={fieldsetStyle}>
           <Button type="button" css={buttonStyle} onClick={handleCancelMember}>
             Cancel
           </Button>
-          <Button type="submit" css={buttonStyle} onClick={handleSubmitMember}>
+          <Button type="submit" css={buttonStyle}>
             Add
           </Button>
         </fieldset>
