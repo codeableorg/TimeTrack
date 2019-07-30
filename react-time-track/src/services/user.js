@@ -1,4 +1,5 @@
 import { apiUrl } from "../util";
+// "http://localhost:3000/api/"
 
 const API_USERS = `${apiUrl}users`;
 
@@ -39,6 +40,24 @@ async function createUser(userData) {
   return response.json();
 } 
 
+async function editUser(userId) {
+  console.log(userId);
+  const response = await fetch(`${API_USERS}/${userId}`, {
+    method: "PUT",
+    credentials: "include",
+    headers: {
+      "Content-type": "application/json"
+    }
+  });
+
+  if (!response.ok) {
+    const {errors} = await response.json();
+    throw new Error(errors.message);
+  }
+
+  return response.json();
+}
+
 async function getUser(userId) {
   console.log(userId);
   const response = await fetch(`${API_USERS}/${userId}`, {
@@ -57,4 +76,4 @@ async function getUser(userId) {
   return response.json();
 } 
 
-export { userList, createUser, getUser };
+export { userList, createUser, getUser, editUser };

@@ -40,17 +40,18 @@ function Users() {
                     font: "bold italic 45px/1.5 Helvetica, Verdana, sans-serif",
                     marginBottom: "20px"
                   }}>
-                  <Card css={{"p": {padding: "0"}}}>
-                    <Li>Name: {usr.name}</Li>
-                    <Li>Role: {usr.role}</Li>  
-                    <Link to={`/edit-user/${usr.id}`}>                  
-                      <FaEdit/>
-                    </Link>
-                    
+                    <Card css={{"p": {padding: "0"}}}>
+                      
+                      <Li>Name: {usr.name}</Li>
+                      <Li>Role: {usr.role}</Li>
+                      <Link to={`/edit-user/${usr.id}`}>                  
+                        <FaEdit/>
+                      </Link>                    
                     </Card>                                                              
                   </li>                            
           );
         })}
+        {console.log(user)}
         </ol>
         <div css={{ marginTop: "2em", width: "80%" }}>
             <Button>NEW USER</Button>

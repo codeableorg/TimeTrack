@@ -6,7 +6,12 @@ import { Li, Title, UserCard,Card, Button } from "../components/ui";
 import { getUser } from "../services/user";
 
 function EditUser({user_id}) {
-  const [editUser, setEditUser] = React.useState([]);
+  const [editUser, setEditUser] = React.useState({
+    name: "",
+    email: "",
+    role: "",
+    rate: 0
+});
 
   React.useEffect(() => {
    console.log(user_id)
@@ -19,7 +24,9 @@ function EditUser({user_id}) {
     console.log(editUser);
   }, [editUser]);
 
-    
+  function handleChange(e, key) {
+    setEditUser({...editUser, [key] : e.target.value })
+   }
 
     return (
     <div
@@ -31,11 +38,15 @@ function EditUser({user_id}) {
         alignItems: "center"
       }}
     >
-            <Title htmlFor="name">{editUser.name}</Title>
-            <p>{editUser.email}</p>            
-        <div css={{ marginTop: "2em", width: "80%" }}>
-            <Button>SAVE CHANGES</Button>
-        </div>
+        <form css={{ marginTop: "5em", display: "flex", flexDirection: "column", width: "50%", fontSize: "20px"}}>
+            Name: <input type="text" name="user-name" onChange={(event)=> handleChange(event,"name")} value={editUser.name} css={{fontSize: "16px", color: "gray", marginBottom: "10px"}}/>
+            Email: <input type="text" name="user-email" onChange={(event)=> handleChange(event,"email")} value={editUser.email} css={{fontSize: "16px", color: "gray", marginBottom: "10px"}}/>
+            Role: <input type="text" name="user-role" onChange={(event)=> handleChange(event,"role")} value={editUser.role} css={{fontSize: "16px", color: "gray", marginBottom: "10px"}}/>
+            Rate: <input type="text" name="user-rate" onChange={(event)=> handleChange(event,"rate")} value={editUser.rate} css={{fontSize: "16px", color: "gray", marginBottom: "10px"}}/>                              
+						<div css={{ marginTop: "1em", display: "flex", textAlign: "center"}}>
+            	<Button>SAVE CHANGES</Button>
+            </div>
+        </form>
     </div>
   );
 }
