@@ -134,7 +134,7 @@ function InputInfoProject() {
                 aria-label={"Enter the " + value[0] + " of the project"}
                 name={"txt" + value[0]}
                 css={value[1] === "text" ? inputTextStyle : inputDateStyle}
-                value={infoProject[value[0].toLowerCase()]}
+                value={infoNewProject[value[0].toLowerCase()]}
                 onChange={event => handleChange(event, value[0].toLowerCase())}
                 required
               />
