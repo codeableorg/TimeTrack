@@ -14,15 +14,10 @@ function EditUser({user_id}) {
 		});
 
     React.useEffect(()=> {
-			console.log(user_id)
       getUser(user_id)
       .then(data => {setUser(data)
     	});
 		}, []);
-
-	React.useEffect(()=> {
-		console.log(user);
-	}, [user]);
 
 	function handleChange(e, key) {
 		setUser({...user, [key]: e.target.value})

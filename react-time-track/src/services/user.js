@@ -15,7 +15,6 @@ async function userList() {
 
   if (!userList.ok) {
     const { errors } = await userList.json();
-    console.log(errors);
     throw new Error(errors);
   }
 
@@ -23,7 +22,6 @@ async function userList() {
 }
 
 async function createUser(userData) {
-  console.log(userData);
   const response = await fetch(API_USERS, {
     method: "POST",
     credentials: "include",
@@ -59,7 +57,6 @@ async function getUserProjects(user_id) {
 }
 
 async function getUser(userId) {
-  console.log(userId);
   const response = await fetch(`${API_USERS}/${userId}`, {
     method: "GET",
     credentials: "include",
@@ -77,7 +74,6 @@ async function getUser(userId) {
 }
 
 async function editUser(userId, userData) {
-  console.log(userId);
   const response = await fetch(`${API_USERS}/${userId}`, {
     method: "PUT",
     credentials: "include",
