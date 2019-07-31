@@ -39,7 +39,7 @@ function Users() {
                     position: "relative",
                     font: "bold italic 45px/1.5 Helvetica, Verdana, sans-serif",
                     marginBottom: "20px"
-                  }}>
+                  }} key={usr.id}>
                   <Card css={{"p": {padding: "0"}}}>
                     <Li>Name: {usr.name}</Li>
                     <Li>Role: {usr.role}</Li>  
@@ -50,7 +50,7 @@ function Users() {
                   </li>                            
           );
         })}
-        {{console.log(user)}}
+        {console.log(user)}
         </ol>
         <div css={{ marginTop: "2em", width: "80%" }}>
             <Button>NEW USER</Button>

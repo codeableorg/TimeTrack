@@ -76,14 +76,15 @@ async function getUser(userId) {
   return response.json();
 }
 
-async function editUser(userId) {
+async function editUser(userId, userData) {
   console.log(userId);
   const response = await fetch(`${API_USERS}/${userId}`, {
     method: "PUT",
-    credential: "include",
+    credentials: "include",
     headers: {
       "Content-type": "application/json"
-    }
+    },
+    body: JSON.stringify(userData)
   });
 
   if (!response.ok) {
