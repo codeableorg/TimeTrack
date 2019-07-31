@@ -1,4 +1,5 @@
 import { apiUrl } from "../util";
+//http://localhost:3000/api/
 
 const API_USERS = `${apiUrl}users`;
 //http://localhost:3000/api/users/1/projects
@@ -75,4 +76,22 @@ async function getUser(userId) {
   return response.json();
 }
 
-export { userList, createUser, getUserProjects, getUser };
+async function editUser(userId) {
+  console.log(userId);
+  const response = await fetch(`${API_USERS}/${userId}`, {
+    method: "PUT",
+    credential: "include",
+    headers: {
+      "Content-type": "application/json"
+    }
+  });
+
+  if (!response.ok) {
+    const {errors} = await response.json();
+    throw new Error(errors.message);
+  }
+
+  return response.json();
+}
+
+export { userList, createUser, getUserProjects, getUser, editUser };
