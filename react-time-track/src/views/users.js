@@ -13,9 +13,9 @@ function Users() {
    userList()
    .then(data => { setUser(data);
    });  
- }, []);
+  }, []);
 
-    return (
+  return (
     <div
       css={{
         maxWidth: "500px",
@@ -25,9 +25,8 @@ function Users() {
         alignItems: "center"
       }}
     >
-            <Title htmlFor="name">List of Users</Title>
-
-            <ol css={{
+      <Title htmlFor="name">List of Users</Title>
+        <ol css={{
                   color: "#ccc",
                   listStyleType: "none",
                   width: "80%",
@@ -39,7 +38,7 @@ function Users() {
                     position: "relative",
                     font: "bold italic 45px/1.5 Helvetica, Verdana, sans-serif",
                     marginBottom: "20px"
-                  }}>
+                  }} key={usr.id}>
                     <Card css={{"p": {padding: "0"}}}>
                       
                       <Li>Name: {usr.name}</Li>
@@ -54,8 +53,8 @@ function Users() {
         {console.log(user)}
         </ol>
         <div css={{ marginTop: "2em", width: "80%" }}>
-            <Button>NEW USER</Button>
-          </div>
+          <Button>NEW USER</Button>
+        </div>
     </div>
   );
 }

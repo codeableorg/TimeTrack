@@ -40,24 +40,6 @@ async function createUser(userData) {
   return response.json();
 } 
 
-async function editUser(userId) {
-  console.log(userId);
-  const response = await fetch(`${API_USERS}/${userId}`, {
-    method: "PUT",
-    credentials: "include",
-    headers: {
-      "Content-type": "application/json"
-    }
-  });
-
-  if (!response.ok) {
-    const {errors} = await response.json();
-    throw new Error(errors.message);
-  }
-
-  return response.json();
-}
-
 async function getUser(userId) {
   console.log(userId);
   const response = await fetch(`${API_USERS}/${userId}`, {
@@ -75,5 +57,24 @@ async function getUser(userId) {
 
   return response.json();
 } 
+
+async function editUser(userId, userData) {
+  console.log(userId);
+  const response = await fetch(`${API_USERS}/${userId}`, {
+    method: "PUT",
+    credentials: "include",
+    headers: {
+      "Content-type": "application/json"
+    },
+    body: JSON.stringify(userData)
+  });
+
+  if (!response.ok) {
+    const {errors} = await response.json();
+    throw new Error(errors.message);
+  }
+
+  return response.json();
+}
 
 export { userList, createUser, getUser, editUser };
