@@ -57,4 +57,22 @@ async function getUserProjects(user_id) {
   return response.json();
 }
 
-export { userList, createUser, getUserProjects };
+async function getUser(userId) {
+  console.log(userId);
+  const response = await fetch(`API_USERS/userId`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+
+  if (!response.ok) {
+    const {errors} = await response.json();
+    throw new Error(errors.message);
+  }
+
+  return response.json();
+}
+
+export { userList, createUser, getUserProjects, getUser };
