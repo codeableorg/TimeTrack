@@ -80,7 +80,7 @@ function App() {
           <CreateUser path="/create-user" />
           <Users path="/users" />
           <DailyLog path="/daily-log" currentUser={currentUser} />
-          <EditUser path="edit-user/:id"/>
+          <EditUser path="edit-user/:user_id"/>
         </Home>
       </Router>
     </UserProvider>
