@@ -72,7 +72,7 @@ function AddMemberProject({ listMember, addMemberFn, closeModalFn }) {
     let time = event.target.elements.txtTime.value;
     let cost = listMember[ddlEmployee.selectedIndex].cost * time;
 
-    addMemberFn([{ id, name, time, cost }]);
+    addMemberFn({ id, name, time, cost });
     closeModalFn();
   }
 
@@ -94,6 +94,9 @@ function AddMemberProject({ listMember, addMemberFn, closeModalFn }) {
     left: 0,
     right: 0,
     bottom: 0,
+    "@media (min-width: 960px)": {
+      left: 230
+    },
     "@media (max-width: 450px)": {
       justifyContent: "center"
     }

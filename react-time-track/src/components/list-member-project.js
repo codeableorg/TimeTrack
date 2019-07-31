@@ -1,97 +1,128 @@
 /**@jsx jsx */
 import React from "react";
-import { createPortal } from "react-dom";
 import { jsx } from "@emotion/core";
 
 import AddMemberProject from "../components/add-member-project";
 import { Button, IconGenericSmall, IconUserSmall } from "../components/ui";
 
-function ListMemberProject() {
+function ListMemberProject({ nextFn, beforeFn }) {
   let fakeListMember = [
     {
       id: "1",
       name: "Usuario 1",
       time: 10,
       cost: 6500,
-      availableTime: [20, 20, 30, 30, 30, 40, 10, 10]
+      availableTime: [20, 20, 30, 30, 30, 40, 10, 10],
+      isChoose: false
     },
     {
       id: "2",
       name: "Usuario 2",
       time: 5,
       cost: 1200,
-      availableTime: [10, 10, 20, 20, 20, 20, 20, 20]
+      availableTime: [10, 10, 20, 20, 20, 20, 20, 20],
+      isChoose: false
     },
     {
       id: "3",
       name: "Usuario 3",
       time: 10,
       cost: 3300,
-      availableTime: [15, 15, 15, 15, 15, 15, 10, 10]
+      availableTime: [15, 15, 15, 15, 15, 15, 10, 10],
+      isChoose: false
     },
     {
       id: "4",
       name: "Usuario 4",
       time: 8,
       cost: 2300,
-      availableTime: [40, 40, 80, 80, 60, 60, 60, 60]
+      availableTime: [40, 40, 80, 80, 60, 60, 60, 60],
+      isChoose: false
     },
     {
       id: "5",
       name: "Usuario 5",
       time: 15,
       cost: 5800,
-      availableTime: [25, 25, 15, 15, 20, 20, 10, 10]
+      availableTime: [25, 25, 15, 15, 20, 20, 10, 10],
+      isChoose: false
     },
     {
       id: "6",
       name: "Usuario 6",
       time: 5,
       cost: 800,
-      availableTime: [50, 50, 50, 50, 40, 40, 40, 40]
+      availableTime: [50, 50, 50, 50, 40, 40, 40, 40],
+      isChoose: false
     },
     {
       id: "7",
       name: "Usuario 7",
       time: 10,
       cost: 1300,
-      availableTime: [80, 80, 80, 80, 80, 80, 80, 80]
+      availableTime: [80, 80, 80, 80, 80, 80, 80, 80],
+      isChoose: false
     },
     {
       id: "8",
       name: "Usuario 8",
       time: 5,
       cost: 1600,
-      availableTime: [40, 15, 45, 15, 45, 15, 10, 10]
+      availableTime: [40, 15, 45, 15, 45, 15, 10, 10],
+      isChoose: false
     },
     {
       id: "9",
       name: "Usuario 9",
       time: 7,
       cost: 2300,
-      availableTime: [80, 80, 80, 80, 80, 80, 80, 80]
+      availableTime: [80, 80, 80, 80, 80, 80, 80, 80],
+      isChoose: false
     },
     {
       id: "10",
       name: "Usuario 10",
       time: 5,
       cost: 7100,
-      availableTime: [50, 50, 50, 50, 50, 50, 50, 50]
+      availableTime: [50, 50, 50, 50, 50, 50, 50, 50],
+      isChoose: false
     }
   ];
-  const [listMember, setListMember] = React.useState([]);
+
+  const [listMember, setListMember] = React.useState(fakeListMember);
+  const [listMemberAdded, setListMemberAdded] = React.useState([]);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const titleProject = JSON.parse(sessionStorage.getItem("InfoNewProject"))[
-    "title"
-  ];
-  const totalCost = listMember.reduce((sum, member) => sum + member.cost, 0);
+  const [isError, setIsError] = React.useState(false);
+
+  const titleProject = JSON.parse(sessionStorage.getItem("InfoNewProject"))
+    .title;
+  const totalCost = listMemberAdded.reduce((sum, elem) => sum + elem.cost, 0);
 
   function addMember(newMember) {
-    setListMember(listMember.concat(newMember));
+    let index = listMember.findIndex(element => element.id === newMember.id);
+    listMember[index].isChoose = true;
+    setListMember(listMember);
+    setListMemberAdded(listMemberAdded.concat(newMember));
+    setIsError(false);
+  }
+
+  function delMember(id) {
+    let index = listMember.findIndex(element => element.id === id);
+    listMember[index].isChoose = false;
+    setListMember(listMember);
+    setListMemberAdded(listMemberAdded.filter(element => element.id !== id));
   }
 
   function handleOpenModal() {
     setIsModalOpen(!isModalOpen);
+  }
+
+  function handleNext() {
+    if (listMemberAdded.length === 0) {
+      setIsError(true);
+      return;
+    }
+    nextFn();
   }
 
   const sectionStyle = {
@@ -152,6 +183,8 @@ function ListMemberProject() {
     }
   };
 
+  const errorDiv = { color: "red", textAlign: "center", fontWeight: "bold" };
+
   return (
     <section css={sectionStyle}>
       <div css={divFormStyle}>
@@ -184,22 +217,28 @@ function ListMemberProject() {
               }}
             >
               <h4 css={{ textAlign: "left" }}>Team Members</h4>
-              <IconGenericSmall icon="add" onClick={handleOpenModal} />
-              {isModalOpen && (
-                <AddMemberProject
-                  listMember={fakeListMember}
-                  addMemberFn={addMember}
-                  closeModalFn={handleOpenModal}
-                />
+              {listMemberAdded.length < listMember.length && (
+                <>
+                  <IconGenericSmall icon="add" onClick={handleOpenModal} />
+                  {isModalOpen && (
+                    <AddMemberProject
+                      listMember={listMember.filter(value => !value.isChoose)}
+                      addMemberFn={addMember}
+                      closeModalFn={handleOpenModal}
+                    />
+                  )}
+                </>
               )}
             </label>
             {/* <hr css={{ width: "100%" }} /> */}
             <ul css={{ overflowY: "auto", height: 200 }}>
-              {listMember.length === 0 ? (
-                <li>There are no members</li>
+              {listMemberAdded.length === 0 ? (
+                <li>
+                  <label>There are no members</label>
+                </li>
               ) : (
-                listMember.map(member => (
-                  <li>
+                listMemberAdded.map(member => (
+                  <li key={member.id}>
                     <div
                       css={{
                         display: "flex",
@@ -234,7 +273,10 @@ function ListMemberProject() {
                         {`S/. ${member.cost}`}
                       </span>
                       <span css={{ width: "10%" }}>
-                        <IconGenericSmall icon="del" />
+                        <IconGenericSmall
+                          icon="del"
+                          onClick={() => delMember(member.id)}
+                        />
                       </span>
                     </div>
                   </li>
@@ -243,11 +285,17 @@ function ListMemberProject() {
             </ul>
           </div>
         </div>
+        {isError && (
+          <div css={errorDiv}>
+            <span>You need add at least one member</span>
+          </div>
+        )}
+
         <fieldset css={fieldsetStyle}>
-          <Button type="button" css={buttonStyle}>
+          <Button type="button" css={buttonStyle} onClick={beforeFn}>
             Back
           </Button>
-          <Button type="button" css={buttonStyle}>
+          <Button type="button" css={buttonStyle} onClick={handleNext}>
             Next
           </Button>
         </fieldset>

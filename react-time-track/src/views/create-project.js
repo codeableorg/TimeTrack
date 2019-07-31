@@ -4,6 +4,7 @@ import { jsx } from "@emotion/core";
 
 import InputInfoProject from "../components/input-info-project";
 import ListMemberProject from "../components/list-member-project";
+import { NewProjectProvider } from "../contexts/newProject";
 
 function CreateProject() {
   const [stepCreation, setStepCreation] = React.useState(1);
@@ -12,14 +13,29 @@ function CreateProject() {
     setStepCreation(stepCreation + 1);
   }
 
+  function beforeStep() {
+    setStepCreation(stepCreation - 1);
+  }
+
+  let component = null;
+
   switch (stepCreation) {
     case 1:
-      return <InputInfoProject nextFn={nextStep} />;
+      component = <InputInfoProject nextFn={nextStep} />;
+      break;
     case 2:
-      return <ListMemberProject />;
+      component = <ListMemberProject nextFn={nextStep} beforeFn={beforeStep} />;
+      break;
     default:
-      return <InputInfoProject />;
+      component = <InputInfoProject beforeFn={beforeStep} />;
+      break;
   }
+
+  return (
+    <NewProjectProvider infoProject={{ nextStep, beforeStep }}>
+      {component}
+    </NewProjectProvider>
+  );
 }
 
 export default CreateProject;
