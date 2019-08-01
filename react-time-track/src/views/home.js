@@ -60,7 +60,6 @@ function Home({ children }) {
         <Header tittle="Create Project" path="/create-project" />
         <Header tittle="Manage Users" path="/users" />
         <Header tittle="Daily Log" path="/daily-log" />
-        <Header tittle="Edit User" path="edit-user/:id"/>
       </Router>
 
       <div
