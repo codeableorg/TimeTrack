@@ -4,7 +4,7 @@ import { jsx } from "@emotion/core";
 import { Link } from "@reach/router";
 import Chart from "chart.js";
 
-import { Card, Circle, Subtitle } from "../components/ui";
+import { Card, Circle, Subtitle, Button } from "../components/ui";
 import { getProjectDetail } from "../services/project";
 import { getWeeklyReport } from "../services/weekly_report";
 
@@ -180,6 +180,7 @@ function Project({ project_id }) {
           );
         })}
       </div>
+      <Button>Close Project</Button>
     </div>
   );
 }
