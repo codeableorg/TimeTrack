@@ -6,6 +6,44 @@
  @param {String} real_cost - string with real_cost for project
  */
 
+import React from "react";
+import { getWeeklyReport } from "../services/weekly_report";
+
+export default function CalculateRisk(totalEstimated, accumEstimated, accumReal) {
+  const red = { borderColor: "#f24636" };
+  const ambar = { borderColor: "#fec235" };
+  const green = { borderColor: "#52af50" };
+
+  let riskValue = [];
+/*
+  const [weeklyData, setWeeklyData] = React.useState([]);
+
+  React.useEffect(() => {
+    getWeeklyReport(projectId)
+      .then(response => setWeeklyData(response))
+      .catch(error => console.log(error));
+  }, []);
+
+  React.useEffect(() => {
+    const estimated_cost = weeklyData.reduce((accum, weekData) => {
+      return (accum += weekData.estimated_cost);
+    }, 0);
+
+    const real_cost = weeklyData.reduce((accum, weekData) => {
+      return (accum += weekData.real_cost);
+    }, 0);
+*/
+    const colorizer = real_cost / estimated_cost;
+
+    if (colorizer >= 1) riskValue = red;
+    else if (colorizer < 1 && colorizer > 0.9) riskValue = ambar;
+    else if (colorizer < 0.9) riskValue = green;
+  });
+
+  return riskValue;
+}
+
+/*
 export default function calculateRisk(
   start_date,
   end_date,
@@ -29,19 +67,19 @@ export default function calculateRisk(
   const currentRealCost = real_cost;
 
   // Comment/delete the following line if it is no longer required.
-  /*console.log(
-    `Proyecto data
-    ---------------
-    Días usados: ${Math.abs(Math.round(usedDays))},
-    Días totales: ${Math.abs(Math.round(projectDays))},
-    Fecha inicial: ${start_date},
-    Fecha actual: ${new Date()},
-    Costo estimado proyecto: ${estimated_cost}, 
-    Costo real proyecto: ${real_cost}, 
-    Costo estimado actual: ${currentEstimatedCost},
-    Costo real actual: ${currentRealCost},
-    Estado: ${(currentRealCost / currentEstimatedCost) * 100}`
-  );*/
+  // console.log(
+  //   `Proyecto data
+  //   ---------------
+  //   Días usados: ${Math.abs(Math.round(usedDays))},
+  //   Días totales: ${Math.abs(Math.round(projectDays))},
+  //   Fecha inicial: ${start_date},
+  //   Fecha actual: ${new Date()},
+  //   Costo estimado proyecto: ${estimated_cost},
+  //   Costo real proyecto: ${real_cost},
+  //   Costo estimado actual: ${currentEstimatedCost},
+  //   Costo real actual: ${currentRealCost},
+  //   Estado: ${(currentRealCost / currentEstimatedCost) * 100}`
+  // );
   // Comment delete the above line if it is no longer required.
 
   if (currentRealCost / currentEstimatedCost > 1) riskValue = red;
@@ -53,3 +91,4 @@ export default function calculateRisk(
   else if (currentRealCost / currentEstimatedCost < 0.9) riskValue = green;
   return riskValue;
 }
+*/
