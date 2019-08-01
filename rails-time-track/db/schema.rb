@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_18_160915) do
+ActiveRecord::Schema.define(version: 2019_07_31_161326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2019_07_18_160915) do
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["project_member_id"], name: "index_daily_logs_on_project_members_id"
+    t.index ["project_member_id"], name: "index_daily_logs_on_project_member_id"
   end
 
   create_table "project_members", force: :cascade do |t|
@@ -46,6 +46,16 @@ ActiveRecord::Schema.define(version: 2019_07_18_160915) do
     t.integer "real_cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_project_reports", force: :cascade do |t|
+    t.bigint "project_id"
+    t.integer "day"
+    t.integer "estimated_cost"
+    t.integer "real_cost"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_user_project_reports_on_project_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -75,5 +85,6 @@ ActiveRecord::Schema.define(version: 2019_07_18_160915) do
   add_foreign_key "daily_logs", "project_members"
   add_foreign_key "project_members", "projects"
   add_foreign_key "project_members", "users"
+  add_foreign_key "user_project_reports", "projects"
   add_foreign_key "weekly_project_reports", "projects"
 end

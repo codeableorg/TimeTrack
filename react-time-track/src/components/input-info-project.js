@@ -33,7 +33,6 @@ function InputInfoProject({ nextFn }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.dir(event.target);
     let title = event.target.elements.txtTitle.value;
     let client = event.target.elements.txtClient.value;
     let category = event.target.elements.txtCategory.value;

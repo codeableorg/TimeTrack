@@ -67,10 +67,11 @@ function AddMemberProject({ listMember, addMemberFn, closeModalFn }) {
     event.preventDefault();
 
     const ddlEmployee = event.target.elements.ddlEmployee;
-    let id = ddlEmployee.value;
-    let name = listMember[ddlEmployee.selectedIndex].name;
-    let time = event.target.elements.txtTime.value;
-    let cost = listMember[ddlEmployee.selectedIndex].cost * time;
+    let id = +ddlEmployee.value;
+    let member = listMember[ddlEmployee.selectedIndex];
+    let name = member.name;
+    let time = +event.target.elements.txtTime.value;
+    let cost = (member.rate * member.availableTime.length * 8 * time) / 100;
 
     addMemberFn({ id, name, time, cost });
     closeModalFn();

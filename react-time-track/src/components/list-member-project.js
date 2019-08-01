@@ -4,92 +4,11 @@ import { jsx } from "@emotion/core";
 
 import AddMemberProject from "../components/add-member-project";
 import { Button, IconGenericSmall, IconUserSmall } from "../components/ui";
+import { userListAvailableTime } from "../services/user";
+import { createProject } from "../services/project";
 
 function ListMemberProject({ nextFn, beforeFn }) {
-  let fakeListMember = [
-    {
-      id: "1",
-      name: "Usuario 1",
-      time: 10,
-      cost: 6500,
-      availableTime: [20, 20, 30, 30, 30, 40, 10, 10],
-      isChoose: false
-    },
-    {
-      id: "2",
-      name: "Usuario 2",
-      time: 5,
-      cost: 1200,
-      availableTime: [10, 10, 20, 20, 20, 20, 20, 20],
-      isChoose: false
-    },
-    {
-      id: "3",
-      name: "Usuario 3",
-      time: 10,
-      cost: 3300,
-      availableTime: [15, 15, 15, 15, 15, 15, 10, 10],
-      isChoose: false
-    },
-    {
-      id: "4",
-      name: "Usuario 4",
-      time: 8,
-      cost: 2300,
-      availableTime: [40, 40, 80, 80, 60, 60, 60, 60],
-      isChoose: false
-    },
-    {
-      id: "5",
-      name: "Usuario 5",
-      time: 15,
-      cost: 5800,
-      availableTime: [25, 25, 15, 15, 20, 20, 10, 10],
-      isChoose: false
-    },
-    {
-      id: "6",
-      name: "Usuario 6",
-      time: 5,
-      cost: 800,
-      availableTime: [50, 50, 50, 50, 40, 40, 40, 40],
-      isChoose: false
-    },
-    {
-      id: "7",
-      name: "Usuario 7",
-      time: 10,
-      cost: 1300,
-      availableTime: [80, 80, 80, 80, 80, 80, 80, 80],
-      isChoose: false
-    },
-    {
-      id: "8",
-      name: "Usuario 8",
-      time: 5,
-      cost: 1600,
-      availableTime: [40, 15, 45, 15, 45, 15, 10, 10],
-      isChoose: false
-    },
-    {
-      id: "9",
-      name: "Usuario 9",
-      time: 7,
-      cost: 2300,
-      availableTime: [80, 80, 80, 80, 80, 80, 80, 80],
-      isChoose: false
-    },
-    {
-      id: "10",
-      name: "Usuario 10",
-      time: 5,
-      cost: 7100,
-      availableTime: [50, 50, 50, 50, 50, 50, 50, 50],
-      isChoose: false
-    }
-  ];
-
-  const [listMember, setListMember] = React.useState(fakeListMember);
+  const [listMember, setListMember] = React.useState([]);
   const [listMemberAdded, setListMemberAdded] = React.useState([]);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [isError, setIsError] = React.useState(false);
@@ -100,7 +19,7 @@ function ListMemberProject({ nextFn, beforeFn }) {
 
   function addMember(newMember) {
     let index = listMember.findIndex(element => element.id === newMember.id);
-    listMember[index].isChoose = true;
+    listMember[index].isChosen = true;
     setListMember(listMember);
     setListMemberAdded(listMemberAdded.concat(newMember));
     setIsError(false);
@@ -108,7 +27,7 @@ function ListMemberProject({ nextFn, beforeFn }) {
 
   function delMember(id) {
     let index = listMember.findIndex(element => element.id === id);
-    listMember[index].isChoose = false;
+    listMember[index].isChosen = false;
     setListMember(listMember);
     setListMemberAdded(listMemberAdded.filter(element => element.id !== id));
   }
@@ -122,8 +41,24 @@ function ListMemberProject({ nextFn, beforeFn }) {
       setIsError(true);
       return;
     }
-    nextFn();
+    // nextFn();
   }
+
+  React.useEffect(() => {
+    let infoProject = JSON.parse(sessionStorage.getItem("InfoNewProject"));
+    const startDate = new Date(infoProject.start.split("-").join("/"));
+    const endDate = new Date(infoProject.end.split("-").join("/"));
+    userListAvailableTime({ startDate, endDate })
+      .then(response => {
+        setListMember(response);
+      })
+      .catch(response => {
+        console.log("error");
+        console.log(response);
+      });
+  }, []);
+
+  //Declaration for styles
 
   const sectionStyle = {
     display: "flex",
@@ -163,6 +98,24 @@ function ListMemberProject({ nextFn, beforeFn }) {
     }
   };
 
+  const h3TitleProject = { textAlign: "center", margin: "0.5em" };
+
+  const labelTotalInfo = {
+    display: "flex",
+    width: 150,
+    justifyContent: "space-between",
+    margin: "0.5em 0"
+  };
+
+  const labelTitleMember = {
+    display: "flex",
+    width: "100%",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "0.5em 0",
+    borderBottom: "1px solid black"
+  };
+
   const fieldsetStyle = {
     border: "none",
     padding: "12px 30px",
@@ -192,37 +145,20 @@ function ListMemberProject({ nextFn, beforeFn }) {
         <hr />
         <div css={divContainerList}>
           <div css={divList}>
-            <h3 css={{ textAlign: "center", margin: "0.5em" }}>
-              {titleProject || "Titulo del Proyecto"}
-            </h3>
-            <label
-              css={{
-                display: "flex",
-                width: 150,
-                justifyContent: "space-between",
-                margin: "0.5em 0"
-              }}
-            >
+            <h3 css={h3TitleProject}>{titleProject}</h3>
+            <label css={labelTotalInfo}>
               <h4 css={{ textAlign: "left" }}>Total</h4>
               <h4>{`S/. ${totalCost}`}</h4>
             </label>
-            <label
-              css={{
-                display: "flex",
-                width: "100%",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "0.5em 0",
-                borderBottom: "1px solid black"
-              }}
-            >
+            <label css={labelTitleMember}>
               <h4 css={{ textAlign: "left" }}>Team Members</h4>
-              {listMemberAdded.length < listMember.length && (
+              {(listMember.length === 0 ||
+                listMemberAdded.length < listMember.length) && (
                 <>
                   <IconGenericSmall icon="add" onClick={handleOpenModal} />
                   {isModalOpen && (
                     <AddMemberProject
-                      listMember={listMember.filter(value => !value.isChoose)}
+                      listMember={listMember.filter(value => !value.isChosen)}
                       addMemberFn={addMember}
                       closeModalFn={handleOpenModal}
                     />
@@ -230,11 +166,14 @@ function ListMemberProject({ nextFn, beforeFn }) {
                 </>
               )}
             </label>
-            {/* <hr css={{ width: "100%" }} /> */}
-            <ul css={{ overflowY: "auto", height: 200 }}>
+            <ul css={{ overflowY: "auto", maxHeight: 200 }}>
               {listMemberAdded.length === 0 ? (
                 <li>
-                  <label>There are no members</label>
+                  <label
+                    css={{ display: "block", textAlign: "center", padding: 10 }}
+                  >
+                    There are no members added
+                  </label>
                 </li>
               ) : (
                 listMemberAdded.map(member => (
@@ -296,7 +235,7 @@ function ListMemberProject({ nextFn, beforeFn }) {
             Back
           </Button>
           <Button type="button" css={buttonStyle} onClick={handleNext}>
-            Next
+            Create
           </Button>
         </fieldset>
       </div>

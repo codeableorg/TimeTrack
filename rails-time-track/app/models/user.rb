@@ -28,10 +28,29 @@ class User < ApplicationRecord
 
   def regenerate_and_timestamp_reset_token
     regenerate_reset_digest
-    update_attribute(:reset_created_at,Time.zone.now)
+    update_attribute(:reset_created_at, Time.zone.now)
   end
 
   def reset_token_expired?
     reset_created_at < 2.hour.ago
+  end
+
+  def availableTimeRange(startDate, endDate)
+    workingDaysRange = (startDate..endDate).filter {|d| (1..5).include?(d.wday) }
+    listProjectAssigned = self.project_members.includes(:project)
+    return Array.new(workingDaysRange.length, 100) if projects.size == 0
+
+    listTimeByProject = listProjectAssigned.map do |project|
+      projectTimeRange = (project.project.start_date..project.project.end_date).filter {|d| (1..5).include?(d.wday) }
+      percentageTimeAssigned = 100 * project.estimated_cost/(self.rate * 8 * projectTimeRange.size)
+      projectTimeRange.reduce(Hash.new(0)) do |obj, day| 
+        obj[day.strftime("%d/%m")] = percentageTimeAssigned
+        obj
+      end
+    end
+
+    workingDaysRange.map do |day|
+      listTimeByProject.reduce(100) { |sum, project| sum - project[day.strftime("%d/%m")]}
+    end
   end
 end
