@@ -16,10 +16,31 @@ module Api
     end
 
     def create
-      project = Project.new(project_params[0])
-      if project
-        params[:members].each {|info| ProjectMember.create(info)}
-        render json: project, status: :created
+      project = Project.new(name: params[:name],
+                            client: params[:client],
+                            category: params[:category],
+                            start_date: params[:start_date],
+                            end_date: params[:end_date],
+                            estimated_cost: params[:estimated_cost],
+                            real_cost: params[:real_cost],
+                            closed: false,)
+      if project.save
+        if params[:members].all? do |member|
+          p member.to_s
+          newMember = ProjectMember.new(
+                                        user_id: member[:user_id],
+                                        estimated_cost: member[:estimated_cost],
+                                        real_cost: 0
+                                        )
+          newMember.project_id = project.id
+          newMember.save
+        end
+          render json: { message: "Project created successfully" }, status: :created
+        else
+          ProjectMember.where(project_id:project.id).destroy_all
+          project.destroy
+          render_errors(project.errors, :unprocessable_entity)
+        end
       else
         render_errors(project.errors, :unprocessable_entity)
       end
@@ -35,11 +56,13 @@ module Api
     end
 
     def project_params
-      [ 
-        params.permit(:name, :client, :category, :start_date,
-                      :end_date, :estimated_cost),
-        params.permit(:members)
-      ]
+      params.require(:project).permit(  [ :name, 
+                                          :client,
+                                          :category,
+                                          :start_date,
+                                          :end_date,
+                                          :estimated_cost], 
+                                      members: [:user_id, :estimated_cost])
     end
   
   end

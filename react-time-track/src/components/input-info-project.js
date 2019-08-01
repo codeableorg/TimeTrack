@@ -19,7 +19,6 @@ function InputInfoProject({ nextFn }) {
     title: "",
     client: "",
     category: "",
-    product: "",
     start: today,
     end: today
   };
@@ -36,10 +35,9 @@ function InputInfoProject({ nextFn }) {
     let title = event.target.elements.txtTitle.value;
     let client = event.target.elements.txtClient.value;
     let category = event.target.elements.txtCategory.value;
-    let product = event.target.elements.txtProduct.value;
     let start = event.target.elements.txtStart.value;
     let end = event.target.elements.txtEnd.value;
-    setInfoNewProject({ title, client, category, product, start, end });
+    setInfoNewProject({ title, client, category, start, end });
     nextFn();
   }
 
@@ -123,7 +121,6 @@ function InputInfoProject({ nextFn }) {
           ["Title", "text"],
           ["Client", "text"],
           ["Category", "text"],
-          ["Product", "text"],
           ["Start", "date"],
           ["End", "date"]
         ].map(value => (

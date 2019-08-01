@@ -100,7 +100,7 @@ async function userListAvailableTime(params) {
   if (!userListTime.ok) {
     const { errors } = await userListTime.json();
     console.log(errors);
-    throw new Error(errors);
+    throw new Error(errors.message);
   }
 
   return userListTime.json();

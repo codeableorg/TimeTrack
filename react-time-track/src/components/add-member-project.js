@@ -6,6 +6,7 @@ import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { Button } from "./ui";
 
 function AddMemberProject({ listMember, addMemberFn, closeModalFn }) {
+  console.log(listMember);
   let infoProject = JSON.parse(sessionStorage.getItem("InfoNewProject"));
   const startDate = new Date(infoProject.start.split("-").join("/"));
   const endDate = new Date(infoProject.end.split("-").join("/"));
@@ -254,6 +255,7 @@ function AddMemberProject({ listMember, addMemberFn, closeModalFn }) {
                 min="0"
                 max="100"
                 required
+                autoFocus
               />
               <span> %</span>
             </div>

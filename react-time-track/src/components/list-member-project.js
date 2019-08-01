@@ -1,6 +1,7 @@
 /**@jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
+import { navigate, redirectTo } from "@reach/router";
 
 import AddMemberProject from "../components/add-member-project";
 import { Button, IconGenericSmall, IconUserSmall } from "../components/ui";
@@ -42,19 +43,51 @@ function ListMemberProject({ nextFn, beforeFn }) {
       return;
     }
     // nextFn();
+    const infoProject = JSON.parse(sessionStorage.getItem("InfoNewProject"));
+    const bodyProject = {
+      name: infoProject.title,
+      client: infoProject.client,
+      category: infoProject.category,
+      start_date: infoProject.start,
+      end_date: infoProject.end,
+      estimated_cost: totalCost,
+      members: listMemberAdded.map(member => {
+        return { user_id: member.id, estimated_cost: member.cost };
+      })
+    };
+    createProject(bodyProject)
+      .then(response => {
+        sessionStorage.removeItem("InfoNewProject");
+        navigate("/");
+      })
+      .catch(response => {
+        console.log("error");
+        console.dir(response);
+        console.log(response.message);
+        if (response.message === "Access denied") {
+          localStorage.removeItem("user");
+          // navigate("../login");
+        }
+      });
   }
 
   React.useEffect(() => {
-    let infoProject = JSON.parse(sessionStorage.getItem("InfoNewProject"));
-    const startDate = new Date(infoProject.start.split("-").join("/"));
-    const endDate = new Date(infoProject.end.split("-").join("/"));
+    const infoProject = JSON.parse(sessionStorage.getItem("InfoNewProject"));
+    const startDate = infoProject.start;
+    const endDate = infoProject.end;
     userListAvailableTime({ startDate, endDate })
       .then(response => {
+        console.log(response);
         setListMember(response);
       })
       .catch(response => {
         console.log("error");
-        console.log(response);
+        console.dir(response);
+        console.log(response.message);
+        if (response.message === "Access denied") {
+          localStorage.removeItem("user");
+          // redirectTo("/login");
+        }
       });
   }, []);
 
