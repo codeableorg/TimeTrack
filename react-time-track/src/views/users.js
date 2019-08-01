@@ -50,7 +50,6 @@ function Users() {
                   </li>                            
           );
         })}
-        {console.log(user)}
         </ol>
         <div css={{ marginTop: "2em", width: "80%" }}>
             <Button>NEW USER</Button>
