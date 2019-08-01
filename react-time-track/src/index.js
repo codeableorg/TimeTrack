@@ -17,6 +17,7 @@ import CreateProject from "./views/create-project";
 import CreateUser from "./views/create-user";
 import Users from "./views/users";
 import DailyLog from "./views/daily-log";
+import EditUser from "./views/edit-user";
 
 const global = {
   body: {
@@ -79,6 +80,7 @@ function App() {
           <CreateUser path="/create-user" />
           <Users path="/users" />
           <DailyLog path="/daily-log" currentUser={currentUser} />
+          <EditUser path="edit-user/:user_id"/>
         </Home>
       </Router>
     </UserProvider>
