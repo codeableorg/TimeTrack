@@ -113,7 +113,7 @@ exports[`create-project component 1`] = `
             name="txtStart"
             required=""
             type="date"
-            value="2019-07-24"
+            value="2019-08-01"
           />
         </div>
       </fieldset>
@@ -134,7 +134,7 @@ exports[`create-project component 1`] = `
             name="txtEnd"
             required=""
             type="date"
-            value="2019-07-24"
+            value="2019-08-01"
           />
         </div>
       </fieldset>
@@ -142,13 +142,13 @@ exports[`create-project component 1`] = `
         class="css-1pfy88f-InputInfoProject"
       >
         <button
-          class="css-1uutyn6-InputInfoProject"
+          class="css-66se3v-InputInfoProject"
           type="button"
         >
           Cancel
         </button>
         <button
-          class="css-1uutyn6-InputInfoProject"
+          class="css-66se3v-InputInfoProject"
           type="submit"
         >
           Next
