@@ -94,8 +94,15 @@ async function editUser(userId, userData) {
 
 async function userListAvailableTime(params) {
   const userListTime = await fetch(`${API_USERS}/availableTime`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify(params)
   });
+
+  console.dir(userListTime);
 
   if (!userListTime.ok) {
     const { errors } = await userListTime.json();

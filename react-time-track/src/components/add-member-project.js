@@ -6,15 +6,12 @@ import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { Button } from "./ui";
 
 function AddMemberProject({ listMember, addMemberFn, closeModalFn }) {
-  console.log(listMember);
   let infoProject = JSON.parse(sessionStorage.getItem("InfoNewProject"));
   const startDate = new Date(infoProject.start.split("-").join("/"));
   const endDate = new Date(infoProject.end.split("-").join("/"));
 
   const [selectedMember, setSelectedMember] = React.useState(listMember[0]);
-  const [availableTime, setAvailableTime] = React.useState(
-    selectedMember["availableTime"].sort()[0]
-  );
+  const [availableTime, setAvailableTime] = React.useState(0);
 
   const millisecondsInADay = 86400000;
   const formatDate = { day: "2-digit", month: "2-digit", year: "2-digit" };
@@ -79,9 +76,9 @@ function AddMemberProject({ listMember, addMemberFn, closeModalFn }) {
   }
 
   React.useEffect(() => {
-    setAvailableTime(selectedMember["availableTime"].sort()[0]);
+    setAvailableTime(Math.min.apply(null, selectedMember.availableTime));
     setDetailTimeByWeek(getTimeWeekly);
-  }, [getTimeWeekly, selectedMember, startDate]);
+  }, [selectedMember]);
 
   //Declaration for styles
 

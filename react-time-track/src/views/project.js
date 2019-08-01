@@ -6,7 +6,6 @@ import { Card, Circle } from "../components/ui";
 import { Subtitle } from "../components/ui";
 import { getProjectDetail } from "../services/project";
 import { getWeeklyReport } from "../services/weekly_report";
-import { navigate } from "@reach/router";
 
 // const weeklyData = [
 //   {
@@ -45,7 +44,7 @@ function Project({ project_id }) {
   }, []);
 
   React.useEffect(() => {
-    if (project.members.length == 0) return;
+    if (project.members.length === 0) return;
     getWeeklyReport(project_id)
       .then(response => setWeeklyData(response))
       .catch(error => console.log(error));

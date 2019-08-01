@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import { Button, Card, Circle } from "./ui";
+import { Button, Card } from "./ui";
 import { Section } from "./helpers";
 import { userList } from "../services/user";
 
@@ -104,7 +104,7 @@ function UserList() {
           return (
             <div css={userStyle} key={user}>
               <h2>{user}</h2>
-              <Card styles={card} role="listuser">
+              <Card styles={card} role="contentinfo">
                 {members[user].map(name => {
                   count++;
                   return (

@@ -1,7 +1,7 @@
 /**@jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import { navigate, redirectTo } from "@reach/router";
+import { navigate } from "@reach/router";
 
 import AddMemberProject from "../components/add-member-project";
 import { Button, IconGenericSmall, IconUserSmall } from "../components/ui";

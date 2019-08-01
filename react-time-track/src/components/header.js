@@ -1,9 +1,8 @@
 /** @jsx jsx */
-import React, { useState } from "react";
+import React from "react";
 import { jsx } from "@emotion/core";
 import { NavBarItem } from "./ui";
 import { FaUser, FaClock } from "react-icons/fa";
-import { Link } from "@reach/router";
 
 function Header({ tittle }) {
   return (
