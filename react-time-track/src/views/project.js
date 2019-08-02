@@ -1,9 +1,10 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
+import { Link } from "@reach/router";
 import Chart from "chart.js";
-import { Card, Circle } from "../components/ui";
-import { Subtitle } from "../components/ui";
+
+import { Card, Circle, Subtitle } from "../components/ui";
 import { getProjectDetail } from "../services/project";
 import { getWeeklyReport } from "../services/weekly_report";
 
@@ -155,18 +156,27 @@ function Project({ project_id }) {
         {project.members.map(member => {
           return (
             <Card styles={card} key={member.id}>
-              <div
+              <Link
                 css={{
                   display: "flex",
-                  flexDirection: "column",
                   width: "100%"
                 }}
+                to={`/projects/${project_id}/users/${member.id}`}
               >
-                <span>{member.name}</span>
-                <span css={{ fontSize: "0.8em" }}>{member.role}</span>
-              </div>
-              <Circle>30%</Circle>
+                <div
+                  css={{
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "100%"
+                  }}
+                >
+                  <span>{member.name}</span>
+                  <span css={{ fontSize: "0.8em" }}>{member.role}</span>
+                </div>
+                <Circle>30%</Circle>
+              </Link>
             </Card>
+            //
           );
         })}
       </div>

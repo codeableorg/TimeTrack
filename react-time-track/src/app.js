@@ -48,7 +48,8 @@ function App() {
         <History path="/history" />
         <UserList path="/members" />
         <Project path="/projects/:project_id" />
-        <ProgressProjectUser path="/projects/:project_id/:user_id" />
+        <ProgressProjectUser path="/projects/:project_id/users/:user_id" />
+        <ProgressProjectUser path="/users/:user_id/projects/:project_id" />
         <CreateProject path="/create-project" />
         <CreateUser path="/create-user" />
         <Users path="/users" />

@@ -4,9 +4,10 @@ import { jsx } from "@emotion/core";
 import Chart from "chart.js";
 
 import { Card, IconUser } from "../components/ui";
-import { Subtitle } from "../components/ui";
 import { getProjectDetail } from "../services/project";
+import { getUser } from "../services/user";
 import { getWeeklyReport } from "../services/weekly_report";
+import { UserContext } from "../contexts/user";
 
 const card = {
   display: "flex",
@@ -18,15 +19,22 @@ const card = {
 };
 
 function ProgressProjectByUser({ project_id, user_id }) {
-  console.log(project_id);
-  console.log(user_id);
+  const logged = React.useContext(UserContext);
+
+  const [user, setUser] = React.useState({ members: [] });
   const [project, setProject] = React.useState({ members: [] });
   const [weeklyData, setWeeklyData] = React.useState([]);
 
   React.useEffect(() => {
     getProjectDetail(project_id)
-      .then(response => setProject(response))
-      .catch(error => console.log(error));
+      .then(response => {
+        setProject(response);
+        return getUser(user_id);
+      })
+      .then(response => setUser(response))
+      .catch(response => {
+        if (response.message === "Access denied") logged.onLogout();
+      });
   }, []);
 
   React.useEffect(() => {
@@ -142,8 +150,10 @@ function ProgressProjectByUser({ project_id, user_id }) {
               marginLeft: "0.5em"
             }}
           >
-            <span>Brayan</span>
-            <span css={{ fontSize: "0.8em", fontWeight: "bold" }}>Analyst</span>
+            <span>{user.name}</span>
+            <span css={{ fontSize: "0.8em", fontWeight: "bold" }}>
+              {user.role}
+            </span>
           </div>
         </div>
         <div
