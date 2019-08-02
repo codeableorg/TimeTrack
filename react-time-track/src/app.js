@@ -10,6 +10,7 @@ import ForgotPassword from "./views/forgot-password";
 import AllProjects from "./views/all-projects";
 import History from "./views/history";
 import Project from "./views/project";
+import ProgressProjectUser from "./views/progress-project-user";
 import UserList from "./components/user-list";
 import ResetPassword from "./views/reset-password";
 import CreateProject from "./views/create-project";
@@ -47,6 +48,7 @@ function App() {
         <History path="/history" />
         <UserList path="/members" />
         <Project path="/projects/:project_id" />
+        <ProgressProjectUser path="/projects/:project_id/:user_id" />
         <CreateProject path="/create-project" />
         <CreateUser path="/create-user" />
         <Users path="/users" />

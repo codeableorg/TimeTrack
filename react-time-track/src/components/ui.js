@@ -212,7 +212,7 @@ function UserInput({ styles, ...props }) {
   );
 }
 
-function IconUserSmall() {
+function IconUser({ styles }) {
   return (
     <div
       css={{
@@ -222,7 +222,8 @@ function IconUserSmall() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: 25
+        height: 25,
+        ...styles
       }}
     >
       <FaUser />
@@ -266,5 +267,5 @@ export {
   Label,
   Li,
   IconGenericSmall,
-  IconUserSmall
+  IconUser
 };

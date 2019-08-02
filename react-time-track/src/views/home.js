@@ -63,6 +63,7 @@ function Home({ children }) {
         <Header title="History" path="/history" />
         <Header title="Members" path="/members" />
         <Header title="Project" path="/projects/:id" />
+        <Header tittle="Specific Status" path="/projects/:id/:user_id" />
         <Header title="Create Project" path="/create-project" />
         <Header title="Manage Users" path="/users" />
         <Header title="Daily Log" path="/daily-log" />
