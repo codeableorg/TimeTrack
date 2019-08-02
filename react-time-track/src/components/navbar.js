@@ -4,6 +4,7 @@ import { jsx } from "@emotion/core";
 import { NavBarItem } from "../components/ui";
 import { FaTimes } from "react-icons/fa";
 import { Link } from "@reach/router";
+import { useConsumer } from "../contexts/user";
 
 import { UserContext } from "../contexts/user";
 
