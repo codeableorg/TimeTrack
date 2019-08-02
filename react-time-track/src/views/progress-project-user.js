@@ -1,47 +1,40 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import { Link } from "@reach/router";
 import Chart from "chart.js";
 
-import { Card, Circle, Subtitle } from "../components/ui";
+import { Card, IconUser } from "../components/ui";
 import { getProjectDetail } from "../services/project";
+import { getUser } from "../services/user";
 import { getWeeklyReport } from "../services/weekly_report";
-
-// const weeklyData = [
-//   {
-//     id: 1,
-//     project_id: 1,
-//     week: "28",
-//     estimated_cost: 96600,
-//     real_cost: 117000
-//   },
-//   {
-//     id: 2,
-//     project_id: 1,
-//     week: "29",
-//     estimated_cost: 96600,
-//     real_cost: 117000
-//   }
-// ];
+import { UserContext } from "../contexts/user";
 
 const card = {
   display: "flex",
+  flexDirection: "column",
   justifyContent: "space-between",
   alignItems: "center",
   margin: "5px",
-  minWidth: "45%",
-  width: "auto"
+  width: "75%"
 };
 
-function Project({ project_id }) {
+function ProgressProjectByUser({ project_id, user_id }) {
+  const logged = React.useContext(UserContext);
+
+  const [user, setUser] = React.useState({ members: [] });
   const [project, setProject] = React.useState({ members: [] });
   const [weeklyData, setWeeklyData] = React.useState([]);
 
   React.useEffect(() => {
     getProjectDetail(project_id)
-      .then(response => setProject(response))
-      .catch(error => console.log(error));
+      .then(response => {
+        setProject(response);
+        return getUser(user_id);
+      })
+      .then(response => setUser(response))
+      .catch(response => {
+        if (response.message === "Access denied") logged.onLogout();
+      });
   }, []);
 
   React.useEffect(() => {
@@ -86,10 +79,15 @@ function Project({ project_id }) {
         ]
       },
       options: {
+        legend: {
+          position: "bottom"
+        },
         responsive: true,
         title: {
           display: true,
-          text: project.name
+          text: project.name,
+          fontSize: 30,
+          fontColor: "black"
         },
         tooltips: {
           mode: "index",
@@ -135,53 +133,41 @@ function Project({ project_id }) {
         alignItems: "center"
       }}
     >
-      <div
-        css={{
-          display: "flex",
-          justifyContent: "center",
-          maxWidth: "90%"
-        }}
-      >
-        <canvas id="myChart" width="400" height="400" />
-      </div>
-      <Subtitle styles={{ alignSelf: "flex-start" }}>Team Members</Subtitle>
-      <div
-        css={{
-          display: "flex",
-          width: "80%",
-          flexWrap: "wrap",
-          justifyContent: "center"
-        }}
-      >
-        {project.members.map(member => {
-          return (
-            <Card styles={card} key={member.id}>
-              <Link
-                css={{
-                  display: "flex",
-                  width: "100%"
-                }}
-                to={`/projects/${project_id}/users/${member.id}`}
-              >
-                <div
-                  css={{
-                    display: "flex",
-                    flexDirection: "column",
-                    width: "100%"
-                  }}
-                >
-                  <span>{member.name}</span>
-                  <span css={{ fontSize: "0.8em" }}>{member.role}</span>
-                </div>
-                <Circle>30%</Circle>
-              </Link>
-            </Card>
-            //
-          );
-        })}
-      </div>
+      <Card styles={card}>
+        <div
+          css={{
+            display: "flex",
+            width: "100%"
+          }}
+        >
+          <IconUser styles={{ width: 64, height: 64, fontSize: "2em" }} />
+          <div
+            css={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              width: "100%",
+              marginLeft: "0.5em"
+            }}
+          >
+            <span>{user.name}</span>
+            <span css={{ fontSize: "0.8em", fontWeight: "bold" }}>
+              {user.role}
+            </span>
+          </div>
+        </div>
+        <div
+          css={{
+            display: "flex",
+            justifyContent: "center",
+            maxWidth: "90%"
+          }}
+        >
+          <canvas id="myChart" width="400" height="400" />
+        </div>
+      </Card>
     </div>
   );
 }
 
-export default Project;
+export default ProgressProjectByUser;

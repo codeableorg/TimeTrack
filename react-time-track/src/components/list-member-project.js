@@ -4,7 +4,7 @@ import { jsx } from "@emotion/core";
 import { navigate } from "@reach/router";
 
 import AddMemberProject from "../components/add-member-project";
-import { Button, IconGenericSmall, IconUserSmall } from "../components/ui";
+import { Button, IconGenericSmall, IconUser } from "../components/ui";
 import { userListAvailableTime } from "../services/user";
 import { createProject } from "../services/project";
 import { UserContext } from "../contexts/user";
@@ -210,7 +210,7 @@ function ListMemberProject({ nextFn, beforeFn }) {
                       }}
                     >
                       <span css={{ width: "10%" }}>
-                        <IconUserSmall />
+                        <IconUser />
                       </span>
                       <span
                         css={{
