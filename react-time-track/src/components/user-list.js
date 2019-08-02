@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import { Button, Card } from "./ui";
+import { Card } from "./ui";
 import { Section } from "./helpers";
 import { userList } from "../services/user";
 
@@ -120,7 +120,6 @@ function UserList() {
             </div>
           );
         })}
-        <Button css={button}>New User</Button>
       </Section>
     </main>
   );

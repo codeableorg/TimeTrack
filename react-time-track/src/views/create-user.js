@@ -3,26 +3,28 @@ import React from "react";
 import { jsx } from "@emotion/core";
 import { UserInput, Label, UserCard, Button } from "../components/ui";
 import { createUser } from "../services/user";
+import { navigate } from "@reach/router";
+import { UserContext } from "../contexts/user";
 
 function CreateUser() {
-  const [userData, setUserData] = React.useState(null);
+  const logged = React.useContext(UserContext);
   //   const [error, setError] = React.useState(null);
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    setUserData({
+    const userData = {
       name: e.target.elements.name.value,
       email: e.target.elements.email.value,
       role: e.target.elements.role.value,
       rate: e.target.elements.rate.value,
       password: e.target.elements.password.value
-    });
+    };
+    createUser(userData)
+      .then(response => navigate("/users"))
+      .catch(response => {
+        if (response.message === "Access denied") logged.onLogout();
+      });
   }
-
-  React.useEffect(() => {
-    if (!userData) return;
-    createUser(userData);
-  }, [userData]);
 
   return (
     <UserCard
@@ -57,14 +59,14 @@ function CreateUser() {
           />
         </div>
         <div css={{ marginTop: "2em" }}>
-          <Label htmlFor="password">Passoword</Label>
+          <Label htmlFor="password">Password</Label>
           <UserInput
             aria-label="enter password"
             required="required"
             autoComplete="off"
             id="password"
             name="password"
-            type="text"
+            type="password"
             placeholder="Enter a password"
           />
         </div>

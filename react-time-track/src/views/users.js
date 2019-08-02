@@ -1,7 +1,8 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
+
 import { Li, Title, Card, Button } from "../components/ui";
 import { userList } from "../services/user";
 import { FaEdit } from "react-icons/fa";
@@ -14,6 +15,10 @@ function Users() {
       setUser(data);
     });
   }, []);
+
+  function handleClick() {
+    navigate("/create-user");
+  }
 
   return (
     <div
@@ -45,7 +50,7 @@ function Users() {
               }}
               key={usr.id}
             >
-              <Card css={{ p: { padding: "0" } }}>
+              <Card css={{ p: { padding: "0" }, width: "100%" }}>
                 <Li>Name: {usr.name}</Li>
                 <Li>Role: {usr.role}</Li>
                 <Link to={`/edit-user/${usr.id}`}>
@@ -57,7 +62,7 @@ function Users() {
         })}
       </ol>
       <div css={{ marginTop: "2em", width: "80%" }}>
-        <Button>NEW USER</Button>
+        <Button onClick={handleClick}>NEW USER</Button>
       </div>
     </div>
   );
