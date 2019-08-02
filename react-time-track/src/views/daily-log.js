@@ -45,7 +45,7 @@ function DailyLog({ currentUser }) {
     }
 
     for (let i = 0; i < projects.length; i++) {
-      const hours = selects.find(e => e.name == projects[i].id).value;
+      const hours = selects.find(e => e.name === projects[i].id).value;
       dailyData = {
         project_member_id: projectMembers[i].id,
         date: calendarDate,

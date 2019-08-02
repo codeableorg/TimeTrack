@@ -67,7 +67,7 @@ async function getUser(userId) {
   });
 
   if (!response.ok) {
-    const {errors} = await response.json();
+    const { errors } = await response.json();
     throw new Error(errors.message);
   }
 
@@ -85,11 +85,39 @@ async function editUser(userId, userData) {
   });
 
   if (!response.ok) {
-    const {errors} = await response.json();
+    const { errors } = await response.json();
     throw new Error(errors.message);
   }
 
   return response.json();
 }
 
-export { userList, createUser, getUserProjects, getUser, editUser };
+async function userListAvailableTime(params) {
+  const userListTime = await fetch(`${API_USERS}/availableTime`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(params)
+  });
+
+  console.dir(userListTime);
+
+  if (!userListTime.ok) {
+    const { errors } = await userListTime.json();
+    console.log(errors);
+    throw new Error(errors.message);
+  }
+
+  return userListTime.json();
+}
+
+export {
+  userList,
+  createUser,
+  getUserProjects,
+  getUser,
+  editUser,
+  userListAvailableTime
+};

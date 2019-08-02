@@ -1,31 +1,28 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import { navigate } from "@reach/router";
 import { UserInput, Label, UserCard, Button } from "../components/ui";
 import { createUser } from "../services/user";
 
 function CreateUser() {
   const [userData, setUserData] = React.useState(null);
-//   const [error, setError] = React.useState(null);
+  //   const [error, setError] = React.useState(null);
 
   async function handleSubmit(e) {
     e.preventDefault();
     setUserData({
-            name: e.target.elements.name.value,
-            email: e.target.elements.email.value,
-            role: e.target.elements.role.value,
-            rate: e.target.elements.rate.value,
-            password: e.target.elements.password.value
-        })
-    
- 
+      name: e.target.elements.name.value,
+      email: e.target.elements.email.value,
+      role: e.target.elements.role.value,
+      rate: e.target.elements.rate.value,
+      password: e.target.elements.password.value
+    });
   }
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     if (!userData) return;
     createUser(userData);
-}, [userData])
+  }, [userData]);
 
   return (
     <UserCard
@@ -95,7 +92,7 @@ function CreateUser() {
             placeholder="rate"
           />
         </div>
-        
+
         <div css={{ marginTop: "3em" }}>
           <Button>ADD USER</Button>
         </div>

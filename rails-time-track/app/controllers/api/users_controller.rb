@@ -31,6 +31,10 @@ module Api
       @user.destroy
       render json: {}, status: :no_content
     end
+    
+    def availableTime
+      render json: User.all, each_serializer: UserAvailableTimeSerializer, option_name: params
+    end
 
     rescue_from ActiveRecord::RecordNotFound do |e|
       render json: { message: e.message }, status: :not_found

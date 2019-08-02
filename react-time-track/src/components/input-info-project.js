@@ -5,7 +5,7 @@ import { navigate } from "@reach/router";
 
 import { Button } from "./ui";
 
-function InputInfoProject() {
+function InputInfoProject({ nextFn }) {
   const today = new Date()
     .toLocaleDateString("es-PE", {
       year: "numeric",
@@ -19,7 +19,6 @@ function InputInfoProject() {
     title: "",
     client: "",
     category: "",
-    product: "",
     start: today,
     end: today
   };
@@ -33,13 +32,13 @@ function InputInfoProject() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    let title = event.target.elements.txtProject.value;
+    let title = event.target.elements.txtTitle.value;
     let client = event.target.elements.txtClient.value;
     let category = event.target.elements.txtCategory.value;
-    let product = event.target.elements.txtProduct.value;
     let start = event.target.elements.txtStart.value;
     let end = event.target.elements.txtEnd.value;
-    setInfoNewProject({ title, client, category, product, start, end });
+    setInfoNewProject({ title, client, category, start, end });
+    nextFn();
   }
 
   function handleCancel() {
@@ -122,7 +121,6 @@ function InputInfoProject() {
           ["Title", "text"],
           ["Client", "text"],
           ["Category", "text"],
-          ["Product", "text"],
           ["Start", "date"],
           ["End", "date"]
         ].map(value => (
@@ -134,7 +132,7 @@ function InputInfoProject() {
                 aria-label={"Enter the " + value[0] + " of the project"}
                 name={"txt" + value[0]}
                 css={value[1] === "text" ? inputTextStyle : inputDateStyle}
-                value={infoProject[value[0].toLowerCase()]}
+                value={infoNewProject[value[0].toLowerCase()]}
                 onChange={event => handleChange(event, value[0].toLowerCase())}
                 required
               />
@@ -145,7 +143,7 @@ function InputInfoProject() {
           <Button type="button" css={buttonStyle} onClick={handleCancel}>
             Cancel
           </Button>
-          <Button type="submit" css={buttonStyle} onClick={handleSubmit}>
+          <Button type="submit" css={buttonStyle}>
             Next
           </Button>
         </fieldset>

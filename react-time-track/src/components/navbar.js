@@ -1,9 +1,8 @@
 /** @jsx jsx */
-import React, { useState } from "react";
+import React from "react";
 import { jsx } from "@emotion/core";
 import { NavBarItem } from "../components/ui";
 import { FaTimes } from "react-icons/fa";
-import { Link } from "@reach/router";
 
 function NavBar({ navBarActive, togleNavBar }) {
   const navBar = {

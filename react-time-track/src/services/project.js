@@ -33,7 +33,7 @@ async function closedProjects() {
   if (!response.ok) {
     const { errors } = await response.json();
     console.log(errors);
-    throw new Error(errors);
+    throw new Error(errors.message);
   }
 
   return response.json();
@@ -51,10 +51,28 @@ async function getProjectDetail(projectId) {
   if (!response.ok) {
     const { errors } = await response.json();
     console.log(errors);
-    throw new Error(errors);
+    throw new Error(errors.message);
   }
 
   return response.json();
 }
 
-export { listProjects, closedProjects, getProjectDetail };
+async function createProject(projectData) {
+  const response = await fetch(API_ALL_PROJECTS, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(projectData)
+  });
+
+  if (!response.ok) {
+    const { errors } = await response.json();
+    throw new Error(errors.message);
+  }
+
+  return response.json();
+}
+
+export { listProjects, closedProjects, getProjectDetail, createProject };
