@@ -95,12 +95,11 @@ exports[`Home component 1`] = `
           </div>
         </a>
         <a
-          aria-current="page"
-          href="/"
+          href="/users"
         >
           <div
             class="css-1hpvyxb-NavBarItem"
-            link="/"
+            link="/users"
           >
             User Settings
           </div>
@@ -125,11 +124,11 @@ exports[`Home component 1`] = `
           class="css-warn85-Header"
         >
           <a
-            href="/#"
+            href="/daily-log"
           >
             <div
               class="css-12x38jx-NavBarItem"
-              link="#"
+              link="/daily-log"
             >
               <svg
                 fill="currentColor"
@@ -186,7 +185,7 @@ exports[`Home component 1`] = `
       </div>
     </div>
     <div
-      class="css-1uyhewu-Home"
+      class="css-1ugqmjg-Home"
     >
       <div>
         <h1
@@ -204,7 +203,7 @@ exports[`Home component 1`] = `
           class="css-1dbpol2-Center"
         >
           <button
-            class="css-nluivw-Button"
+            class="css-r8lshn-Button"
           >
             New Project
           </button>

@@ -20,4 +20,19 @@ async function getWeeklyReport(projectId) {
   return response.json();
 }
 
-export { getWeeklyReport };
+async function listWeeklyReport() {
+  const response = await fetch(API_WEEKLY_REPORT, {
+    method: "GET",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" }
+  });
+
+  if (!response.ok) {
+    const { errors } = await response.json();
+    console.log(errors.message);
+    throw new Error(errors.message);
+  }
+  return response.json();
+}
+
+export { getWeeklyReport, listWeeklyReport };

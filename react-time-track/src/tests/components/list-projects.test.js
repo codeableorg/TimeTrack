@@ -1,11 +1,13 @@
 import React from "react";
 import { render, wait } from "@testing-library/react";
 
+import { act } from "react-dom/test-utils";
+
 import ListProjects from "../../components/list-projects";
 
 const projects = [
   {
-    category: "Eduaction",
+    category: "Education",
     client: "MINEDU",
     closed: false,
     created_at: "2019-07-11T20:14:25.250Z",
