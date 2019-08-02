@@ -2,7 +2,6 @@
 import React from "react";
 import { render } from "react-dom";
 import { jsx, Global } from "@emotion/core";
-
 import { UserProvider } from "./contexts/user";
 import App from "./app";
 

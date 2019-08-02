@@ -6,7 +6,7 @@ import { FaBars } from "react-icons/fa";
 
 import NavBar from "../components/navbar";
 import Header from "../components/header";
-import { useConsumer } from "../contexts/user";
+import { UserContext } from "../contexts/user";
 
 const gridContainer = {
   display: "grid",
@@ -36,7 +36,7 @@ const menuIcon = {
 
 function Home({ children }) {
   const [navBarActive, setNavBarActive] = React.useState("translateX(-245px)");
-  const { user } = useConsumer();
+  const currentUser = React.useContext(UserContext).data;
 
   function togleNavBar() {
     navBarActive === "translateX(-245px)"
@@ -56,7 +56,7 @@ function Home({ children }) {
         }}
       >
         <Header
-          tittle={user.role === "Analyst" ? "My Status" : "Projects"}
+          tittle={currentUser.role === "Analyst" ? "My Status" : "Projects"}
           path="/"
         />
         <Header tittle="My Status" path="/mystatus" />

@@ -38,7 +38,11 @@ function App() {
       <ForgotPassword path="/forgot-password" />
       <ResetPassword path="/reset-password/:token" />
       <Home path="/">
-        <MyStatus path={currentUser.role === "Analyst" ? "/" : "/mystatus"} />
+        <MyStatus
+          path={
+            logged.data && logged.data.role === "Analyst" ? "/" : "/mystatus"
+          }
+        />
         <AllProjects path="/" />
         <History path="/history" />
         <UserList path="/members" />

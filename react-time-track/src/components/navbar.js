@@ -4,11 +4,11 @@ import { jsx } from "@emotion/core";
 import { NavBarItem } from "../components/ui";
 import { FaTimes } from "react-icons/fa";
 import { Link } from "@reach/router";
-import { useConsumer } from "../contexts/user";
-
 import { UserContext } from "../contexts/user";
 
 function NavBar({ navBarActive, togleNavBar }) {
+  const currentUser = React.useContext(UserContext).data;
+
   const navBar = {
     gridArea: "sidenav",
     display: "flex",
@@ -27,8 +27,6 @@ function NavBar({ navBarActive, togleNavBar }) {
       transform: "translateX(0)"
     }
   };
-
-  const currentUser = React.useContext(UserContext).data;
 
   const linksByRole = {
     Owner: [

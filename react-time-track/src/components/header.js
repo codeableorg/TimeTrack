@@ -6,7 +6,6 @@ import { NavBarItem } from "./ui";
 import Logout from "./logout";
 import { UserContext } from "../contexts/user";
 import { Link } from "@reach/router";
-import { useConsumer } from "../contexts/user";
 
 function Header({ tittle }) {
   const currentUser = React.useContext(UserContext).data;
