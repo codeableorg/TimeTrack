@@ -3,11 +3,17 @@ module Api
 
     before_action :set_project, only: [:show]
 
+    before_action :authenticate_owner_or_manager, only: [:index]
+
     def index
       if params[:user_id]
         render json: User.find(params[:user_id]).projects.where(closed: false)
       else
-        render json: Project.where(closed: false)
+        if @current_user.role === "Owner"
+          render json: Project.where(closed: false)
+        else
+          render json: User.find(@current_user.id).projects.where(closed: false)
+        end
       end
     end
 

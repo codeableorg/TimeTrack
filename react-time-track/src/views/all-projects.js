@@ -6,8 +6,11 @@ import { navigate } from "@reach/router";
 import { Button, Subtitle } from "../components/ui";
 import { Center } from "../components/helpers";
 import ListProjects from "../components/list-projects";
+import { UserContext } from "../contexts/user";
 
 function AllProjects() {
+  const currentUser = React.useContext(UserContext).data;
+
   function handleClick() {
     navigate("/create-project");
   }
@@ -16,9 +19,11 @@ function AllProjects() {
     <div>
       <Subtitle>All Projects:</Subtitle>
       <ListProjects />
-      <Center>
-        <Button onClick={handleClick}>New Project</Button>
-      </Center>
+      {currentUser.role === "Owner" ? (
+        <Center>
+          <Button onClick={handleClick}>New Project</Button>
+        </Center>
+      ) : null}
     </div>
   );
 }
