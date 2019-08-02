@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     post "/change-password", to: "passwords#change"
     post "/reset-password", to: "passwords#reset"
 
-    resources :projects, :only => [:index, :show, :create]
+    resources :projects, :only => [:index, :show, :create] do
+      get 'my-projects', action: 'my_projects', on: :collection
+    end
     resources :weekly_project_reports, :only => [:show]
     resources :daily_logs, :only => [:index, :create]
     resources :histories, :only => [:index]
