@@ -22,7 +22,9 @@ function ListUserProjects() {
   React.useEffect(() => {
     listUserProjects()
       .then(list => setUserProjects(list))
-      .catch(response => navigate("/login"));
+      .catch(response => {
+        if (response.message === "Access denied") logged.onLogout();
+      });
   }, []);
 
   React.useEffect(() => {

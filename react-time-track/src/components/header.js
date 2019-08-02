@@ -7,7 +7,7 @@ import Logout from "./logout";
 import { UserContext } from "../contexts/user";
 import { Link } from "@reach/router";
 
-function Header({ tittle }) {
+function Header({ title }) {
   const currentUser = React.useContext(UserContext).data;
   return (
     <div
@@ -28,7 +28,7 @@ function Header({ tittle }) {
           }
         }}
       >
-        {tittle}
+        {title}
       </h2>
       <div
         css={{
