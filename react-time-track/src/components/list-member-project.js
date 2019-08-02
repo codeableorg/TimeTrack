@@ -7,8 +7,11 @@ import AddMemberProject from "../components/add-member-project";
 import { Button, IconGenericSmall, IconUserSmall } from "../components/ui";
 import { userListAvailableTime } from "../services/user";
 import { createProject } from "../services/project";
+import { UserContext } from "../contexts/user";
 
 function ListMemberProject({ nextFn, beforeFn }) {
+  const logged = React.useContext(UserContext);
+
   const [listMember, setListMember] = React.useState([]);
   const [listMemberAdded, setListMemberAdded] = React.useState([]);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
@@ -61,13 +64,7 @@ function ListMemberProject({ nextFn, beforeFn }) {
         navigate("/");
       })
       .catch(response => {
-        console.log("error");
-        console.dir(response);
-        console.log(response.message);
-        if (response.message === "Access denied") {
-          localStorage.removeItem("user");
-          // navigate("../login");
-        }
+        if (response.message === "Access denied") logged.onLogout();
       });
   }
 
@@ -81,13 +78,7 @@ function ListMemberProject({ nextFn, beforeFn }) {
         setListMember(response);
       })
       .catch(response => {
-        console.log("error");
-        console.dir(response);
-        console.log(response.message);
-        if (response.message === "Access denied") {
-          localStorage.removeItem("user");
-          // redirectTo("/login");
-        }
+        if (response.message === "Access denied") logged.onLogout();
       });
   }, []);
 

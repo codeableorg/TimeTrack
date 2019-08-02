@@ -1,10 +1,15 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import { NavBarItem } from "./ui";
 import { FaUser, FaClock } from "react-icons/fa";
 
+import { NavBarItem } from "./ui";
+import Logout from "./logout";
+import { UserContext } from "../contexts/user";
+
 function Header({ tittle }) {
+  const currentUser = React.useContext(UserContext).data;
+
   return (
     <div
       css={{
@@ -29,6 +34,7 @@ function Header({ tittle }) {
       <div
         css={{
           display: "flex",
+          alignItems: "center",
           marginLeft: "auto"
         }}
       >
@@ -63,7 +69,7 @@ function Header({ tittle }) {
             css={{
               display: "flex",
               alignItems: "center",
-              padding: "0 0.25em,",
+              padding: "0 0.25em",
               fontSize: "1.5em"
             }}
           >
@@ -77,8 +83,17 @@ function Header({ tittle }) {
               justifyContent: "center"
             }}
           >
-            <span>Username</span>
-            <span>Role</span>
+            <span>{currentUser.name}</span>
+            <span>{currentUser.role}</span>
+          </div>
+          <div
+            css={{
+              display: "flex",
+              alignItems: "center",
+              padding: "0 0.25em"
+            }}
+          >
+            <Logout />
           </div>
         </div>
       </div>

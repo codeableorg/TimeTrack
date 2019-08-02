@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import { navigate, Link } from "@reach/router";
+import { Link } from "@reach/router";
 
 import { Card, Circle } from "../components/ui";
 import { Section } from "../components/helpers";
@@ -9,6 +9,7 @@ import { listProjects } from "../services/project";
 
 import calculateProgress from "../utils/calculateProgress";
 import calculateRisk from "../utils/calculateRisk";
+import { UserContext } from "../contexts/user";
 
 const card = {
   display: "flex",
@@ -18,11 +19,12 @@ const card = {
 
 function ListProjects() {
   const [projects, setProjects] = React.useState([]);
+  const logged = React.useContext(UserContext);
 
   React.useEffect(() => {
     listProjects()
       .then(list => setProjects(list))
-      .catch(response => navigate("/login"));
+      .catch(response => logged.onLogout());
   }, []);
 
   // console.log("Projects:", projects);

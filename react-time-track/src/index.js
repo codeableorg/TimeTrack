@@ -1,23 +1,10 @@
 /** @jsx jsx */
 import React from "react";
 import { render } from "react-dom";
-import { Router, Redirect } from "@reach/router";
 import { jsx, Global } from "@emotion/core";
-import { UserProvider } from "./contexts/user";
 
-import Login from "./views/login";
-import Home from "./views/home";
-import ForgotPassword from "./views/forgot-password";
-import AllProjects from "./views/all-projects";
-import History from "./views/history";
-import Project from "./views/project";
-import UserList from "./components/user-list";
-import ResetPassword from "./views/reset-password";
-import CreateProject from "./views/create-project";
-import CreateUser from "./views/create-user";
-import Users from "./views/users";
-import DailyLog from "./views/daily-log";
-import EditUser from "./views/edit-user";
+import { UserProvider } from "./contexts/user";
+import App from "./app";
 
 const global = {
   body: {
@@ -37,55 +24,13 @@ const global = {
   }
 };
 
-function App() {
-  const [currentUser, setCurrentUser] = React.useState(
-    JSON.parse(localStorage.getItem("user")) || {}
-  );
-
-  function handleCurrentUser(newValue) {
-    localStorage.setItem("user", JSON.stringify(newValue));
-    setCurrentUser(newValue);
-  }
-
-  return (
-    <UserProvider user={currentUser} setUser={handleCurrentUser}>
-      <Global styles={global} />
-      <Router>
-        {currentUser.name ? (
-          <Redirect
-            from="/login"
-            to={
-              window.location.pathname === "/login"
-                ? "/"
-                : window.location.pathname
-            }
-            noThrow
-          />
-        ) : (
-          window.location.pathname !== "/login" &&
-          window.location.pathname.indexOf("/reset-password") === -1 &&
-          window.location.pathname !== "/forgot-password" && (
-            <Redirect from={window.location.pathname} to="/login" noThrow />
-          )
-        )}
-        <Login path="/login" />
-        <ForgotPassword path="/forgot-password" />
-        <ResetPassword path="/reset-password/:token" />
-        <Home path="/">
-          <AllProjects path="/" />
-          <History path="/history" />
-          <UserList path="/members" />
-          <Project path="/projects/:project_id" />
-          <CreateProject path="/create-project" />
-          <CreateUser path="/create-user" />
-          <Users path="/users" />
-          <DailyLog path="/daily-log" currentUser={currentUser} />
-          <EditUser path="edit-user/:user_id"/>
-        </Home>
-      </Router>
-    </UserProvider>
-  );
-}
-
 const $root = document.getElementById("root");
-render(<App />, $root);
+render(
+  <>
+    <Global styles={global} />
+    <UserProvider>
+      <App />
+    </UserProvider>
+  </>,
+  $root
+);

@@ -16,12 +16,12 @@ const users = [
   }
 ];
 
-test("testing api", async() => {
+test("testing api", async () => {
   fetch.mockResponseOnce(JSON.stringify(users));
   const { getAllByRole } = render(<UserList />);
   let cards;
   await wait(() => {
-    cards = getAllByRole("listuser");
+    cards = getAllByRole("contentinfo");
   });
 
   expect(cards.length).toEqual(1);
