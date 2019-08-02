@@ -27,8 +27,6 @@ function ListProjects() {
       .catch(response => logged.onLogout());
   }, []);
 
-  // console.log("Projects:", projects);
-
   return (
     <main>
       <Section role="list">

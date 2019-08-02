@@ -74,7 +74,6 @@ function ListMemberProject({ nextFn, beforeFn }) {
     const endDate = infoProject.end;
     userListAvailableTime({ startDate, endDate })
       .then(response => {
-        console.log(response);
         setListMember(response);
       })
       .catch(response => {

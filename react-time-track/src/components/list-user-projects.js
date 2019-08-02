@@ -9,6 +9,7 @@ import { listUserProjects } from "../services/project";
 
 import calculateProgress from "../utils/calculateProgress";
 import calculateRisk from "../utils/calculateRisk";
+import { UserContext } from "../contexts/user";
 
 const card = {
   display: "flex",
@@ -18,6 +19,7 @@ const card = {
 
 function ListUserProjects() {
   const [userProjects, setUserProjects] = React.useState([]);
+  const logged = React.useContext(UserContext);
 
   React.useEffect(() => {
     listUserProjects()
@@ -26,10 +28,6 @@ function ListUserProjects() {
         if (response.message === "Access denied") logged.onLogout();
       });
   }, []);
-
-  React.useEffect(() => {
-    console.log(userProjects);
-  }, [userProjects]);
 
   return (
     <main>

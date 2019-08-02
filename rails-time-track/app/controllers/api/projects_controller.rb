@@ -32,7 +32,7 @@ module Api
                             start_date: params[:start_date],
                             end_date: params[:end_date],
                             estimated_cost: params[:estimated_cost],
-                            real_cost: params[:real_cost],
+                            real_cost: 0,
                             closed: false,)
       if project.save
         if params[:members].all? do |member|
