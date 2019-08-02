@@ -12,9 +12,13 @@ module Api
         if @current_user.role === "Owner"
           render json: Project.where(closed: false)
         else
-          render json: User.find(@current_user.id).projects.where(closed: false)
+          render json: current_user.projects.where(closed: false)
         end
       end
+    end
+
+    def my_projects
+      render json: current_user.projects.where(closed: false)
     end
 
     def show

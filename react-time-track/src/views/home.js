@@ -6,6 +6,7 @@ import { FaBars } from "react-icons/fa";
 
 import NavBar from "../components/navbar";
 import Header from "../components/header";
+import { UserContext } from "../contexts/user";
 
 const gridContainer = {
   display: "grid",
@@ -35,6 +36,7 @@ const menuIcon = {
 
 function Home({ children }) {
   const [navBarActive, setNavBarActive] = React.useState("translateX(-245px)");
+  const currentUser = React.useContext(UserContext).data;
 
   function togleNavBar() {
     navBarActive === "translateX(-245px)"
@@ -53,14 +55,18 @@ function Home({ children }) {
           gridArea: "header"
         }}
       >
-        <Header tittle="Projects" path="/" />
-        <Header tittle="History" path="/history" />
-        <Header tittle="Members" path="/members" />
-        <Header tittle="Project" path="/projects/:id" />
-        <Header tittle="Create Project" path="/create-project" />
-        <Header tittle="Manage Users" path="/users" />
-        <Header tittle="Daily Log" path="/daily-log" />
-        <Header tittle="Edit User" path="edit-user/:id"/>
+        <Header
+          title={currentUser.role === "Analyst" ? "My Status" : "Projects"}
+          path="/"
+        />
+        <Header title="My Status" path="/mystatus" />
+        <Header title="History" path="/history" />
+        <Header title="Members" path="/members" />
+        <Header title="Project" path="/projects/:id" />
+        <Header title="Create Project" path="/create-project" />
+        <Header title="Manage Users" path="/users" />
+        <Header title="Daily Log" path="/daily-log" />
+        <Header title="Edit User" path="edit-user/:id" />
       </Router>
 
       <div

@@ -4,10 +4,11 @@ import { jsx } from "@emotion/core";
 import { NavBarItem } from "../components/ui";
 import { FaTimes } from "react-icons/fa";
 import { Link } from "@reach/router";
-
 import { UserContext } from "../contexts/user";
 
 function NavBar({ navBarActive, togleNavBar }) {
+  const currentUser = React.useContext(UserContext).data;
+
   const navBar = {
     gridArea: "sidenav",
     display: "flex",
@@ -27,26 +28,21 @@ function NavBar({ navBarActive, togleNavBar }) {
     }
   };
 
-  const currentUser = React.useContext(UserContext).data;
-
   const linksByRole = {
     Owner: [
-      { name: "My Status", link: "/" },
+      { name: "My Status", link: "/mystatus" },
       { name: "Projects", link: "/" },
       { name: "Members", link: "/members" },
       { name: "History", link: "/history" },
       { name: "User Settings", link: "/users" }
     ],
     Manager: [
-      { name: "My Status", link: "/" },
+      { name: "My Status", link: "/mystatus" },
       { name: "Projects", link: "/" },
       { name: "Members", link: "/members" },
       { name: "History", link: "/history" }
     ],
-    Analyst: [
-      { name: "My Status", link: "/" },
-      { name: "History", link: "/history" }
-    ]
+    Analyst: [{ name: "My Status", link: "/" }]
   };
 
   return (
@@ -82,7 +78,7 @@ function NavBar({ navBarActive, togleNavBar }) {
       >
         {linksByRole[currentUser.role].map(link => {
           return (
-            <NavBarItem link={link.link} onClick={togleNavBar}>
+            <NavBarItem link={link.link} onClick={togleNavBar} key={link.name}>
               {link.name}
             </NavBarItem>
           );
