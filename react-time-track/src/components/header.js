@@ -82,7 +82,6 @@ function Header({ tittle }) {
               justifyContent: "center"
             }}
           >
-<<<<<<< HEAD
             <span>{currentUser.name}</span>
             <span>{currentUser.role}</span>
           </div>
@@ -94,10 +93,6 @@ function Header({ tittle }) {
             }}
           >
             <Logout />
-=======
-            <span>{user.name}</span>
-            <span>{user.role}</span>
->>>>>>> Add authorization to crate project
           </div>
         </div>
       </div>

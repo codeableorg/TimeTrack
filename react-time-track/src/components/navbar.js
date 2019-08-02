@@ -4,7 +4,8 @@ import { jsx } from "@emotion/core";
 import { NavBarItem } from "../components/ui";
 import { FaTimes } from "react-icons/fa";
 import { Link } from "@reach/router";
-import { useConsumer } from "../contexts/user";
+
+import { UserContext } from "../contexts/user";
 
 function NavBar({ navBarActive, togleNavBar }) {
   const navBar = {
@@ -26,9 +27,7 @@ function NavBar({ navBarActive, togleNavBar }) {
     }
   };
 
-  const { user } = useConsumer();
-
-  console.log(user);
+  const currentUser = React.useContext(UserContext).data;
 
   const linksByRole = {
     Owner: [
@@ -81,7 +80,7 @@ function NavBar({ navBarActive, togleNavBar }) {
           flexDirection: "column"
         }}
       >
-        {linksByRole[user.role].map(link => {
+        {linksByRole[currentUser.role].map(link => {
           return (
             <NavBarItem link={link.link} onClick={togleNavBar}>
               {link.name}
