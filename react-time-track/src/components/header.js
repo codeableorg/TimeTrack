@@ -2,13 +2,14 @@
 import React from "react";
 import { jsx } from "@emotion/core";
 import { FaUser, FaClock } from "react-icons/fa";
+
 import { NavBarItem } from "./ui";
 import Logout from "./logout";
 import { UserContext } from "../contexts/user";
-import { Link } from "@reach/router";
 
 function Header({ title }) {
   const currentUser = React.useContext(UserContext).data;
+
   return (
     <div
       css={{
