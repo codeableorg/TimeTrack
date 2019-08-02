@@ -5,6 +5,7 @@ import { jsx } from "@emotion/core";
 import { Subtitle, Button } from "../components/ui";
 import { getProjectMember } from "../services/project_member";
 import { getUserProjects } from "../services/user";
+import { listUserProjects } from "../services/project";
 import { createDailyLog } from "../services/daily_log";
 import { UserContext } from "../contexts/user";
 
@@ -29,7 +30,7 @@ function DailyLog() {
   const [projects, setProjects] = React.useState([]);
 
   React.useEffect(() => {
-    getUserProjects(currentUser.id).then(response => setProjects(response));
+    listUserProjects().then(response => setProjects(response));
   }, []);
 
   async function handleSubmit(event) {

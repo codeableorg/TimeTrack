@@ -17,9 +17,12 @@ import CreateUser from "./views/create-user";
 import Users from "./views/users";
 import DailyLog from "./views/daily-log";
 import EditUser from "./views/edit-user";
+import MyStatus from "./views/my-status";
 
 function App() {
   const logged = React.useContext(UserContext);
+  const currentUser = React.useContext(UserContext).data;
+
   return (
     <Router>
       {logged.data ? (
@@ -35,6 +38,7 @@ function App() {
       <ForgotPassword path="/forgot-password" />
       <ResetPassword path="/reset-password/:token" />
       <Home path="/">
+        <MyStatus path={currentUser.role === "Analyst" ? "/" : "/mystatus"} />
         <AllProjects path="/" />
         <History path="/history" />
         <UserList path="/members" />
