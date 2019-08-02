@@ -5,13 +5,13 @@ import { jsx } from "@emotion/core";
 import { Button } from "../components/ui";
 import { login } from "../services/session";
 import { navigate } from "@reach/router";
-import { useConsumer } from "../contexts/user";
+import { UserContext } from "../contexts/user";
 
 function Login() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  const { setUser } = useConsumer();
+  const logged = React.useContext(UserContext);
   const [action, setAction] = React.useState("Log In");
   const [error, setError] = React.useState(null);
 
@@ -28,7 +28,7 @@ function Login() {
     setAction("Loading...");
     login({ email, password })
       .then(response => {
-        setUser(response);
+        logged.onLogin(response);
         navigate("/");
       })
       .catch(response => {

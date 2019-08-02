@@ -81,27 +81,6 @@ exports[`input-project-info component 1`] = `
         <label
           class="css-ooi7h"
         >
-          Product
-        </label>
-        <div
-          class="css-16q0q7d"
-        >
-          <input
-            aria-label="Enter the Product of the project"
-            class="css-pldvt4"
-            name="txtProduct"
-            required=""
-            type="text"
-            value=""
-          />
-        </div>
-      </fieldset>
-      <fieldset
-        class="css-xeagov"
-      >
-        <label
-          class="css-ooi7h"
-        >
           Start
         </label>
         <div
@@ -113,7 +92,7 @@ exports[`input-project-info component 1`] = `
             name="txtStart"
             required=""
             type="date"
-            value="2019-08-01"
+            value="2019-08-02"
           />
         </div>
       </fieldset>
@@ -134,7 +113,7 @@ exports[`input-project-info component 1`] = `
             name="txtEnd"
             required=""
             type="date"
-            value="2019-08-01"
+            value="2019-08-02"
           />
         </div>
       </fieldset>

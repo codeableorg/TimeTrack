@@ -1,10 +1,12 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
+
 import { Subtitle, Button } from "../components/ui";
 import { getProjectMember } from "../services/project_member";
 import { getUserProjects } from "../services/user";
 import { createDailyLog } from "../services/daily_log";
+import { UserContext } from "../contexts/user";
 
 const currentDate = new Date();
 const year = currentDate.getFullYear();
@@ -20,7 +22,8 @@ const calendarDate = `${year}-${month}-${day}`;
 
 const hours = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
-function DailyLog({ currentUser }) {
+function DailyLog() {
+  const currentUser = React.useContext(UserContext).data;
   const [selects, setSelects] = React.useState({});
   const [total, setTotal] = React.useState(0);
   const [projects, setProjects] = React.useState([]);
@@ -45,7 +48,7 @@ function DailyLog({ currentUser }) {
     }
 
     for (let i = 0; i < projects.length; i++) {
-      const hours = selects.find(e => e.name === projects[i].id).value;
+      const hours = selects.find(e => +e.name === projects[i].id).value;
       dailyData = {
         project_member_id: projectMembers[i].id,
         date: calendarDate,

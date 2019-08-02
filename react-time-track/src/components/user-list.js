@@ -95,7 +95,7 @@ function UserList() {
   });
   let count = -1;
 
-  const firstLetter = Object.keys(members);
+  const firstLetter = Object.keys(members).sort();
 
   return (
     <main>
