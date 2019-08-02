@@ -11,6 +11,14 @@ class ApplicationController < ActionController::API
     @current_user ||= authenticate_token
   end
 
+  def authenticate_owner_or_manager
+    current_user.role == "Owner" || current_user.role == "Manager" ? current_user : render_errors('Access denied', :unauthorized)
+  end
+
+  def authenticate_owner
+    current_user.role == "Owner" ? current_user : render_errors('Access denied', :unauthorized)
+  end
+
   private
 
   def render_errors(message, status)
