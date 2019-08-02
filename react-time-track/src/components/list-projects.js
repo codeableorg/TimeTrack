@@ -27,8 +27,6 @@ function ListProjects() {
       .catch(response => logged.onLogout());
   }, []);
 
-  // console.log("Projects:", projects);
-
   return (
     <main>
       <Section role="list">
@@ -39,8 +37,6 @@ function ListProjects() {
                 <span>{project.name}</span>
               </Link>
               <Circle styles={calculateRisk(project.weekly)}>
-                {console.log(project.real_cost)}
-                {console.log(project.estimated_cost)}
                 {calculateProgress(project.real_cost, project.estimated_cost)}
               </Circle>
             </Card>

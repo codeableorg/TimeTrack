@@ -29,10 +29,6 @@ function ListUserProjects() {
       });
   }, []);
 
-  React.useEffect(() => {
-    console.log(userProjects);
-  }, [userProjects]);
-
   return (
     <main>
       <Section role="list">
