@@ -255,6 +255,27 @@ function IconGenericSmall({ icon, ...props }) {
   );
 }
 
+const modalBackground = {
+	position: "fixed",
+  top: "0",
+  left: "0",
+  bottom: "0",
+  right: "0",
+  backgroundColor: "rgba(0, 0, 0, 0.5)",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center"
+};
+
+const modalContainer = {
+	position: "relative",
+	top: "10rem",
+	backgroundColor: "#ffffff",
+	padding: "1rem",
+	width: "200px",
+	height: "150px"
+};
+
 export {
   Button,
   Card,
@@ -267,5 +288,7 @@ export {
   Label,
   Li,
   IconGenericSmall,
-  IconUser
+  IconUser,
+  modalBackground,
+  modalContainer
 };

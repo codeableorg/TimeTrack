@@ -8,6 +8,9 @@ import { Card, Circle, Subtitle, Button } from "../components/ui";
 import { getProjectDetail } from "../services/project";
 import { getWeeklyReport } from "../services/weekly_report";
 
+import Modal from "../components/modal";
+import CloseProjectModal from "../components/close-project-modal";
+
 // const weeklyData = [
 //   {
 //     id: 1,
@@ -34,9 +37,21 @@ const card = {
   width: "auto"
 };
 
-function Project({ project_id }) {
+function Project({ project_id }, props) {
   const [project, setProject] = React.useState({ members: [] });
   const [weeklyData, setWeeklyData] = React.useState([]);
+
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  function toggleModal(){
+    setIsOpen(!isOpen)
+  }
+
+  function onCloseProject(project_id){
+    console.log('Aca se cierra el proyecto')
+    toggleModal();
+    navigate('/history');
+  }
 
   React.useEffect(() => {
     getProjectDetail(project_id)
@@ -180,7 +195,12 @@ function Project({ project_id }) {
           );
         })}
       </div>
-      <Button>Close Project</Button>
+      <Button onClick={toggleModal}>Close Project</Button>
+      <CloseProjectModal
+        toggleModal={toggleModal}
+        isOpen={isOpen}
+        onCloseProject={onCloseProject}
+      />      
     </div>
   );
 }
