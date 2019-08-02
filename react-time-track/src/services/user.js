@@ -22,7 +22,6 @@ async function userList() {
 }
 
 async function createUser(userData) {
-  console.log(userData);
   const response = await fetch(API_USERS, {
     method: "POST",
     credentials: "include",
@@ -101,8 +100,6 @@ async function userListAvailableTime(params) {
     },
     body: JSON.stringify(params)
   });
-
-  console.dir(userListTime);
 
   if (!userListTime.ok) {
     const { errors } = await userListTime.json();
