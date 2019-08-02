@@ -48,7 +48,8 @@ const weeklyData = [
       estimated_cost: "1000000",
       real_cost: "10000"
     }
-  ]
+  ],
+  []
 ];
 
 const weeklyExpected = [
@@ -67,4 +68,8 @@ test("Test return progress function 2", () => {
 
 test("Test return progress function 3", () => {
   expect(calculateRisk(weeklyData[2])).toEqual(weeklyExpected[2]);
+});
+
+test("Test return progress function 4", () => {
+  expect(calculateRisk(weeklyData[3])).toEqual(weeklyExpected[2]);
 });

@@ -6,7 +6,6 @@
 
 function resumeWeekly(weeklyData) {
   const projectsCosts = weeklyData.reduce((accum, data) => {
-    if (data === 0) return void 0;
     if (accum.length === 0) {
       accum.push(data.estimated_cost);
       accum.push(data.real_cost);
@@ -34,7 +33,7 @@ function calculateRisk(weekly) {
   let riskValue = [];
   let weekData = [];
 
-  if (weekly.length === 0) weekData = [0, 0];
+  if (weekly.length === 0) weekData = [1, 0];
   else weekData = resumeWeekly(weekly);
 
   const colorizer = weekData[1] / weekData[0];
