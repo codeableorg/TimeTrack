@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :projects, :only => [:index, :show, :create] do
       get 'my-projects', action: 'my_projects', on: :collection
     end
+    
     resources :weekly_project_reports, :only => [:show]
     resources :daily_logs, :only => [:index, :create]
     resources :histories, :only => [:index]
@@ -18,5 +19,6 @@ Rails.application.routes.draw do
       post "availableTime", action: "availableTime", on: :collection
     end
     resources :project_members, :only => [:index]
+    resources :pro
   end
 end

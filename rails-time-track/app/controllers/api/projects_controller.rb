@@ -68,6 +68,9 @@ module Api
       end
     end
     
+    # accion q haga close del project
+
+
     private    
     def set_project
       @project = Project.find(params[:id])
@@ -83,6 +86,7 @@ module Api
                                       members: [:user_id, :estimated_cost])
       # params.permit(:closed)
     end
-  
+
+    
   end
 end

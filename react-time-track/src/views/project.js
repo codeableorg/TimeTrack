@@ -49,6 +49,8 @@ function Project({ project_id }, props) {
 
   function onCloseProject(project_id){
     console.log('Aca se cierra el proyecto')
+    // ejecutar el service
+    // then 
     toggleModal();
     navigate('/history');
   }
