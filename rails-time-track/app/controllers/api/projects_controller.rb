@@ -64,7 +64,7 @@ module Api
       if @project.update(project_params)
         render json: @project, status: :ok
       else
-        render json: {errors: @project.errors}
+        render_errors(project.errors, :unprocessable_entity)
       end
     end
     
@@ -73,7 +73,7 @@ module Api
       if project.update({closed: true})
         render json: project, status: :ok
       else 
-        render json: {errors: project.errors}
+        render_errors(project.errors, :unprocessable_entity)
       end
     end
 
@@ -91,7 +91,5 @@ module Api
                                           :estimated_cost], 
                                       members: [:user_id, :estimated_cost])
     end
-
-    
   end
 end

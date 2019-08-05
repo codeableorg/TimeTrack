@@ -37,7 +37,7 @@ const card = {
   width: "auto"
 };
 
-function Project({ project_id }, props) {
+function Project({ project_id }) {
   const [project, setProject] = React.useState({ members: [] });
   const [weeklyData, setWeeklyData] = React.useState([]);
 

@@ -271,9 +271,11 @@ const modalContainer = {
 	position: "relative",
 	top: "10rem",
 	backgroundColor: "#ffffff",
-	padding: "1rem",
-	width: "200px",
-	height: "150px"
+  height: "150px",
+  width: "50%",
+  padding: 10,
+  boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.5)",
+  borderRadius: "0.5em"
 };
 
 export {

@@ -20,6 +20,5 @@ Rails.application.routes.draw do
       post "availableTime", action: "availableTime", on: :collection
     end
     resources :project_members, :only => [:index]
-    resources :pro
   end
 end
