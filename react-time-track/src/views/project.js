@@ -9,6 +9,28 @@ import CloseProjectModal from "../components/close-project-modal";
 import { getProjectDetail, closeProject } from "../services/project";
 import { getWeeklyReport } from "../services/weekly_report";
 
+import Modal from "../components/modal";
+import CloseProjectModal from "../components/close-project-modal";
+import calculateProgress from "../utils/calculateProgress";
+import calculateRisk from "../utils/calculateRisk";
+
+// const weeklyData = [
+//   {
+//     id: 1,
+//     project_id: 1,
+//     week: "28",
+//     estimated_cost: 96600,
+//     real_cost: 117000
+//   },
+//   {
+//     id: 2,
+//     project_id: 1,
+//     week: "29",
+//     estimated_cost: 96600,
+//     real_cost: 117000
+//   }
+// ];
+
 const card = {
   display: "flex",
   justifyContent: "space-between",
@@ -49,7 +71,7 @@ function Project({ project_id }) {
       .then(response => setWeeklyData(response))
       .catch(error => console.log(error));
   }, [project]);
-
+  console.log("Project:", project);
   React.useEffect(() => {
     let acumEstimated = 0;
     let acumReal = 0;
@@ -155,6 +177,7 @@ function Project({ project_id }) {
         }}
       >
         {project.members.map(member => {
+          console.log("Member:", member);
           return (
             <Card styles={card} key={member.id}>
               <Link
@@ -174,7 +197,9 @@ function Project({ project_id }) {
                   <span>{member.name}</span>
                   <span css={{ fontSize: "0.8em" }}>{member.role}</span>
                 </div>
-                <Circle>30%</Circle>
+                <Circle>
+                  {calculateProgress(member.real_cost, member.estimated_cost)}
+                </Circle>
               </Link>
             </Card>
             //
