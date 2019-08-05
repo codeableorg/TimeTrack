@@ -58,24 +58,23 @@ async function closedProjects() {
   return response.json();
 }
 
-// method: "PUT/POST" 
-// async function getProjectDetail(projectId) {
-//   const response = await fetch(`${API_ALL_PROJECTS}/close`, {
-//     method: "..",
-//     credentials: "include",
-//     headers: {
-//       "Content-Type": "application/json"
-//     }
-//   });
+async function closeProject(projectId) {
+  const response = await fetch(`${API_ALL_PROJECTS}/${projectId}/close`, {
+    method: "PUT",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
 
-//   if (!response.ok) {
-//     const { errors } = await response.json();
-//     console.log(errors);
-//     throw new Error(errors);
-//   }
+  if (!response.ok) {
+    const { errors } = await response.json();
+    console.log(errors);
+    throw new Error(errors);
+  }
 
-//   return response.json();
-// }
+  return response.json();
+}
 
 
 async function getProjectDetail(projectId) {
@@ -119,5 +118,6 @@ export {
   closedProjects,
   getProjectDetail,
   createProject,
-  listUserProjects
+  listUserProjects,
+  closeProject
 };

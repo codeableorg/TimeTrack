@@ -68,8 +68,13 @@ module Api
       end
     end
     
-    # accion q haga close del project
-
+    def close
+      if @project.update({closed: true})
+        render json: @project, status: :ok
+      else 
+        render json: {errors: @project.errors}
+      end
+    end
 
     private    
     def set_project

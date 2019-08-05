@@ -5,7 +5,7 @@ import { Link } from "@reach/router";
 import Chart from "chart.js";
 
 import { Card, Circle, Subtitle, Button } from "../components/ui";
-import { getProjectDetail } from "../services/project";
+import { getProjectDetail, closeProject } from "../services/project";
 import { getWeeklyReport } from "../services/weekly_report";
 
 import Modal from "../components/modal";
@@ -48,7 +48,7 @@ function Project({ project_id }, props) {
   }
 
   function onCloseProject(project_id){
-    console.log('Aca se cierra el proyecto')
+    closeProject(project_id).then((response) => {console.log(response)})
     // ejecutar el service
     // then 
     toggleModal();
