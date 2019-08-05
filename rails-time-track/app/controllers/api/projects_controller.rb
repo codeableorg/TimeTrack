@@ -69,10 +69,11 @@ module Api
     end
     
     def close
-      if @project.update({closed: true})
-        render json: @project, status: :ok
+      project = Project.find(params[:project_id])
+      if project.update({closed: true})
+        render json: project, status: :ok
       else 
-        render json: {errors: @project.errors}
+        render json: {errors: project.errors}
       end
     end
 

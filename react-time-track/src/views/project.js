@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 import Chart from "chart.js";
 
 import { Card, Circle, Subtitle, Button } from "../components/ui";
@@ -47,12 +47,11 @@ function Project({ project_id }, props) {
     setIsOpen(!isOpen)
   }
 
-  function onCloseProject(project_id){
-    closeProject(project_id).then((response) => {console.log(response)})
-    // ejecutar el service
-    // then 
-    toggleModal();
-    navigate('/history');
+  function onCloseProject(){
+    closeProject(project_id).then((response) => {
+      toggleModal();
+      navigate('/history');
+    }).catch(error => console.log(error))
   }
 
   React.useEffect(() => {
