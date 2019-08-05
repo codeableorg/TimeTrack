@@ -90,7 +90,6 @@ module Api
                                           :end_date,
                                           :estimated_cost], 
                                       members: [:user_id, :estimated_cost])
-      # params.permit(:closed)
     end
 
     
