@@ -53,20 +53,7 @@ function calculateWorkDays(firstDate, lastDate) {
   if (endDay === 6 && startDay !== 0) {
     days--;
   }
-  /*
-  console.log(`calculateWorkDays:
-  firstDate: ${firstDate}
-  lastDate: ${lastDate}
-  startDate: ${startDate}
-  endDate: ${endDate}
-  diff: ${diff}
-  days: ${days}
-  weeks: ${weeks}
-  startDay: ${startDay}
-  endDay: ${endDay}
-  `);
-*/
   return days;
 }
-// module.exports = calculateWorkDays;
+
 export default calculateWorkDays;
