@@ -92,7 +92,7 @@ exports[`create-project component 1`] = `
             name="txtStart"
             required=""
             type="date"
-            value="2019-08-02"
+            value="2019-08-06"
           />
         </div>
       </fieldset>
@@ -113,7 +113,7 @@ exports[`create-project component 1`] = `
             name="txtEnd"
             required=""
             type="date"
-            value="2019-08-02"
+            value="2019-08-06"
           />
         </div>
       </fieldset>

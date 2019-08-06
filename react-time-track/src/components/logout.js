@@ -21,7 +21,10 @@ function LogOut() {
         fontSize: "2em",
         padding: "0.5rem",
         border: "none",
-        cursor: "pointer"
+        cursor: "pointer",
+        "&:hover": {
+          backgroundColor: "red"
+        }
       }}
       onClick={handleLogOut}
     >

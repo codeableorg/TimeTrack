@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import { navigate, Link } from "@reach/router";
+import { Link } from "@reach/router";
 
 import { Card, Circle } from "./ui";
 import { Section } from "./helpers";

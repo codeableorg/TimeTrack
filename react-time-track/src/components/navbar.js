@@ -1,10 +1,10 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import { NavBarItem } from "../components/ui";
 import { FaTimes } from "react-icons/fa";
-import { Link } from "@reach/router";
+
 import { UserContext } from "../contexts/user";
+import { NavBarItem } from "../components/ui";
 
 function NavBar({ navBarActive, togleNavBar }) {
   const currentUser = React.useContext(UserContext).data;

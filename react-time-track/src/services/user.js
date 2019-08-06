@@ -15,7 +15,7 @@ async function userList() {
   if (!userList.ok) {
     const { errors } = await userList.json();
     console.log(errors);
-    throw new Error(errors);
+    throw new Error(errors.message);
   }
 
   return userList.json();
@@ -103,7 +103,6 @@ async function userListAvailableTime(params) {
 
   if (!userListTime.ok) {
     const { errors } = await userListTime.json();
-    console.log(errors);
     throw new Error(errors.message);
   }
 

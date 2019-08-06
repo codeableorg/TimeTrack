@@ -3,6 +3,8 @@ import React from "react";
 import { jsx } from "@emotion/core";
 import { Router } from "@reach/router";
 import { FaBars } from "react-icons/fa";
+import { Provider as AlertProvider } from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
 
 import NavBar from "../components/navbar";
 import Header from "../components/header";
@@ -34,6 +36,13 @@ const menuIcon = {
   padding: "12px"
 };
 
+const options = {
+  position: "bottom right",
+  timeout: 5000,
+  offset: "30px",
+  transition: "scale"
+};
+
 function Home({ children }) {
   const [navBarActive, setNavBarActive] = React.useState("translateX(-245px)");
   const currentUser = React.useContext(UserContext).data;
@@ -45,48 +54,51 @@ function Home({ children }) {
   }
 
   return (
-    <div css={gridContainer}>
-      <div css={menuIcon} onClick={togleNavBar}>
-        <FaBars />
-      </div>
-      <NavBar navBarActive={navBarActive} togleNavBar={togleNavBar} />
-      <Router
-        css={{
-          gridArea: "header"
-        }}
-      >
-        <Header
-          title={currentUser.role === "Analyst" ? "My Status" : "Projects"}
-          path="/"
-        />
-        <Header title="My Status" path="/mystatus" />
-        <Header title="History" path="/history" />
-        <Header title="Members" path="/members" />
-        <Header title="Project" path="/projects/:id" />
-        <Header
-          tittle="Specific Status"
-          path="/projects/:project_id/users/:user_id"
-        />
-        <Header
-          tittle="Specific Status"
-          path="/users/:user_id/projects/:project_id"
-        />
-        <Header title="Create Project" path="/create-project" />
-        <Header title="Manage Users" path="/users" />
-        <Header title="Daily Log" path="/daily-log" />
-        <Header title="Edit User" path="edit-user/:id" />
-      </Router>
+    <AlertProvider template={AlertTemplate} {...options}>
+      <div css={gridContainer}>
+        <div css={menuIcon} onClick={togleNavBar}>
+          <FaBars />
+        </div>
+        <NavBar navBarActive={navBarActive} togleNavBar={togleNavBar} />
+        <Router
+          css={{
+            gridArea: "header"
+          }}
+        >
+          <Header
+            title={currentUser.role === "Analyst" ? "My Status" : "Projects"}
+            path="/"
+          />
+          <Header title="My Status" path="/mystatus" />
+          <Header title="History" path="/history" />
+          <Header title="Members" path="/members" />
+          <Header title="Project" path="/projects/:id" />
+          <Header
+            tittle="Specific Status"
+            path="/projects/:project_id/users/:user_id"
+          />
+          <Header
+            tittle="Specific Status"
+            path="/users/:user_id/projects/:project_id"
+          />
+          <Header title="Create Project" path="/create-project" />
+          <Header title="Daily Log" path="/daily-log" />
+          <Header title="Manage Users" path="/users" />
+          <Header title="Edit User" path="/users/:id" />
+          <Header title="New User" path="/users/new" />
+        </Router>
 
-      <div
-        css={{
-          gridArea: "main",
-          marginTop: "0.5em",
-          overflow: "auto"
-        }}
-      >
-        {children}
+        <div
+          css={{
+            gridArea: "main",
+            marginTop: "0.5em",
+            overflow: "auto"
+          }}
+        >
+          {children}
+        </div>
       </div>
-    </div>
+    </AlertProvider>
   );
 }
 

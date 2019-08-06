@@ -1,9 +1,9 @@
 class User < ApplicationRecord
 
+  validates :name, :rate, presence: true
   validates :email, format: { with: /[a-zA-Z0-9]*@[a-zA-Z]*.[a-zA-Z0-9]*/, message: "Bad format"  }, presence: true, uniqueness: true
-  # validates :name, presence: true
-  # validates :role, presence true
-  # validates :rate, presence true
+  validates :role, inclusion: { in: ["Owner","Analyst", "Manager"] , message: "%{value} is not a valid role" }
+  
 
   has_secure_password
   has_secure_token
