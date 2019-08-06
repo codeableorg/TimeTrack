@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import { FaUser, FaClock, FaInfo } from "react-icons/fa";
+import { FaUser, FaClock } from "react-icons/fa";
 
 import { NavBarItem } from "./ui";
 import Logout from "./logout";
@@ -21,6 +21,10 @@ const h2Style = {
   marginLeft: "1.5em",
   "@media (min-width: 960px)": {
     marginLeft: "0"
+  },
+  "@media (max-width: 400px)": {
+    fontSize: "1.1em",
+    marginLeft: "1.7em"
   }
 };
 

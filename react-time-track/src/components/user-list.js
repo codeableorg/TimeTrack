@@ -1,9 +1,12 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
+import { Link } from "@reach/router";
+
 import { Card } from "./ui";
 import { Section } from "./helpers";
 import { userList } from "../services/user";
+import { UserContext } from "../contexts/user";
 
 const userStyle = {
   width: "70%",
@@ -27,16 +30,6 @@ const card = {
   }
 };
 
-const circle = {
-  marginRight: "2%",
-  width: "3em",
-  height: "3em",
-  border: "5px solid green",
-  "@media (max-width: 768px)": {
-    fontSize: "14px"
-  }
-};
-
 const eachUser = {
   display: "flex",
   flexDirection: "row",
@@ -56,12 +49,6 @@ const roleStyle = {
   fontSize: "14px"
 };
 
-const button = {
-  margin: "1% auto",
-  width: "70%",
-  borderRadius: "10px"
-};
-
 const eachNameStyle = {
   cursor: "Pointer",
   "@media (max-width: 768px)": {
@@ -74,26 +61,30 @@ const eachNameStyle = {
 };
 
 function UserList() {
+  const logged = React.useContext(UserContext);
   const [users, setUsers] = React.useState([]);
 
+  function handleClick(user) {
+    sessionStorage.setItem("ProjectMember", JSON.stringify(user));
+  }
+
   React.useEffect(() => {
-    userList().then(list => setUsers(list));
+    userList()
+      .then(list => setUsers(list))
+      .catch(response => {
+        if (response.message === "Access denied") logged.onLogout();
+      });
   }, []);
 
   let members = users.reduce((objUsers, user) => {
     let list = objUsers[user.name[0]];
     if (!list) list = [];
-    list.push(user.name);
+    list.push(user);
     return {
       ...objUsers,
       [user.name[0]]: list
     };
   }, {});
-
-  const roles = users.map(user => {
-    return user.role;
-  });
-  let count = -1;
 
   const firstLetter = Object.keys(members).sort();
 
@@ -105,15 +96,19 @@ function UserList() {
             <div css={userStyle} key={user}>
               <h2>{user}</h2>
               <Card styles={card} role="contentinfo">
-                {members[user].map(name => {
-                  count++;
+                {members[user].map(objUser => {
                   return (
-                    <div css={eachUser} key={name}>
-                      <div css={nameStyle}>
-                        <div css={eachNameStyle}>{name}</div>
-                        <div css={roleStyle}>{roles[count]}</div>
+                    <Link
+                      to={`/members/${objUser.id}`}
+                      onClick={() => handleClick(objUser)}
+                      key={objUser.id}
+                    >
+                      <div css={eachUser}>
+                        <div css={nameStyle}>
+                          <div css={eachNameStyle}>{objUser.name}</div>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   );
                 })}
               </Card>

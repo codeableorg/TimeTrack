@@ -5,28 +5,9 @@ import { Link, navigate } from "@reach/router";
 import Chart from "chart.js";
 
 import { Card, Circle, Subtitle, Button } from "../components/ui";
+import CloseProjectModal from "../components/close-project-modal";
 import { getProjectDetail, closeProject } from "../services/project";
 import { getWeeklyReport } from "../services/weekly_report";
-
-import Modal from "../components/modal";
-import CloseProjectModal from "../components/close-project-modal";
-
-// const weeklyData = [
-//   {
-//     id: 1,
-//     project_id: 1,
-//     week: "28",
-//     estimated_cost: 96600,
-//     real_cost: 117000
-//   },
-//   {
-//     id: 2,
-//     project_id: 1,
-//     week: "29",
-//     estimated_cost: 96600,
-//     real_cost: 117000
-//   }
-// ];
 
 const card = {
   display: "flex",
@@ -43,15 +24,17 @@ function Project({ project_id }) {
 
   const [isOpen, setIsOpen] = React.useState(false);
 
-  function toggleModal(){
-    setIsOpen(!isOpen)
+  function toggleModal() {
+    setIsOpen(!isOpen);
   }
 
-  function onCloseProject(){
-    closeProject(project_id).then((response) => {
-      toggleModal();
-      navigate('/history');
-    }).catch(error => console.log(error))
+  function onCloseProject() {
+    closeProject(project_id)
+      .then(response => {
+        toggleModal();
+        navigate("/history");
+      })
+      .catch(error => console.log(error));
   }
 
   React.useEffect(() => {
@@ -75,10 +58,12 @@ function Project({ project_id }) {
       acumEstimated += week_data.estimated_cost;
       return (acumEstimated / project.estimated_cost) * 100;
     });
+
     const real_cost = weeklyData.map(week_data => {
       acumReal += week_data.real_cost;
       return (acumReal / project.estimated_cost) * 100;
     });
+
     const ctx = document.getElementById("myChart");
     const myChart = new Chart(ctx, {
       type: "line",
@@ -201,7 +186,7 @@ function Project({ project_id }) {
         toggleModal={toggleModal}
         isOpen={isOpen}
         onCloseProject={onCloseProject}
-      />      
+      />
     </div>
   );
 }

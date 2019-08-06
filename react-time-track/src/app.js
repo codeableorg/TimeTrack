@@ -12,6 +12,7 @@ import History from "./views/history";
 import Project from "./views/project";
 import ProgressProjectUser from "./views/progress-project-user";
 import UserList from "./components/user-list";
+import ProjectsByUser from "./views/projects-user";
 import ResetPassword from "./views/reset-password";
 import CreateProject from "./views/create-project";
 import CreateUser from "./views/create-user";
@@ -46,6 +47,7 @@ function App() {
         <AllProjects path="/" />
         <History path="/history" />
         <UserList path="/members" />
+        <ProjectsByUser path="/members/:user_id" />
         <Project path="/projects/:project_id" />
         <ProgressProjectUser path="/projects/:project_id/users/:user_id" />
         <ProgressProjectUser path="/users/:user_id/projects/:project_id" />

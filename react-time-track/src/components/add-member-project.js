@@ -1,6 +1,6 @@
 /**@jsx jsx */
 import React from "react";
-import { jsx } from "@emotion/core";
+import { jsx, keyframes } from "@emotion/core";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 
 import { Button } from "./ui";
@@ -107,10 +107,22 @@ const fieldsetGeneralStyle = {
   }
 };
 
+const animateDetail = keyframes`
+   0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+ `;
+
 const fieldsetDetailStyle = {
   ...fieldsetGeneralStyle,
   border: "1px solid gray",
   width: "64%",
+  animation: `${animateDetail} 450ms ease 1`,
   "@media (max-width: 800px)": {
     ...fieldsetGeneralStyle["@media (max-width: 800px)"],
     width: "66%"

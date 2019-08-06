@@ -72,6 +72,7 @@ function Home({ children }) {
           <Header title="My Status" path="/mystatus" />
           <Header title="History" path="/history" />
           <Header title="Members" path="/members" />
+          <Header title="Members Status" path="/members/:user_id" />
           <Header title="Project" path="/projects/:id" />
           <Header
             tittle="Specific Status"

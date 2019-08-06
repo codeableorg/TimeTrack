@@ -76,7 +76,6 @@ async function closeProject(projectId) {
   return response.json();
 }
 
-
 async function getProjectDetail(projectId) {
   const response = await fetch(`${API_ALL_PROJECTS}/${projectId}`, {
     method: "GET",
