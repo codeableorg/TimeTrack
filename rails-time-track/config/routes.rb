@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :users do
       resources :projects, :only => [:index]
       post "availableTime", action: "availableTime", on: :collection
+      put "updateState", action: "updateState", on: :member
     end
     resources :project_members, :only => [:index]
   end

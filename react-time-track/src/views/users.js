@@ -2,9 +2,10 @@
 import React from "react";
 import { jsx } from "@emotion/core";
 import { Link } from "@reach/router";
+import { useAlert } from "react-alert";
 
-import { Title, Card, Button, IconUser } from "../components/ui";
-import { userList } from "../services/user";
+import { Card, Button, IconUser } from "../components/ui";
+import { userList, editUserState } from "../services/user";
 import { UserContext } from "../contexts/user";
 
 const divStyleGeneral = {
@@ -44,7 +45,22 @@ const divStyleRow = {
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  marginLeft: "0.5em"
+  marginLeft: "0.5em",
+  "@media (max-width: 450px)": {
+    fontSize: ".9rem"
+  }
+};
+
+const iconUserStyle = {
+  minWidth: 64,
+  height: 64,
+  fontSize: "2em",
+  alignSelf: "center",
+  "@media (max-width: 450px)": {
+    minWidth: 40,
+    height: 40,
+    fontSize: "1.5em"
+  }
 };
 
 const divStyleInfoRow = { ...divStyleRow, width: "100%" };
@@ -54,7 +70,15 @@ const buttonStyle = {
   width: 100,
   padding: 0,
   height: "30px",
-  margin: ".1em"
+  margin: ".1em",
+  "@media (max-width: 768px)": {
+    margin: ".08em",
+    borderRadius: ".25em"
+  },
+  "@media (max-width: 450px)": {
+    width: 80,
+    fontSize: ".95em"
+  }
 };
 
 const buttonStyleEnable = { ...buttonStyle, backgroundColor: "green" };
@@ -63,6 +87,27 @@ const buttonStyleDisable = { ...buttonStyle, backgroundColor: "#b71717" };
 function Users() {
   const [users, setUser] = React.useState([]);
   const logged = React.useContext(UserContext);
+  const alert = useAlert();
+
+  function handleClick(userId, userName, isActive) {
+    editUserState(userId, isActive)
+      .then(response => {
+        alert.success(
+          `User ${userName} was ${
+            isActive ? "enabled" : "disabled"
+          } successfully`
+        );
+        const newUsers = Array.from(users);
+        const index = newUsers.findIndex(user => user.id === userId);
+        newUsers[index].isActive = isActive;
+        setUser(newUsers);
+      })
+      .catch(response => {
+        console.log(response.message);
+        if (response.message === "Access denied") logged.onLogout();
+        else alert.error("There was a error during the transaction");
+      });
+  }
 
   React.useEffect(() => {
     userList()
@@ -81,7 +126,6 @@ function Users() {
 
   return (
     <div css={divStyleGeneral}>
-      <Title htmlFor="name">List of Users</Title>
       <ol css={olStyle}>
         {users.map(user => {
           return (
@@ -93,14 +137,7 @@ function Users() {
                     width: "100%"
                   }}
                 >
-                  <IconUser
-                    styles={{
-                      minWidth: 64,
-                      height: 64,
-                      fontSize: "2em",
-                      alignSelf: "center"
-                    }}
-                  />
+                  <IconUser styles={iconUserStyle} />
                   <div css={divStyleInfoRow}>
                     <span>{user.name}</span>
                     <span css={{ fontSize: "0.8em", fontWeight: "bold" }}>
@@ -118,6 +155,9 @@ function Users() {
                       css={
                         user.isActive ? buttonStyleDisable : buttonStyleEnable
                       }
+                      onClick={() =>
+                        handleClick(user.id, user.name, !user.isActive)
+                      }
                     >
                       {user.isActive ? "Disable" : "Enable"}
                     </Button>
@@ -128,7 +168,7 @@ function Users() {
           );
         })}
       </ol>
-      <div css={{ marginTop: "2em", width: "80%" }}>
+      <div css={{ width: "80%" }}>
         <Link to="/users/new">
           <Button>New User</Button>
         </Link>

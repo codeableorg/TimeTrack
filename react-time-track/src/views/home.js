@@ -39,7 +39,7 @@ const menuIcon = {
 const options = {
   position: "bottom right",
   timeout: 5000,
-  offset: "30px",
+  offset: "0px",
   transition: "scale"
 };
 
@@ -47,7 +47,7 @@ function Home({ children }) {
   const [navBarActive, setNavBarActive] = React.useState("translateX(-245px)");
   const currentUser = React.useContext(UserContext).data;
 
-  function togleNavBar() {
+  function toggleNavBar() {
     navBarActive === "translateX(-245px)"
       ? setNavBarActive("translateX(0)")
       : setNavBarActive("translateX(-245px)");
@@ -56,10 +56,10 @@ function Home({ children }) {
   return (
     <AlertProvider template={AlertTemplate} {...options}>
       <div css={gridContainer}>
-        <div css={menuIcon} onClick={togleNavBar}>
+        <div css={menuIcon} onClick={toggleNavBar}>
           <FaBars />
         </div>
-        <NavBar navBarActive={navBarActive} togleNavBar={togleNavBar} />
+        <NavBar navBarActive={navBarActive} togleNavBar={toggleNavBar} />
         <Router
           css={{
             gridArea: "header"

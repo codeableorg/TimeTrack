@@ -12,7 +12,7 @@ require 'faker'
   
   manager1 = User.create(
     name: "Brayan Manager",
-    email: "linzeur@hotmail.com",j
+    email: "linzeur@hotmail.com",
     password: "123456",
     role: "Manager",
     rate: 4300

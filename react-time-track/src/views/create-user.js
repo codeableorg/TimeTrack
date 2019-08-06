@@ -32,7 +32,7 @@ function CreateUser() {
 
     createUser(userData)
       .then(response => {
-        alert.success("User was created successfully");
+        alert.success(`User ${user.name} was created successfully`);
         navigate("/users");
       })
       .catch(response => {
