@@ -45,11 +45,6 @@ const divStyleUserInfo = {
 
 function Header({ title }) {
   const currentUser = React.useContext(UserContext).data;
-  const [isShownOptionsUser, setIsShownOptionsUser] = React.useState(false);
-
-  function handleClick() {
-    setIsShownOptionsUser(!isShownOptionsUser);
-  }
 
   return (
     <div css={divStyleGeneral}>
@@ -64,8 +59,7 @@ function Header({ title }) {
               background: "#f24c36",
               color: "#FFF",
               fontWeight: "bold"
-            },
-            "@media (max-width: 500px)": { display: "none" }
+            }
           }}
           link="/daily-log"
         >
@@ -75,72 +69,14 @@ function Header({ title }) {
           <span css={{ marginLeft: "0.25em" }}>Log</span>
         </NavBarItem>
         <div css={{ display: "flex" }}>
-          {window.innerWidth >= 500 ? (
-            <div css={divStyleIcon}>
-              <FaUser />
-            </div>
-          ) : (
-            <>
-              <div
-                css={{ ...divStyleIcon, cursor: "pointer" }}
-                onClick={handleClick}
-              >
-                <FaUser />
-              </div>
-              {isShownOptionsUser && (
-                <ul
-                  css={{
-                    backgroundColor: "white",
-                    position: "absolute",
-                    top: 50,
-                    right: 65,
-                    padding: 10,
-                    zIndex: 1000,
-                    width: 150
-                  }}
-                >
-                  <li>
-                    <div css={{ display: "flex", margin: "0px -10px" }}>
-                      <div css={divStyleIcon}>
-                        <FaInfo />
-                      </div>
-                      <div
-                        css={{
-                          display: "flex",
-                          flexDirection: "column",
-                          marginLeft: "0.25em"
-                        }}
-                      >
-                        <span>{currentUser.name}</span>
-                        <span>{currentUser.role}</span>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <NavBarItem
-                      styles={{
-                        padding: 0,
-                        height: 40,
-                        margin: "0px -10px",
-                        "&:hover": {
-                          cursor: "pointer",
-                          background: "black",
-                          color: "#FFF",
-                          fontWeight: "bold"
-                        }
-                      }}
-                      link="/daily-log"
-                    >
-                      <div css={divStyleIcon}>
-                        <FaClock />
-                      </div>
-                      <span css={{ marginLeft: "0.25em" }}>Log</span>
-                    </NavBarItem>
-                  </li>
-                </ul>
-              )}
-            </>
-          )}
+          <div
+            css={{
+              ...divStyleIcon,
+              "@media (max-width: 500px)": { display: "none" }
+            }}
+          >
+            <FaUser />
+          </div>
           <div css={divStyleUserInfo}>
             <span>{currentUser.name}</span>
             <span>{currentUser.role}</span>
