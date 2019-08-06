@@ -1,12 +1,15 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 import Chart from "chart.js";
 
-import { Card, Circle, Subtitle } from "../components/ui";
-import { getProjectDetail } from "../services/project";
+import { Card, Circle, Subtitle, Button } from "../components/ui";
+import { getProjectDetail, closeProject } from "../services/project";
 import { getWeeklyReport } from "../services/weekly_report";
+
+import Modal from "../components/modal";
+import CloseProjectModal from "../components/close-project-modal";
 
 // const weeklyData = [
 //   {
@@ -37,6 +40,19 @@ const card = {
 function Project({ project_id }) {
   const [project, setProject] = React.useState({ members: [] });
   const [weeklyData, setWeeklyData] = React.useState([]);
+
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  function toggleModal(){
+    setIsOpen(!isOpen)
+  }
+
+  function onCloseProject(){
+    closeProject(project_id).then((response) => {
+      toggleModal();
+      navigate('/history');
+    }).catch(error => console.log(error))
+  }
 
   React.useEffect(() => {
     getProjectDetail(project_id)
@@ -180,6 +196,12 @@ function Project({ project_id }) {
           );
         })}
       </div>
+      <Button onClick={toggleModal}>Close Project</Button>
+      <CloseProjectModal
+        toggleModal={toggleModal}
+        isOpen={isOpen}
+        onCloseProject={onCloseProject}
+      />      
     </div>
   );
 }

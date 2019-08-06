@@ -9,7 +9,9 @@ Rails.application.routes.draw do
 
     resources :projects, :only => [:index, :show, :create] do
       get 'my-projects', action: 'my_projects', on: :collection
+      put "/close", to: "projects#close"
     end
+    
     resources :weekly_project_reports, :only => [:show]
     resources :daily_logs, :only => [:index, :create]
     resources :histories, :only => [:index]

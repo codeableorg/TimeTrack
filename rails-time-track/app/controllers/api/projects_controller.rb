@@ -60,6 +60,23 @@ module Api
       render_errors(e.message, :not_found)
     end
 
+    def update
+      if @project.update(project_params)
+        render json: @project, status: :ok
+      else
+        render_errors(project.errors, :unprocessable_entity)
+      end
+    end
+    
+    def close
+      project = Project.find(params[:project_id])
+      if project.update({closed: true})
+        render json: project, status: :ok
+      else 
+        render_errors(project.errors, :unprocessable_entity)
+      end
+    end
+
     private    
     def set_project
       @project = Project.find(params[:id])
@@ -74,6 +91,5 @@ module Api
                                           :estimated_cost], 
                                       members: [:user_id, :estimated_cost])
     end
-  
   end
 end

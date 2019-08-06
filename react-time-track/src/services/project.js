@@ -58,6 +58,25 @@ async function closedProjects() {
   return response.json();
 }
 
+async function closeProject(projectId) {
+  const response = await fetch(`${API_ALL_PROJECTS}/${projectId}/close`, {
+    method: "PUT",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+
+  if (!response.ok) {
+    const { errors } = await response.json();
+    console.log(errors);
+    throw new Error(errors);
+  }
+
+  return response.json();
+}
+
+
 async function getProjectDetail(projectId) {
   const response = await fetch(`${API_ALL_PROJECTS}/${projectId}`, {
     method: "GET",
@@ -99,5 +118,6 @@ export {
   closedProjects,
   getProjectDetail,
   createProject,
-  listUserProjects
+  listUserProjects,
+  closeProject
 };
