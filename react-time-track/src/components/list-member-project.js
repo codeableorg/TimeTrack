@@ -2,6 +2,7 @@
 import React from "react";
 import { jsx } from "@emotion/core";
 import { navigate } from "@reach/router";
+import { useAlert } from "react-alert";
 
 import AddMemberProject from "../components/add-member-project";
 import { Button, IconGenericSmall, IconUser } from "../components/ui";
@@ -11,6 +12,7 @@ import { UserContext } from "../contexts/user";
 
 function ListMemberProject({ nextFn, beforeFn }) {
   const logged = React.useContext(UserContext);
+  const alert = useAlert();
 
   const [listMember, setListMember] = React.useState([]);
   const [listMemberAdded, setListMemberAdded] = React.useState([]);
@@ -60,6 +62,7 @@ function ListMemberProject({ nextFn, beforeFn }) {
     };
     createProject(bodyProject)
       .then(response => {
+        alert.success(`The project ${titleProject} was updated successfully`);
         sessionStorage.removeItem("InfoNewProject");
         navigate("/");
       })

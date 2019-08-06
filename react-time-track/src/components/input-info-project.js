@@ -2,10 +2,12 @@
 import React from "react";
 import { jsx } from "@emotion/core";
 import { navigate } from "@reach/router";
+import { useAlert } from "react-alert";
 
 import { Button } from "./ui";
 
 function InputInfoProject({ nextFn }) {
+  const alert = useAlert();
   const today = new Date()
     .toLocaleDateString("es-PE", {
       year: "numeric",
@@ -42,6 +44,7 @@ function InputInfoProject({ nextFn }) {
   }
 
   function handleCancel() {
+    alert.info("The changes were saved");
     navigate("/");
   }
 

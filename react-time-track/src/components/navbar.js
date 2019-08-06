@@ -1,10 +1,16 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import { NavBarItem } from "../components/ui";
-import { FaTimes } from "react-icons/fa";
-import { Link } from "@reach/router";
+import { FaTimes, FaUser } from "react-icons/fa";
+
 import { UserContext } from "../contexts/user";
+import { NavBarItem } from "../components/ui";
+
+const divStyleIcon = {
+  display: "none",
+  alignItems: "center",
+  padding: "0 .25em"
+};
 
 function NavBar({ navBarActive, togleNavBar }) {
   const currentUser = React.useContext(UserContext).data;
@@ -57,10 +63,12 @@ function NavBar({ navBarActive, togleNavBar }) {
           alignItems: "center"
         }}
       >
-        <span>Timer Tracker</span>
+        <span>Time Tracker</span>
         <span
+          role="button"
           css={{
             display: "flex",
+            cursor: "pointer",
             "@media (min-width: 960px)": {
               visibility: "hidden"
             }
@@ -69,6 +77,36 @@ function NavBar({ navBarActive, togleNavBar }) {
         >
           <FaTimes />
         </span>
+      </div>
+      <div
+        css={{
+          ...divStyleIcon,
+          borderBottom: "1px solid black",
+          borderTop: "1px solid black",
+          padding: "0.5em 0",
+          "@media (max-width: 500px)": { display: "flex" }
+        }}
+      >
+        <div
+          css={{
+            ...divStyleIcon,
+            fontSize: "1.5em",
+            "@media (max-width: 500px)": { display: "flex" }
+          }}
+        >
+          <FaUser />
+        </div>
+        <div
+          css={{
+            display: "flex",
+            flexDirection: "column",
+            marginLeft: "0.25em",
+            fontSize: "15px"
+          }}
+        >
+          <span>{currentUser.name}</span>
+          <span>{currentUser.role}</span>
+        </div>
       </div>
       <div
         css={{

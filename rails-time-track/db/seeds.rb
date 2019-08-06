@@ -23,7 +23,8 @@ require 'faker'
     email: "manager2@mail.com",
     password: "123456",
     role: "Manager",
-    rate: 4500
+    rate: 4500,
+    isActive: false
   )
   
   analyst1 = User.create(
@@ -35,7 +36,7 @@ require 'faker'
   )
 
   analyst2 = User.create(
-    name: "Lucia Analyst",
+    name: "Lian Analyst",
     email: "analyst2@mail.com",
     password: "123456",
     role: "Analyst",
@@ -55,7 +56,8 @@ require 'faker'
     email: "analyst4@mail.com",
     password: "123456",
     role: "Analyst",
-    rate: 1300
+    rate: 1300,
+    isActive: false
   )
     
   #Create projects

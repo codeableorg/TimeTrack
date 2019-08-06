@@ -1,98 +1,87 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import { FaUser, FaClock } from "react-icons/fa";
+import { FaUser, FaClock, FaInfo } from "react-icons/fa";
 
 import { NavBarItem } from "./ui";
 import Logout from "./logout";
 import { UserContext } from "../contexts/user";
 
+const flexboxStyle = { display: "flex", alignItems: "center" };
+
+const divStyleGeneral = {
+  gridArea: "header",
+  ...flexboxStyle,
+  marginLeft: "25px",
+  borderBottom: "1px solid #e8e8eb",
+  height: "100%"
+};
+
+const h2Style = {
+  marginLeft: "1.5em",
+  "@media (min-width: 960px)": {
+    marginLeft: "0"
+  }
+};
+
+const divStyleOptions = {
+  ...flexboxStyle,
+  marginLeft: "auto"
+};
+
+const divStyleIcon = {
+  ...flexboxStyle,
+  padding: "0 .25em",
+  fontSize: "1.5em"
+};
+
+const divStyleUserInfo = {
+  display: "flex",
+  flexDirection: "column",
+  fontSize: "0.8em",
+  justifyContent: "center",
+  "@media (max-width: 500px)": { display: "none" }
+};
+
 function Header({ title }) {
   const currentUser = React.useContext(UserContext).data;
 
   return (
-    <div
-      css={{
-        gridArea: "header",
-        display: "flex",
-        margin: "0 25px",
-        alignItems: "center",
-        borderBottom: "1px solid #e8e8eb",
-        height: "100%"
-      }}
-    >
-      <h2
-        css={{
-          marginLeft: "1.5em",
-          "@media (min-width: 960px)": {
-            marginLeft: "0"
-          }
-        }}
-      >
-        {title}
-      </h2>
-      <div
-        css={{
-          display: "flex",
-          alignItems: "center",
-          marginLeft: "auto"
-        }}
-      >
+    <div css={divStyleGeneral}>
+      <h2 css={h2Style}>{title}</h2>
+      <div css={divStyleOptions}>
         <NavBarItem
           styles={{
+            padding: "0 1em",
+            height: 48,
             "&:hover": {
               cursor: "pointer",
               background: "#f24c36",
               color: "#FFF",
-              padding: "0 1em",
               fontWeight: "bold"
-            },
-            padding: "0 1em"
+            }
           }}
           link="/daily-log"
         >
-          <FaClock />
-          <span
-            css={{
-              marginLeft: "0.25em"
-            }}
-          >
-            Log
-          </span>
+          <div css={divStyleIcon}>
+            <FaClock />
+          </div>
+          <span css={{ marginLeft: "0.25em" }}>Log</span>
         </NavBarItem>
-        <div
-          css={{
-            display: "flex"
-          }}
-        >
+        <div css={{ display: "flex" }}>
           <div
             css={{
-              display: "flex",
-              alignItems: "center",
-              padding: "0 0.25em",
-              fontSize: "1.5em"
+              ...divStyleIcon,
+              "@media (max-width: 500px)": { display: "none" }
             }}
           >
             <FaUser />
           </div>
-          <div
-            css={{
-              display: "flex",
-              flexDirection: "column",
-              fontSize: "0.8em",
-              justifyContent: "center"
-            }}
-          >
+          <div css={divStyleUserInfo}>
             <span>{currentUser.name}</span>
             <span>{currentUser.role}</span>
           </div>
-          <div
-            css={{
-              display: "flex",
-              alignItems: "center",
-              padding: "0 0.25em"
-            }}
-          >
+          <div css={{ ...divStyleIcon, fontSize: "15px" }}>
             <Logout />
           </div>
         </div>

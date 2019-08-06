@@ -5,9 +5,14 @@ module Api
     def create
       if params.has_key?("email") && params.has_key?("password")
         user = User.valid_login?(params[:email], params[:password])
+
         if user
-          regenerate_and_signed_token(user)
-          render json: user
+          if user.isActive
+            regenerate_and_signed_token(user)
+            render json: user
+          else
+            render_errors("Access is denied", :forbidden)
+          end
         else
           render_errors("Incorrect email or password", :bad_request)
         end

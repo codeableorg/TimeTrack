@@ -22,7 +22,6 @@ import MyStatus from "./views/my-status";
 
 function App() {
   const logged = React.useContext(UserContext);
-  const currentUser = React.useContext(UserContext).data;
 
   return (
     <Router>
@@ -51,10 +50,10 @@ function App() {
         <ProgressProjectUser path="/projects/:project_id/users/:user_id" />
         <ProgressProjectUser path="/users/:user_id/projects/:project_id" />
         <CreateProject path="/create-project" />
-        <CreateUser path="/create-user" />
-        <Users path="/users" />
         <DailyLog path="/daily-log" />
-        <EditUser path="edit-user/:user_id" />
+        <Users path="/users" />
+        <CreateUser path="/users/new" />
+        <EditUser path="/users/:user_id" />
       </Home>
     </Router>
   );

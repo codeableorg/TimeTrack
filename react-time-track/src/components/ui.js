@@ -22,7 +22,6 @@ function Button({ styles, ...props }) {
         transition: "all 200ms ease",
         outline: "0",
         "@media (max-width: 768px)": {
-          width: "90%",
           margin: "0.5rem auto",
           borderRadius: "0.5em",
           boxSizing: "border-box"

@@ -5,8 +5,137 @@ import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 
 import { Button } from "./ui";
 
+const sectionStyle = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundColor: "rgba(0,0,0,0.5)",
+  position: "fixed",
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  "@media (min-width: 960px)": {
+    left: 230
+  },
+  "@media (max-width: 450px)": {
+    justifyContent: "center"
+  }
+};
+
+const formStyle = {
+  width: "80%",
+  backgroundColor: "white",
+  padding: 10,
+  boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.5)",
+  borderRadius: "0.5em"
+};
+
+const fieldsetStyle = {
+  width: "94%",
+  border: "none",
+  padding: "12px 30px",
+  textAlign: "center",
+  "@media (max-width: 800px)": {
+    padding: "12px 15px",
+    width: ""
+  },
+  "@media (max-width: 500px)": {
+    padding: "12px 8px",
+    width: ""
+  },
+  "@media (max-width: 450px)": {
+    padding: "16px 8px",
+    width: ""
+  }
+};
+
+const labelStyle = {
+  width: "35%",
+  display: "inline-block",
+  textAlign: "left",
+  fontWeight: "bold",
+  "@media (max-width: 700px)": {
+    width: 80
+  }
+};
+
+const divStyle = {
+  display: "inline-block",
+  width: "65%",
+  textAlign: "left",
+  "@media (max-width: 700px)": {
+    width: "calc(100% - 80px)",
+    textAlign: "right"
+  },
+  "@media (max-width: 600px)": {
+    textAlign: "left"
+  },
+  "@media (max-width: 500px)": {
+    width: "calc(80% - 100px)"
+  }
+};
+
+const selectStyle = {
+  width: "80%",
+  "@media (max-width: 500px)": {
+    width: "100%"
+  }
+};
+
+const inputTextStyle = {
+  width: 80,
+  "@media (max-width: 500px)": {
+    width: 40
+  }
+};
+
+const fieldsetGeneralStyle = {
+  border: "1px solid black",
+  margin: "12px 42px",
+  padding: "10px 0",
+  textAlign: "center",
+  "@media (max-width: 800px)": {
+    margin: "12px 27px"
+  },
+  "@media (max-width: 500px)": {
+    margin: "12px 20px"
+  },
+  "@media (max-width: 450px)": {
+    margin: "16px 20px"
+  }
+};
+
+const fieldsetDetailStyle = {
+  ...fieldsetGeneralStyle,
+  border: "1px solid gray",
+  width: "64%",
+  "@media (max-width: 800px)": {
+    ...fieldsetGeneralStyle["@media (max-width: 800px)"],
+    width: "66%"
+  },
+  "@media (max-width: 500px)": {
+    ...fieldsetGeneralStyle["@media (max-width: 500px)"],
+    width: "69%"
+  }
+};
+
+const rowWeekStyle = {
+  display: "flex",
+  justifyContent: "space-around"
+};
+
+const buttonStyle = {
+  width: 135,
+  margin: "0 10px",
+  "@media (max-width: 500px)": {
+    width: 95
+  }
+};
+
 function AddMemberProject({ listMember, addMemberFn, closeModalFn }) {
-  let infoProject = JSON.parse(sessionStorage.getItem("InfoNewProject"));
+  const infoProject = JSON.parse(sessionStorage.getItem("InfoNewProject"));
   const startDate = new Date(infoProject.start.split("-").join("/"));
   const endDate = new Date(infoProject.end.split("-").join("/"));
 
@@ -79,137 +208,6 @@ function AddMemberProject({ listMember, addMemberFn, closeModalFn }) {
     setAvailableTime(Math.min.apply(null, selectedMember.availableTime));
     setDetailTimeByWeek(getTimeWeekly);
   }, [selectedMember]);
-
-  //Declaration for styles
-
-  const sectionStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "rgba(0,0,0,0.5)",
-    position: "fixed",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    "@media (min-width: 960px)": {
-      left: 230
-    },
-    "@media (max-width: 450px)": {
-      justifyContent: "center"
-    }
-  };
-
-  const formStyle = {
-    width: "80%",
-    backgroundColor: "white",
-    padding: 10,
-    boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.5)",
-    borderRadius: "0.5em"
-  };
-
-  const fieldsetStyle = {
-    width: "94%",
-    border: "none",
-    padding: "12px 30px",
-    textAlign: "center",
-    "@media (max-width: 800px)": {
-      padding: "12px 15px",
-      width: ""
-    },
-    "@media (max-width: 500px)": {
-      padding: "12px 8px",
-      width: ""
-    },
-    "@media (max-width: 450px)": {
-      padding: "16px 8px",
-      width: ""
-    }
-  };
-
-  const labelStyle = {
-    width: "35%",
-    display: "inline-block",
-    textAlign: "left",
-    fontWeight: "bold",
-    "@media (max-width: 700px)": {
-      width: 80
-    }
-  };
-
-  const divStyle = {
-    display: "inline-block",
-    width: "65%",
-    textAlign: "left",
-    "@media (max-width: 700px)": {
-      width: "calc(100% - 80px)",
-      textAlign: "right"
-    },
-    "@media (max-width: 600px)": {
-      textAlign: "left"
-    },
-    "@media (max-width: 500px)": {
-      width: "calc(80% - 100px)"
-    }
-  };
-
-  const selectStyle = {
-    width: "80%",
-    "@media (max-width: 500px)": {
-      width: "100%"
-    }
-  };
-
-  const inputTextStyle = {
-    width: 80,
-    "@media (max-width: 500px)": {
-      width: 40
-    }
-  };
-
-  const fieldsetGeneralStyle = {
-    border: "1px solid black",
-    margin: "12px 42px",
-    padding: "10px 0",
-    textAlign: "center",
-    "@media (max-width: 800px)": {
-      margin: "12px 27px"
-    },
-    "@media (max-width: 500px)": {
-      margin: "12px 20px"
-    },
-    "@media (max-width: 450px)": {
-      margin: "16px 20px"
-    }
-  };
-
-  const fieldsetDetailStyle = {
-    ...fieldsetGeneralStyle,
-    border: "1px solid gray",
-    width: "64%",
-    "@media (max-width: 800px)": {
-      ...fieldsetGeneralStyle["@media (max-width: 800px)"],
-      width: "66%"
-    },
-    "@media (max-width: 500px)": {
-      ...fieldsetGeneralStyle["@media (max-width: 500px)"],
-      width: "69%"
-    }
-  };
-
-  const rowWeekStyle = {
-    display: "flex",
-    justifyContent: "space-around"
-  };
-
-  const buttonStyle = {
-    width: 135,
-    margin: "0 10px",
-    "@media (max-width: 500px)": {
-      width: 95
-    }
-  };
 
   return (
     <section css={sectionStyle}>

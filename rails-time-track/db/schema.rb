@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_31_161326) do
+ActiveRecord::Schema.define(version: 2019_08_05_211420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2019_07_31_161326) do
     t.string "token"
     t.string "reset_digest"
     t.string "reset_created_at"
+    t.boolean "isActive", default: true
     t.index ["token"], name: "index_users_on_token"
   end
 

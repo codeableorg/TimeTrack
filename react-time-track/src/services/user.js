@@ -15,20 +15,37 @@ async function userList() {
   if (!userList.ok) {
     const { errors } = await userList.json();
     console.log(errors);
-    throw new Error(errors);
+    throw new Error(errors.message);
   }
 
   return userList.json();
 }
 
-async function createUser(userData) {
-  const response = await fetch(API_USERS, {
+async function userListAvailableTime(params) {
+  const userListTime = await fetch(`${API_USERS}/availableTime`, {
     method: "POST",
     credentials: "include",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(userData)
+    body: JSON.stringify(params)
+  });
+
+  if (!userListTime.ok) {
+    const { errors } = await userListTime.json();
+    throw new Error(errors.message);
+  }
+
+  return userListTime.json();
+}
+
+async function getUser(userId) {
+  const response = await fetch(`${API_USERS}/${userId}`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    }
   });
 
   if (!response.ok) {
@@ -56,13 +73,14 @@ async function getUserProjects(user_id) {
   return response.json();
 }
 
-async function getUser(userId) {
-  const response = await fetch(`${API_USERS}/${userId}`, {
-    method: "GET",
+async function createUser(userData) {
+  const response = await fetch(API_USERS, {
+    method: "POST",
     credentials: "include",
     headers: {
       "Content-Type": "application/json"
-    }
+    },
+    body: JSON.stringify(userData)
   });
 
   if (!response.ok) {
@@ -91,30 +109,30 @@ async function editUser(userId, userData) {
   return response.json();
 }
 
-async function userListAvailableTime(params) {
-  const userListTime = await fetch(`${API_USERS}/availableTime`, {
-    method: "POST",
+async function editUserState(userId, isActive) {
+  const response = await fetch(`${API_USERS}/${userId}/updateState`, {
+    method: "PUT",
     credentials: "include",
     headers: {
-      "Content-Type": "application/json"
+      "Content-type": "application/json"
     },
-    body: JSON.stringify(params)
+    body: JSON.stringify({ isActive: isActive })
   });
 
-  if (!userListTime.ok) {
-    const { errors } = await userListTime.json();
-    console.log(errors);
+  if (!response.ok) {
+    const { errors } = await response.json();
     throw new Error(errors.message);
   }
 
-  return userListTime.json();
+  return response.json();
 }
 
 export {
   userList,
-  createUser,
-  getUserProjects,
+  userListAvailableTime,
   getUser,
+  getUserProjects,
+  createUser,
   editUser,
-  userListAvailableTime
+  editUserState
 };
