@@ -20,12 +20,12 @@ function dateToString(date) {
   );
 }
 /**
- * function workingDays(firstDate, lastDate)
+ * function calculateWorkDays(firstDate, lastDate)
  * Calculates all the work days between two provided dates. The dates can be on string format "2019-02-19" or as a date object.
  * @param {string||object} firstDate
  * @param {string||object} lastDate
  */
-function workingDays(firstDate, lastDate) {
+function calculateWorkDays(firstDate, lastDate) {
   const startDate = parseDate(firstDate);
   const endDate = parseDate(lastDate);
 
@@ -68,6 +68,5 @@ function workingDays(firstDate, lastDate) {
 */
   return days;
 }
-
-// module.exports = workingDays;
-export default workingDays;
+// module.exports = calculateWorkDays;
+export default calculateWorkDays;

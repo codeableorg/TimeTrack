@@ -9,7 +9,7 @@ import CloseProjectModal from "../components/close-project-modal";
 import { getProjectDetail, closeProject } from "../services/project";
 import { getWeeklyReport } from "../services/weekly_report";
 
-import Modal from "../components/modal";
+// import Modal from "../components/modal";
 import CloseProjectModal from "../components/close-project-modal";
 import calculateProgress from "../utils/calculateProgress";
 import calculateStatus from "../utils/calculateStatus";
@@ -177,7 +177,6 @@ function Project({ project_id }) {
         }}
       >
         {project.members.map(member => {
-          // console.log("Member:", member);
           return (
             <Card styles={card} key={member.id}>
               <Link
