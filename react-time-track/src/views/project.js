@@ -9,27 +9,9 @@ import CloseProjectModal from "../components/close-project-modal";
 import { getProjectDetail, closeProject } from "../services/project";
 import { getWeeklyReport } from "../services/weekly_report";
 
-// import Modal from "../components/modal";
 import CloseProjectModal from "../components/close-project-modal";
 import calculateProgress from "../utils/calculateProgress";
 import calculateStatus from "../utils/calculateStatus";
-
-// const weeklyData = [
-//   {
-//     id: 1,
-//     project_id: 1,
-//     week: "28",
-//     estimated_cost: 96600,
-//     real_cost: 117000
-//   },
-//   {
-//     id: 2,
-//     project_id: 1,
-//     week: "29",
-//     estimated_cost: 96600,
-//     real_cost: 117000
-//   }
-// ];
 
 const card = {
   display: "flex",
