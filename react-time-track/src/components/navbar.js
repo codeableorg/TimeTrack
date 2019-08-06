@@ -63,10 +63,12 @@ function NavBar({ navBarActive, togleNavBar }) {
           alignItems: "center"
         }}
       >
-        <span>Timer Tracker</span>
+        <span>Time Tracker</span>
         <span
+          role="button"
           css={{
             display: "flex",
+            cursor: "pointer",
             "@media (min-width: 960px)": {
               visibility: "hidden"
             }
