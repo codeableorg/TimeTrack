@@ -8,7 +8,9 @@ import { Section } from "../components/helpers";
 import { listProjects } from "../services/project";
 
 import calculateProgress from "../utils/calculateProgress";
-import calculateRisk from "../utils/calculateRisk";
+// import calculateRisk from "../utils/calculateRisk";
+import calculateStatus from "../utils/calculateStatus";
+// import calculateWorkDays from "../utils/calculateWorkDays";
 import { UserContext } from "../contexts/user";
 
 const card = {
@@ -26,7 +28,7 @@ function ListProjects() {
       .then(list => setProjects(list))
       .catch(response => logged.onLogout());
   }, []);
-
+  // Observe calculateRisk and consider
   return (
     <main>
       <Section role="list">
@@ -36,7 +38,16 @@ function ListProjects() {
               <Link to={`/projects/${project.id}`}>
                 <span>{project.name}</span>
               </Link>
-              <Circle styles={calculateRisk(project.weekly)}>
+              {/* <Circle styles={calculateRisk(project.weekly)}> */}
+              <Circle
+                styles={calculateStatus(
+                  project.start_date,
+                  project.end_date,
+                  project.real_cost,
+                  project.estimated_cost
+                )}
+              >
+                {/* {console.log("Data in weekly:", project.weekly)} */}
                 {calculateProgress(project.real_cost, project.estimated_cost)}
               </Circle>
             </Card>
