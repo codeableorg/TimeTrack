@@ -8,7 +8,7 @@ const testData = [
     projectEstimatedCost: "772800"
   },
   {
-    projectStartDate: "2019-09-02",
+    projectStartDate: "2019-08-06",
     projectEndDate: "2019-09-02",
     projectRealCost: "0",
     projectEstimatedCost: "772800"

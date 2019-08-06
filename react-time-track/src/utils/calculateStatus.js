@@ -1,9 +1,8 @@
 import calculateWorkDays from "./calculateWorkDays";
-
 // const calculateWorkDays = require("./calculateWorkDays");
 
 /**
- * function projectStatus(projectStartDate, projectEndDate, projectRealCost, projectEstimatedCost),
+ * function calculateStatus(projectStartDate, projectEndDate, projectRealCost, projectEstimatedCost),
  * Sets the color whenever the project is above, according or below estimated costs, taking into account the date.
  * @param {Numeric} projectStartDate
  * @param {Numeric} projectEndDate
@@ -11,24 +10,18 @@ import calculateWorkDays from "./calculateWorkDays";
  * @param {Numeric} projectEstimatedCost
  */
 
-function projectStatus(
+function calculateStatus(
   projectStartDate,
   projectEndDate,
   projectRealCost,
   projectEstimatedCost
 ) {
-  // console.log("projectStartDate:", projectStartDate);
-  // console.log("type projectStartDate:", typeof projectStartDate);
-  // console.log("projectEndDate:", projectEndDate);
-  // console.log("type projectEndDate:", typeof projectEndDate);
   let riskValue = [];
   const red = { borderColor: "#f24636" };
   const ambar = { borderColor: "#fec235" };
   const green = { borderColor: "#52af50" };
 
   const currentDate = new Date();
-  // console.log("currentDate:", currentDate);
-  // console.log("type currentDate:", typeof currentDate);
   const progress =
     calculateWorkDays(projectStartDate, currentDate) /
     calculateWorkDays(projectStartDate, projectEndDate);
@@ -56,15 +49,22 @@ function projectStatus(
   else if (colorizer < 0.9) riskValue = green;
   return riskValue;
 }
-
-// console.log(
-//   "First individual project color: ",
-//   projectStatus("2019-07-08", "2019-09-02", 74400, 198400)
-// );
-
-// console.log(
-//   "Second individual project color: ",
-//   projectStatus("2019-08-06", "2019-09-06", 0, 275200)
-// );
-
-export default projectStatus;
+/*
+console.log(
+  "calculate Status 1",
+  calculateStatus("2019-07-08", "2019-09-02", 234000, 772800)
+);
+console.log(
+  "calculate Status 2",
+  calculateStatus("2019-08-06", "2019-09-02", 0, 772800)
+);
+console.log(
+  "calculate Status 3",
+  calculateStatus(new Date(), "2019-07-02", 0, 772800)
+);
+console.log(
+  "calculate Status 4",
+  calculateStatus("2019-09-02", "2019-09-02", 0, 772800)
+);
+*/
+export default calculateStatus;
