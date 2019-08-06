@@ -12,7 +12,7 @@ import { getWeeklyReport } from "../services/weekly_report";
 import Modal from "../components/modal";
 import CloseProjectModal from "../components/close-project-modal";
 import calculateProgress from "../utils/calculateProgress";
-import calculateRisk from "../utils/calculateRisk";
+import calculateStatus from "../utils/calculateStatus";
 
 // const weeklyData = [
 //   {
@@ -71,7 +71,7 @@ function Project({ project_id }) {
       .then(response => setWeeklyData(response))
       .catch(error => console.log(error));
   }, [project]);
-  console.log("Project:", project);
+
   React.useEffect(() => {
     let acumEstimated = 0;
     let acumReal = 0;
@@ -177,7 +177,7 @@ function Project({ project_id }) {
         }}
       >
         {project.members.map(member => {
-          console.log("Member:", member);
+          // console.log("Member:", member);
           return (
             <Card styles={card} key={member.id}>
               <Link
@@ -197,7 +197,14 @@ function Project({ project_id }) {
                   <span>{member.name}</span>
                   <span css={{ fontSize: "0.8em" }}>{member.role}</span>
                 </div>
-                <Circle>
+                <Circle
+                  styles={calculateStatus(
+                    project.start_date,
+                    project.end_date,
+                    member.real_cost,
+                    member.estimated_cost
+                  )}
+                >
                   {calculateProgress(member.real_cost, member.estimated_cost)}
                 </Circle>
               </Link>
