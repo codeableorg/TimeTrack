@@ -1,5 +1,5 @@
 import React from "react";
-import { render, wait } from "@testing-library/react";
+import { render, wait, asFragment } from "@testing-library/react";
 
 import ClosedProjects from "../../components/closed-projects";
 
@@ -16,11 +16,12 @@ const closedProjects = [
 test("Testing API history", async () => {
   fetch.mockResponseOnce(JSON.stringify(closedProjects));
 
-  const { getAllByRole } = render(<ClosedProjects />);
-  let cards;
-  await wait(() => {
-    cards = getAllByRole("listitem");
-  });
+  const { asFragment, getAllByRole } = render(<ClosedProjects />);
+  // let cards;
+  // await wait(() => {
+  //   cards = getAllByRole("listitem");
+  // });
 
-  expect(cards.length).toEqual(1);
+  // expect(cards.length).toEqual(1);
+  expect(asFragment()).toMatchSnapshot();
 });
