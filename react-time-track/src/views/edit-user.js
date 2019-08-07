@@ -26,7 +26,7 @@ function EditUser({ user_id }) {
     e.preventDefault();
     editUser(user_id, user)
       .then(response => {
-        alert.success(`User ${user.name} was updated successfully`);
+        alert.success(`User ${user.name} was updated`);
         navigate("/users");
       })
       .catch(response => {

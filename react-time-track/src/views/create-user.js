@@ -10,8 +10,9 @@ import { UserContext } from "../contexts/user";
 
 function CreateUser() {
   const logged = React.useContext(UserContext);
-  //   const [error, setError] = React.useState(null);
   const alert = useAlert();
+
+  const [error, setError] = React.useState(null);
   const [user, setUser] = React.useState({
     name: "",
     email: "",
@@ -32,18 +33,19 @@ function CreateUser() {
 
     createUser(userData)
       .then(response => {
-        alert.success(`User ${user.name} was created successfully`);
+        alert.success(`User ${user.name} was created`);
         navigate("/users");
       })
       .catch(response => {
         console.log(response.message);
         if (response.message === "Access denied") logged.onLogout();
+        else setError(response.message);
       });
   }
 
   return (
     <UserForm
-      initialValue={{ user, setUser }}
+      initialValue={{ user, setUser, error }}
       inputs={[
         ["name", "text"],
         ["email", "email"],

@@ -29,7 +29,10 @@ const formStyle = {
   backgroundColor: "white",
   padding: 10,
   boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.5)",
-  borderRadius: "0.5em"
+  borderRadius: "0.5em",
+  "@media (max-width: 450px)": {
+    width: "90%"
+  }
 };
 
 const fieldsetStyle = {

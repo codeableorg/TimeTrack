@@ -183,28 +183,24 @@ function UserCard({ styles, ...props }) {
   );
 }
 
-const styleInput = {
-  background: "none",
-  border: "1px solid #eaeaea",
-  borderRadius: ".25rem",
-  boxSizing: "border-box",
-  display: "block",
-  fontSize: "1rem",
-  padding: ".5rem",
-  color: "#333",
-  width: "100%",
-  "&:focus": {
-    outline: "none",
-    borderColor: "#00b7c6"
-  }
-};
-
 function UserInput({ styles, ...props }) {
   return (
     <input
       {...props}
       css={{
-        ...styleInput,
+        background: "none",
+        border: "1px solid #eaeaea",
+        borderRadius: ".25rem",
+        boxSizing: "border-box",
+        display: "block",
+        fontSize: "1rem",
+        padding: ".5rem",
+        color: "#333",
+        width: "100%",
+        "&:focus": {
+          outline: "none",
+          borderBottomColor: "black"
+        },
         ...styles
       }}
     />
@@ -254,29 +250,6 @@ function IconGenericSmall({ icon, ...props }) {
   );
 }
 
-const modalBackground = {
-	position: "fixed",
-  top: "0",
-  left: "0",
-  bottom: "0",
-  right: "0",
-  backgroundColor: "rgba(0, 0, 0, 0.5)",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center"
-};
-
-const modalContainer = {
-	position: "relative",
-	top: "10rem",
-	backgroundColor: "#ffffff",
-  height: "150px",
-  width: "50%",
-  padding: 10,
-  boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.5)",
-  borderRadius: "0.5em"
-};
-
 export {
   Button,
   Card,
@@ -289,7 +262,5 @@ export {
   Label,
   Li,
   IconGenericSmall,
-  IconUser,
-  modalBackground,
-  modalContainer
+  IconUser
 };
