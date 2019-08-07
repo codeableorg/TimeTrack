@@ -9,7 +9,6 @@ import CloseProjectModal from "../components/close-project-modal";
 import { getProjectDetail, closeProject } from "../services/project";
 import { getWeeklyReport } from "../services/weekly_report";
 
-import CloseProjectModal from "../components/close-project-modal";
 import calculateProgress from "../utils/calculateProgress";
 import calculateStatus from "../utils/calculateStatus";
 
