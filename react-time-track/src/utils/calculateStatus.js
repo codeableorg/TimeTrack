@@ -21,16 +21,13 @@ function calculateStatus(
 
   let riskValue = [];
   let currentDate = new Date();
-  console.log("Fecha actual", currentDate);
 
   if (currentDate > new Date(projectEndDate)) {
     currentDate = new Date(projectEndDate);
-    console.log("Fecha mayor a projectEndDate:", currentDate);
   }
 
   if (currentDate < new Date(projectStartDate)) {
     currentDate = new Date(projectStartDate);
-    console.log("Fecha menor a projectStartDate", currentDate);
   }
 
   const progress =
