@@ -7,6 +7,9 @@ import { Card, Circle } from "../components/ui";
 import { Section } from "../components/helpers";
 import { closedProjects } from "../services/project";
 
+import calculateStatus from "../utils/calculateStatus";
+import calculateProgress from "../utils/calculateProgress";
+
 const card = {
   display: "flex",
   justifyContent: "space-between",
@@ -33,7 +36,16 @@ function ClosedProjects() {
           return (
             <Card styles={card} key={project.id} role="listitem">
               <span>{project.name}</span>
-              <Circle>30%</Circle>
+              <Circle
+                styles={calculateStatus(
+                  project.start_date,
+                  project.end_date,
+                  project.real_cost,
+                  project.estimated_cost
+                )}
+              >
+                {calculateProgress(project.real_cost, project.estimated_cost)}
+              </Circle>
             </Card>
           );
         })}

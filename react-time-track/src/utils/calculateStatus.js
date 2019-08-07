@@ -15,12 +15,24 @@ function calculateStatus(
   projectRealCost,
   projectEstimatedCost
 ) {
-  let riskValue = [];
   const red = { borderColor: "#f24636" };
   const ambar = { borderColor: "#fec235" };
   const green = { borderColor: "#52af50" };
 
-  const currentDate = new Date();
+  let riskValue = [];
+  let currentDate = new Date();
+  console.log("Fecha actual", currentDate);
+
+  if (currentDate > new Date(projectEndDate)) {
+    currentDate = new Date(projectEndDate);
+    console.log("Fecha mayor a projectEndDate:", currentDate);
+  }
+
+  if (currentDate < new Date(projectStartDate)) {
+    currentDate = new Date(projectStartDate);
+    console.log("Fecha menor a projectStartDate", currentDate);
+  }
+
   const progress =
     calculateWorkDays(projectStartDate, currentDate) /
     calculateWorkDays(projectStartDate, projectEndDate);
