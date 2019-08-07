@@ -93,9 +93,7 @@ function Users() {
     editUserState(userId, isActive)
       .then(response => {
         alert.success(
-          `User ${userName} was ${
-            isActive ? "enabled" : "disabled"
-          } successfully`
+          `User ${userName} was ${isActive ? "enabled" : "disabled"}`
         );
         const newUsers = Array.from(users);
         const index = newUsers.findIndex(user => user.id === userId);
@@ -105,7 +103,7 @@ function Users() {
       .catch(response => {
         console.log(response.message);
         if (response.message === "Access denied") logged.onLogout();
-        else alert.error("There was a error during the transaction");
+        else alert.error("There is a problem, please try later");
       });
   }
 
@@ -121,6 +119,7 @@ function Users() {
       })
       .catch(response => {
         if (response.message === "Access denied") logged.onLogout();
+        else alert.error("There is a problem, please try later");
       });
   }, []);
 

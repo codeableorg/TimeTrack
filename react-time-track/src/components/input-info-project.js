@@ -81,7 +81,8 @@ function InputInfoProject({ nextFn }) {
       padding: "12px 8px"
     },
     "@media (max-width: 450px)": {
-      padding: "16px 8px"
+      padding: "16px 8px",
+      marginLeft: "-20px"
     }
   };
   const labelStyle = {

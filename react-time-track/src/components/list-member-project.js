@@ -62,12 +62,13 @@ function ListMemberProject({ nextFn, beforeFn }) {
     };
     createProject(bodyProject)
       .then(response => {
-        alert.success(`The project ${titleProject} was updated successfully`);
+        alert.success(`The project ${titleProject} was created`);
         sessionStorage.removeItem("InfoNewProject");
         navigate("/");
       })
       .catch(response => {
         if (response.message === "Access denied") logged.onLogout();
+        else alert.error(`There is a problem, please try later`);
       });
   }
 

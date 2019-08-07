@@ -104,17 +104,7 @@ function ProgressProjectByUser({ project_id, member_id }) {
             position: "relative"
           }}
         >
-          <canvas
-            id="myChart"
-            width="400"
-            height="400"
-            // css={{
-            //   "@media (max-width: 350px)": {
-            //     height: 500,
-            //     width: 500
-            //   }
-            // }}
-          />
+          <canvas id="myChart" width="400" height="400" />
         </div>
       </Card>
     </div>

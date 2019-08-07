@@ -48,7 +48,8 @@ RSpec.describe Api::UsersController, type: :controller do
                     "email", 
                     "name", 
                     "rate", 
-                    "role"
+                    "role",
+                    "isActive"
                 ])
             end
         end
@@ -65,7 +66,7 @@ RSpec.describe Api::UsersController, type: :controller do
         end
 
         it 'creates a new user' do
-            post :create, params: {name: 'juanito3', email: 'juanito3@gmail.com', password: "123456"}, format: 'json'
+            post :create, params: {name: 'juanito3', email: 'juanito3@gmail.com', password: "123456", role:"Analyst", rate:4000}, format: 'json'
             assert_response :success
             expected_response = JSON.parse(response.body)
             expect(expected_response["name"]).to eq('juanito3')

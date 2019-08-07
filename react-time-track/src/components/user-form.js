@@ -63,10 +63,29 @@ function UserForm({ initialValue, inputs, onSubmitFn }) {
             <option value="Manager">Manager</option>
           </select>
         </div>
-
         <div css={{ marginTop: "3em" }}>
           <Button>Save Changes</Button>
         </div>
+        {initialValue.error && (
+          <div
+            aria-label="Error messages during the creation of user"
+            css={{
+              color: "red",
+              fontWeight: "bold",
+              fontSize: "1em",
+              textAlign: "center"
+            }}
+          >
+            {initialValue.error.split("|").map(message => {
+              return (
+                <>
+                  {message}
+                  <br />
+                </>
+              );
+            })}
+          </div>
+        )}
       </form>
     </UserCard>
   );

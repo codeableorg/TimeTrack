@@ -2,6 +2,7 @@
 import React from "react";
 import { jsx } from "@emotion/core";
 import { Link, navigate } from "@reach/router";
+import { useAlert } from "react-alert";
 
 import { Card, Circle, Subtitle, Button } from "../components/ui";
 import CloseProjectModal from "../components/close-project-modal";
@@ -23,6 +24,7 @@ const card = {
 };
 
 function Project({ project_id }) {
+  const alert = useAlert();
   const logged = React.useContext(UserContext);
   const [project, setProject] = React.useState({ members: [] });
   const [weeklyData, setWeeklyData] = React.useState([]);
@@ -36,12 +38,14 @@ function Project({ project_id }) {
   function onCloseProject() {
     closeProject(project_id)
       .then(response => {
+        alert.success(`The project ${project.name} were closed`);
         toggleModal();
         navigate("/history");
       })
       .catch(response => {
         console.log(response);
         if (response.message === "Access denied") logged.onLogout();
+        else alert.error(`There is a problem, please try later`);
       });
   }
 

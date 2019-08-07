@@ -3,7 +3,6 @@ import React from "react";
 import { jsx } from "@emotion/core";
 
 import { Subtitle, Button } from "../components/ui";
-import { getProjectMember } from "../services/project_member";
 import { listUserProjects } from "../services/project";
 import { createDailyLog } from "../services/daily_log";
 import { UserContext } from "../contexts/user";
@@ -24,14 +23,22 @@ const calendarDate = `${year}-${month}-${day}`;
 const hours = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
 function DailyLog() {
-  const currentUser = React.useContext(UserContext).data;
+  const alert = useAlert();
+  const logged = React.useContext(UserContext);
+  const currentUser = logged.data;
+
   const [selects, setSelects] = React.useState({});
   const [total, setTotal] = React.useState(0);
   const [projects, setProjects] = React.useState([]);
-  const alert = useAlert();
 
   React.useEffect(() => {
-    listUserProjects().then(response => setProjects(response));
+    listUserProjects()
+      .then(response => setProjects(response))
+      .catch(response => {
+        console.log(response.message);
+        if (response.message === "Access denied") logged.onLogout();
+        else alert.error(response.message);
+      });
   }, []);
 
   async function handleSubmit(event) {
@@ -91,7 +98,7 @@ function DailyLog() {
           margin: "1em"
         }}
       >
-        <label htmlFor="calendar">Chose a date</label>
+        <label htmlFor="calendar">Choose a date</label>
         <input id="calendar" type="date" defaultValue={calendarDate} />
       </div>
       <Subtitle>My projects</Subtitle>
