@@ -3,7 +3,6 @@ class ProjectSerializer < ActiveModel::Serializer
 
   def members
     self.object.users.select("users.id, users.name, users.role, project_members.estimated_cost, project_members.real_cost")
-    
   end
 
   def weekly

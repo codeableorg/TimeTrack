@@ -8,6 +8,7 @@ import calculateWorkDays from "./calculateWorkDays";
  * @param {Numeric} projectRealCost
  * @param {Numeric} projectEstimatedCost
  */
+
 const red = { borderColor: "#f24636" };
 const ambar = { borderColor: "#fec235" };
 const green = { borderColor: "#52af50" };
