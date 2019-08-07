@@ -55,8 +55,20 @@ function ListUserProjects({ userId }) {
                 styles={calculateStatus(
                   project.start_date,
                   project.end_date,
-                  project.user_detail[0].real_cost,
-                  project.user_detail[0].estimated_cost
+                  userId === undefined
+                    ? project.user_detail[0].real_cost
+                    : filterResult(
+                        project.members,
+                        parseInt(userId),
+                        "real_cost"
+                      ),
+                  userId === undefined
+                    ? project.user_detail[0].estimated_cost
+                    : filterResult(
+                        project.members,
+                        parseInt(userId),
+                        "estimated_cost"
+                      )
                 )}
               >
                 {calculateProgress(
