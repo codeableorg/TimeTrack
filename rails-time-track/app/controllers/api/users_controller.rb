@@ -36,7 +36,7 @@ module Api
     end
     
     def available_time
-      render json: User.all, each_serializer: UserAvailableTimeSerializer, option_name: params
+      render json: User.where(isActive: true), each_serializer: UserAvailableTimeSerializer, option_name: params
     end
 
     rescue_from ActiveRecord::RecordNotFound do |e|
