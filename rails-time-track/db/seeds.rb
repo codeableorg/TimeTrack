@@ -124,7 +124,7 @@ require 'faker'
     start_date: "2019-05-13",
     end_date: "2019-07-07",
     closed: true,
-    estimated_cost: 1000000,
+    estimated_cost: 665600,
     real_cost: 0
   )
 
@@ -132,10 +132,10 @@ require 'faker'
     name: "Proyecto Cerrado 2",
     client: "Ministerio Produccion",
     category: "Category 3",
-    start_date: "2019-05-27",
+    start_date: "2019-05-13",
     end_date: "2019-07-07",
     closed: true,
-    estimated_cost: 900000,
+    estimated_cost: 940800,
     real_cost: 0
   )
 
@@ -286,6 +286,48 @@ require 'faker'
     real_cost: 0
   )
 
+  projectMember6_1 = ProjectMember.create(
+    user:owner,
+    project:closed_project1,
+    estimated_cost: 198400,
+    real_cost: 0
+  )
+
+  projectMember6_2 = ProjectMember.create(
+    user:manager1,
+    project:closed_project1,
+    estimated_cost: 275200,
+    real_cost: 0
+  )
+
+  projectMember6_3 = ProjectMember.create(
+    user:analyst1,
+    project:closed_project1,
+    estimated_cost: 192000,
+    real_cost: 0
+  )
+
+  projectMember7_1 = ProjectMember.create(
+    user:owner,
+    project:closed_project2,
+    estimated_cost: 297600,
+    real_cost: 0
+  )
+
+  projectMember7_2 = ProjectMember.create(
+    user:manager2,
+    project:closed_project2,
+    estimated_cost: 432000,
+    real_cost: 0
+  )
+
+  projectMember7_3 = ProjectMember.create(
+    user:analyst2,
+    project:closed_project2,
+    estimated_cost: 211200,
+    real_cost: 0
+  )
+
   (Project.where(closed: false).each{|project| 
     start = Date.parse(project.start_date.to_s)
     finish = Date.parse(project.end_date.to_s)
@@ -299,14 +341,33 @@ require 'faker'
           DailyLog.create(
             project_member: member,
             date: day.to_s,
-            amount: (member.estimated_cost / duration * rand(0.5..1.6)).to_i
+            amount: (member.estimated_cost / duration * rand(0.75..1.75)).to_i
           )
         end
       }
     }
   })
 
-  Project.where(closed: false).each{|project| 
+  (Project.where(closed: true).each{|project| 
+    start = Date.parse(project.start_date.to_s)
+    finish = Date.parse(project.end_date.to_s)
+    duration = 0
+    (start..finish).each{|day| duration += 1 if (![6,7].include?(day.cwday))}
+    
+    project.project_members.each{|member|
+      (start..finish).each { |day| 
+        if ![6,7].include?(day.cwday)
+          DailyLog.create(
+            project_member: member,
+            date: day.to_s,
+            amount: (member.estimated_cost / duration * rand(0.75..1.75)).to_i
+          )
+        end
+      }
+    }
+  })
+
+  Project.all.each{|project| 
     s = Date.parse(project.start_date.to_s)
     e = Date.parse(project.end_date.to_s)
     duration = (e - s).to_i / 7
@@ -326,7 +387,7 @@ require 'faker'
     }
   }
 
-  Project.where(closed: false).each{|project|
+  Project.all.each{|project|
     project_cost = 0
     project.project_members.each{|project_member|
       real_cost = project_member.daily_logs.reduce(0){|acum, daily| acum + daily.amount }
@@ -340,7 +401,7 @@ require 'faker'
   }
 
   ##User Report
-  Project.where(closed: false).each{|project| 
+  Project.all.each{|project| 
     s = Date.parse(project.start_date.to_s)
     e = Date.parse(project.end_date.to_s)
     duration = (e - s).to_i / 7
