@@ -1,11 +1,11 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import { Link } from "@reach/router";
 
 import { Card, Circle } from "./ui";
 import { Section } from "./helpers";
 import { listUserProjects } from "../services/project";
+import { getUserProjects } from "../services/user";
 
 import calculateProgress from "../utils/calculateProgress";
 import calculateRisk from "../utils/calculateRisk";
@@ -17,12 +17,16 @@ const card = {
   alignItems: "center"
 };
 
-function ListUserProjects() {
+function ListUserProjects({ userId }) {
   const [userProjects, setUserProjects] = React.useState([]);
   const logged = React.useContext(UserContext);
 
   React.useEffect(() => {
-    listUserProjects()
+    let listProjects = null;
+    if (userId) listProjects = getUserProjects(userId);
+    else listProjects = listUserProjects();
+
+    listProjects
       .then(list => setUserProjects(list))
       .catch(response => {
         if (response.message === "Access denied") logged.onLogout();
@@ -35,9 +39,7 @@ function ListUserProjects() {
         {userProjects.map(project => {
           return (
             <Card styles={card} key={project.id} role="listitem">
-              <Link to="#">
-                <span>{project.name}</span>
-              </Link>
+              <span>{project.name}</span>
               <Circle styles={calculateRisk(project.weekly)}>
                 {calculateProgress(
                   project.user_detail[0].real_cost,
