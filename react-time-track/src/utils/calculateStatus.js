@@ -9,6 +9,10 @@ import calculateWorkDays from "./calculateWorkDays";
  * @param {Numeric} projectEstimatedCost
  */
 
+const red = { borderColor: "#f24636" };
+const ambar = { borderColor: "#fec235" };
+const green = { borderColor: "#52af50" };
+
 function calculateStatus(
   projectStartDate,
   projectEndDate,
@@ -16,11 +20,16 @@ function calculateStatus(
   projectEstimatedCost
 ) {
   let riskValue = [];
-  const red = { borderColor: "#f24636" };
-  const ambar = { borderColor: "#fec235" };
-  const green = { borderColor: "#52af50" };
+  let currentDate = new Date();
 
-  const currentDate = new Date();
+  if (currentDate > new Date(projectEndDate)) {
+    currentDate = new Date(projectEndDate);
+  }
+
+  if (currentDate < new Date(projectStartDate)) {
+    currentDate = new Date(projectStartDate);
+  }
+
   const progress =
     calculateWorkDays(projectStartDate, currentDate) /
     calculateWorkDays(projectStartDate, projectEndDate);
