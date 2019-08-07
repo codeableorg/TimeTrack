@@ -7,6 +7,7 @@ import { getProjectMember } from "../services/project_member";
 import { listUserProjects } from "../services/project";
 import { createDailyLog } from "../services/daily_log";
 import { UserContext } from "../contexts/user";
+import { useAlert } from "react-alert";
 
 const currentDate = new Date();
 const year = currentDate.getFullYear();
@@ -27,6 +28,7 @@ function DailyLog() {
   const [selects, setSelects] = React.useState({});
   const [total, setTotal] = React.useState(0);
   const [projects, setProjects] = React.useState([]);
+  const alert = useAlert();
 
   React.useEffect(() => {
     listUserProjects().then(response => setProjects(response));
@@ -35,27 +37,28 @@ function DailyLog() {
   async function handleSubmit(event) {
     event.preventDefault();
     event.target.reset();
-    const selects = Array.from(event.target.elements);
 
-    let dailyData = {};
-    const projectMembers = [];
-    for (let i = 0; i < projects.length; i++) {
-      const projectMember = await getProjectMember(
-        currentUser.id,
-        projects[i].id
-      );
-      projectMembers.push(projectMember[0]);
-    }
+    let dailyData = [];
 
-    for (let i = 0; i < projects.length; i++) {
-      const hours = selects.find(e => +e.name === projects[i].id).value;
-      dailyData = {
-        project_member_id: projectMembers[i].id,
+    projects.forEach(project => {
+      const hours = selects[project.id];
+      const data = {
+        project_id: project.id,
+        user_id: currentUser.id,
         date: calendarDate,
         amount: Math.round((+hours / total) * currentUser.rate) || 0
       };
-      await createDailyLog(dailyData);
-    }
+      dailyData.push(data);
+    });
+
+    createDailyLog({ data: dailyData })
+      .then(response => {
+        alert.success(`Daily Log saved`);
+      })
+      .catch(response => {
+        alert.error(response.message);
+      });
+    setSelects({});
   }
 
   function handleSelectChange(event) {
@@ -70,6 +73,7 @@ function DailyLog() {
       Object.values(selects).reduce((acum, current) => acum + +current, 0)
     );
   }, [selects]);
+
   return (
     <form
       onSubmit={handleSubmit}
