@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`testing api 1`] = `
+<DocumentFragment>
+  <main>
+    <section
+      class="css-10oyw64-Section"
+      role="list"
+    />
+  </main>
+</DocumentFragment>
+`;

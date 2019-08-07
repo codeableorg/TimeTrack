@@ -1,5 +1,5 @@
 import React from "react";
-import { render, wait } from "@testing-library/react";
+import { render, wait, asFragment } from "@testing-library/react";
 
 import ListProjects from "../../components/list-projects";
 import { UserProvider, UserContext } from "../../contexts/user";
@@ -31,16 +31,18 @@ test("testing api", async () => {
     rate: 4300
   };
   localStorage.setItem("user", JSON.stringify(user));
-  const { getAllByRole } = render(
+  const { asFragment, getAllByRole } = render(
     <UserProvider>
       <UserContext.Consumer>{logged => <ListProjects />}</UserContext.Consumer>
     </UserProvider>
   );
 
-  let cards;
-  await wait(() => {
-    cards = getAllByRole("list");
-  });
+  expect(asFragment()).toMatchSnapshot();
 
-  expect(cards.length).toEqual(1);
+  // let cards;
+  // await wait(() => {
+  //   cards = getAllByRole("list");
+  // });
+
+  // expect(cards.length).toEqual(1);
 });
