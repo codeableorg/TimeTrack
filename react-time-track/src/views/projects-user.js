@@ -16,8 +16,8 @@ const card = {
   }
 };
 
-function ProjectsByUser({ user_id }) {
-  const [user, setUser] = React.useState({ name: "", role: "" });
+function ProjectsByUser({ member_id }) {
+  const [user, setUser] = React.useState({ id: member_id, name: "", role: "" });
 
   React.useEffect(() => {
     if (!sessionStorage.getItem("ProjectMember")) navigate("/members");
@@ -48,7 +48,7 @@ function ProjectsByUser({ user_id }) {
           </div>
         </div>
       </div>
-      <ListUserProjects userId={user_id} />
+      <ListUserProjects user={user} />
     </>
   );
 }

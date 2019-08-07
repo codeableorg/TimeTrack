@@ -1,6 +1,6 @@
 module Api
   class Api::UsersController < ApplicationController
-    before_action :set_user, only: [:show, :update, :updateState]
+    before_action :set_user, only: [:show, :update, :update_state]
 
     def index
       render json: User.all
@@ -27,7 +27,7 @@ module Api
       end
     end
 
-    def updateState
+    def update_state
       if @user.update(isActive:params[:isActive])
         render json: @user, status: :ok
       else
@@ -35,7 +35,7 @@ module Api
       end
     end
     
-    def availableTime
+    def available_time
       render json: User.all, each_serializer: UserAvailableTimeSerializer, option_name: params
     end
 

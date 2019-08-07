@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2019_08_06_214643) do
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["project_member_id"], name: "index_daily_logs_on_project_members_id"
+    t.index ["project_member_id"], name: "index_daily_logs_on_project_member_id"
   end
 
   create_table "project_members", force: :cascade do |t|

@@ -26,17 +26,18 @@ module Api
     end
 
     def create
-      project = Project.new(name: params[:name],
+      project = Project.new(
+                            name: params[:name],
                             client: params[:client],
                             category: params[:category],
                             start_date: params[:start_date],
                             end_date: params[:end_date],
                             estimated_cost: params[:estimated_cost],
                             real_cost: 0,
-                            closed: false,)
+                            closed: false
+                          )
       if project.save
         if params[:members].all? do |member|
-          p member.to_s
           newMember = ProjectMember.new(
                                         user_id: member[:user_id],
                                         estimated_cost: member[:estimated_cost],
@@ -56,10 +57,6 @@ module Api
       end
     end
 
-    rescue_from ActiveRecord::RecordNotFound do |e|
-      render_errors(e.message, :not_found)
-    end
-
     def update
       if @project.update(project_params)
         render json: @project, status: :ok
@@ -77,6 +74,10 @@ module Api
       end
     end
 
+    rescue_from ActiveRecord::RecordNotFound do |e|
+      render_errors(e.message, :not_found)
+    end
+
     private    
     def set_project
       @project = Project.find(params[:id])
@@ -89,7 +90,7 @@ module Api
                                           :start_date,
                                           :end_date,
                                           :estimated_cost], 
-                                      members: [:user_id, :estimated_cost])
+                                        members: [:user_id, :estimated_cost])
     end
   end
 end

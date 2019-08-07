@@ -31,7 +31,7 @@ module Api
     end
 
     rescue_from ActiveRecord::RecordNotFound do |e|
-      render json: { message: e.message }, status: :not_found
+      render_errors(e.message, :not_found)
     end
   
   end

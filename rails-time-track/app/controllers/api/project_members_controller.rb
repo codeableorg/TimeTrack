@@ -1,6 +1,8 @@
 module Api
   class Api::ProjectMembersController < ApplicationController
 
+    before_action :set_project_member_report, only: [:report_detail]
+
     def index
       if params[:user_id] && params[:project_id]
         user = User.find(params[:user_id])
@@ -10,9 +12,21 @@ module Api
         render json: ProjectMember.all
       end
     end
+
+    def report_detail
+      render json: @project_member_report, serializer: ProjectMemberReportSerializer
+    end
     
     rescue_from ActiveRecord::RecordNotFound do |e|
-      render json: { message: e.message }, status: :not_found
+      render_errors(e.message, :not_found)
+    end
+
+    private    
+    def set_project_member_report
+      @project_member_report = ProjectMember.find_by(
+                                                      project_id: params[:project_id],
+                                                      user_id:params[:user_id]
+                                                    )
     end
   
   end
