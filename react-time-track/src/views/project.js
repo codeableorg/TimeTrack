@@ -9,6 +9,9 @@ import CloseProjectModal from "../components/close-project-modal";
 import { getProjectDetail, closeProject } from "../services/project";
 import { getWeeklyReport } from "../services/weekly_report";
 
+import calculateProgress from "../utils/calculateProgress";
+import calculateStatus from "../utils/calculateStatus";
+
 const card = {
   display: "flex",
   justifyContent: "space-between",
@@ -174,7 +177,16 @@ function Project({ project_id }) {
                   <span>{member.name}</span>
                   <span css={{ fontSize: "0.8em" }}>{member.role}</span>
                 </div>
-                <Circle>30%</Circle>
+                <Circle
+                  styles={calculateStatus(
+                    project.start_date,
+                    project.end_date,
+                    member.real_cost,
+                    member.estimated_cost
+                  )}
+                >
+                  {calculateProgress(member.real_cost, member.estimated_cost)}
+                </Circle>
               </Link>
             </Card>
             //

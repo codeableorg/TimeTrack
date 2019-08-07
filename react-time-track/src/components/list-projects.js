@@ -6,10 +6,9 @@ import { Link } from "@reach/router";
 import { Card, Circle } from "../components/ui";
 import { Section } from "../components/helpers";
 import { listProjects } from "../services/project";
-
-import calculateProgress from "../utils/calculateProgress";
-import calculateRisk from "../utils/calculateRisk";
 import { UserContext } from "../contexts/user";
+import calculateProgress from "../utils/calculateProgress";
+import calculateStatus from "../utils/calculateStatus";
 
 const card = {
   display: "flex",
@@ -26,7 +25,6 @@ function ListProjects() {
       .then(list => setProjects(list))
       .catch(response => logged.onLogout());
   }, []);
-
   return (
     <main>
       <Section role="list">
@@ -36,7 +34,14 @@ function ListProjects() {
               <Link to={`/projects/${project.id}`}>
                 <span>{project.name}</span>
               </Link>
-              <Circle styles={calculateRisk(project.weekly)}>
+              <Circle
+                styles={calculateStatus(
+                  project.start_date,
+                  project.end_date,
+                  project.real_cost,
+                  project.estimated_cost
+                )}
+              >
                 {calculateProgress(project.real_cost, project.estimated_cost)}
               </Circle>
             </Card>
