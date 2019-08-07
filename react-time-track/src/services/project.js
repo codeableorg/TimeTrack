@@ -2,7 +2,7 @@ import { apiUrl } from "../util";
 
 const API_ALL_PROJECTS = `${apiUrl}projects`;
 const API_CLOSED_PROJECTS = `${apiUrl}histories`;
-const API_MY_PROJECTS = `${apiUrl}projects/my-projects`;
+const API_MY_PROJECTS = `${apiUrl}projects/my_projects`;
 
 async function listProjects() {
   const response = await fetch(API_ALL_PROJECTS, {
@@ -70,7 +70,7 @@ async function closeProject(projectId) {
   if (!response.ok) {
     const { errors } = await response.json();
     console.log(errors);
-    throw new Error(errors);
+    throw new Error(errors.message);
   }
 
   return response.json();

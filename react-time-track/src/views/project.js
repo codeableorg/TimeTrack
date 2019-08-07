@@ -2,12 +2,13 @@
 import React from "react";
 import { jsx } from "@emotion/core";
 import { Link, navigate } from "@reach/router";
-import Chart from "chart.js";
 
 import { Card, Circle, Subtitle, Button } from "../components/ui";
 import CloseProjectModal from "../components/close-project-modal";
 import { getProjectDetail, closeProject } from "../services/project";
 import { getWeeklyReport } from "../services/weekly_report";
+import progressChart from "../utils/progress-chart";
+import { UserContext } from "../contexts/user";
 
 import calculateProgress from "../utils/calculateProgress";
 import calculateStatus from "../utils/calculateStatus";
@@ -22,6 +23,7 @@ const card = {
 };
 
 function Project({ project_id }) {
+  const logged = React.useContext(UserContext);
   const [project, setProject] = React.useState({ members: [] });
   const [weeklyData, setWeeklyData] = React.useState([]);
 
@@ -37,20 +39,34 @@ function Project({ project_id }) {
         toggleModal();
         navigate("/history");
       })
-      .catch(error => console.log(error));
+      .catch(response => {
+        console.log(response);
+        if (response.message === "Access denied") logged.onLogout();
+      });
+  }
+
+  function handleClick(user) {
+    sessionStorage.setItem("ProjectMember", JSON.stringify(user));
+    sessionStorage.setItem("ProjectTitle", project.name);
   }
 
   React.useEffect(() => {
     getProjectDetail(project_id)
       .then(response => setProject(response))
-      .catch(error => console.log(error));
+      .catch(response => {
+        console.log(response);
+        if (response.message === "Access denied") logged.onLogout();
+      });
   }, []);
 
   React.useEffect(() => {
     if (project.members.length === 0) return;
     getWeeklyReport(project_id)
       .then(response => setWeeklyData(response))
-      .catch(error => console.log(error));
+      .catch(response => {
+        console.log(response);
+        if (response.message === "Access denied") logged.onLogout();
+      });
   }, [project]);
 
   React.useEffect(() => {
@@ -67,69 +83,12 @@ function Project({ project_id }) {
       return (acumReal / project.estimated_cost) * 100;
     });
 
-    const ctx = document.getElementById("myChart");
-    const myChart = new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: weeksLabels,
-        datasets: [
-          {
-            label: "Estimated Cost",
-            data: estimated_cost,
-            backgroundColor: "red",
-            borderColor: "red",
-            fill: false
-          },
-          {
-            label: "Real Cost",
-            data: real_cost,
-            backgroundColor: "blue",
-            borderColor: "blue",
-            fill: false
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        title: {
-          display: true,
-          text: project.name
-        },
-        tooltips: {
-          mode: "index",
-          intersect: false
-        },
-        hover: {
-          mode: "nearest",
-          intersect: true
-        },
-        scales: {
-          xAxes: [
-            {
-              display: true,
-              scaleLabel: {
-                display: true,
-                labelString: "Week"
-              }
-            }
-          ],
-          yAxes: [
-            {
-              display: true,
-              scaleLabel: {
-                display: true,
-                labelString: "%Consume budget"
-              },
-              ticks: {
-                suggestedMin: 0,
-                suggestedMax: 100
-              }
-            }
-          ]
-        }
-      }
+    const myChart = progressChart("myChart", weeksLabels, {
+      graphic_estimated: estimated_cost,
+      graphic_real: real_cost,
+      title: project.name
     });
-  });
+  }, [weeklyData]);
 
   return (
     <div
@@ -165,7 +124,8 @@ function Project({ project_id }) {
                   display: "flex",
                   width: "100%"
                 }}
-                to={`/projects/${project_id}/users/${member.id}`}
+                to={`/projects/${project_id}/members/${member.id}`}
+                onClick={() => handleClick(member)}
               >
                 <div
                   css={{

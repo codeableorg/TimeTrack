@@ -30,14 +30,14 @@ function App() {
         <Redirect from="/login" to="/" noThrow />
       ) : (
         window.location.pathname !== "/login" &&
-        window.location.pathname.indexOf("/reset-password") === -1 &&
+        window.location.pathname.indexOf("/reset_password") === -1 &&
         window.location.pathname !== "/forgot-password" && (
           <Redirect from={window.location.pathname} to="/login" noThrow />
         )
       )}
       <Login path="/login" />
       <ForgotPassword path="/forgot-password" />
-      <ResetPassword path="/reset-password/:token" />
+      <ResetPassword path="/reset_password/:token" />
       <Home path="/">
         <MyStatus
           path={
@@ -47,10 +47,11 @@ function App() {
         <AllProjects path="/" />
         <History path="/history" />
         <UserList path="/members" />
-        <ProjectsByUser path="/members/:user_id" />
+        <ProjectsByUser path="/members/:member_id" />
         <Project path="/projects/:project_id" />
-        <ProgressProjectUser path="/projects/:project_id/users/:user_id" />
-        <ProgressProjectUser path="/users/:user_id/projects/:project_id" />
+        <ProgressProjectUser path="/projects/:project_id/members/:member_id" />
+        <ProgressProjectUser path="/members/:member_id/projects/:project_id" />
+        <ProgressProjectUser path="/mystatus/projects/:project_id" />
         <CreateProject path="/create-project" />
         <DailyLog path="/daily-log" />
         <Users path="/users" />

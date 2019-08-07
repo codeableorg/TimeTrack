@@ -75,12 +75,16 @@ function Home({ children }) {
           <Header title="Members Status" path="/members/:user_id" />
           <Header title="Project" path="/projects/:id" />
           <Header
-            tittle="Specific Status"
-            path="/projects/:project_id/users/:user_id"
+            title="Specific Status"
+            path="/projects/:project_id/members/:member_id"
           />
           <Header
-            tittle="Specific Status"
-            path="/users/:user_id/projects/:project_id"
+            title="Specific Status"
+            path="/members/:member_id/projects/:project_id"
+          />
+          <Header
+            title="Specific Status"
+            path="/mystatus/projects/:project_id"
           />
           <Header title="Create Project" path="/create-project" />
           <Header title="Daily Log" path="/daily-log" />

@@ -22,7 +22,7 @@ async function userList() {
 }
 
 async function userListAvailableTime(params) {
-  const userListTime = await fetch(`${API_USERS}/availableTime`, {
+  const userListTime = await fetch(`${API_USERS}/available_time`, {
     method: "POST",
     credentials: "include",
     headers: {
@@ -110,7 +110,7 @@ async function editUser(userId, userData) {
 }
 
 async function editUserState(userId, isActive) {
-  const response = await fetch(`${API_USERS}/${userId}/updateState`, {
+  const response = await fetch(`${API_USERS}/${userId}/update_state`, {
     method: "PUT",
     credentials: "include",
     headers: {
