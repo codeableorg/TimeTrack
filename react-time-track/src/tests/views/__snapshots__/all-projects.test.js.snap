@@ -14,15 +14,6 @@ exports[`Render all projects 1`] = `
         role="list"
       />
     </main>
-    <div
-      class="css-1dbpol2-Center"
-    >
-      <button
-        class="css-r8lshn-Button"
-      >
-        New Project
-      </button>
-    </div>
   </div>
 </DocumentFragment>
 `;

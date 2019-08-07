@@ -119,6 +119,7 @@ function Users() {
       })
       .catch(response => {
         if (response.message === "Access denied") logged.onLogout();
+        else alert.error("There is a problem, please try later");
       });
   }, []);
 

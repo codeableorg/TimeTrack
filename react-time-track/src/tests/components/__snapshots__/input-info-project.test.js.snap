@@ -13,7 +13,7 @@ exports[`input-project-info component 1`] = `
       </h2>
       <hr />
       <fieldset
-        class="css-xeagov"
+        class="css-1ihc67e"
       >
         <label
           class="css-ooi7h"
@@ -34,7 +34,7 @@ exports[`input-project-info component 1`] = `
         </div>
       </fieldset>
       <fieldset
-        class="css-xeagov"
+        class="css-1ihc67e"
       >
         <label
           class="css-ooi7h"
@@ -55,7 +55,7 @@ exports[`input-project-info component 1`] = `
         </div>
       </fieldset>
       <fieldset
-        class="css-xeagov"
+        class="css-1ihc67e"
       >
         <label
           class="css-ooi7h"
@@ -76,7 +76,7 @@ exports[`input-project-info component 1`] = `
         </div>
       </fieldset>
       <fieldset
-        class="css-xeagov"
+        class="css-1ihc67e"
       >
         <label
           class="css-ooi7h"
@@ -92,12 +92,12 @@ exports[`input-project-info component 1`] = `
             name="txtStart"
             required=""
             type="date"
-            value="2019-08-06"
+            value="2019-08-07"
           />
         </div>
       </fieldset>
       <fieldset
-        class="css-xeagov"
+        class="css-1ihc67e"
       >
         <label
           class="css-ooi7h"
@@ -113,21 +113,21 @@ exports[`input-project-info component 1`] = `
             name="txtEnd"
             required=""
             type="date"
-            value="2019-08-06"
+            value="2019-08-07"
           />
         </div>
       </fieldset>
       <fieldset
-        class="css-1pfy88f-InputInfoProject"
+        class="css-nxuqur-InputInfoProject"
       >
         <button
-          class="css-66se3v-InputInfoProject"
+          class="css-6v7i04-InputInfoProject"
           type="button"
         >
           Cancel
         </button>
         <button
-          class="css-66se3v-InputInfoProject"
+          class="css-6v7i04-InputInfoProject"
           type="submit"
         >
           Next

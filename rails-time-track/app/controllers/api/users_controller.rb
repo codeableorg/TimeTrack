@@ -11,7 +11,7 @@ module Api
       if user.save
         render json: user, status: :created
       else
-        render_errors(user.errors.full_messages.join("\n"), :unprocessable_entity)
+        render_errors(user.errors.full_messages.join("|"), :unprocessable_entity)
       end
     end
 

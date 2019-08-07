@@ -43,7 +43,7 @@ RSpec.describe Api::SessionsController, type: :controller do
     it 'return json with attributes id, email and name' do
       post :create, params: {email:@user.email, password: @user.password},as: :json
       expected_response = JSON.parse(response.body);
-      expect(expected_response.keys.size).to eq(3)
+      expect(expected_response.keys.size).to eq(6)
 
       expect(expected_response.keys).to include("id")
       expect(expected_response.keys).to include("name")

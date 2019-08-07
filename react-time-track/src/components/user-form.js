@@ -76,7 +76,14 @@ function UserForm({ initialValue, inputs, onSubmitFn }) {
               textAlign: "center"
             }}
           >
-            {initialValue.error}
+            {initialValue.error.split("|").map(message => {
+              return (
+                <>
+                  {message}
+                  <br />
+                </>
+              );
+            })}
           </div>
         )}
       </form>
