@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :weekly_project_reports, :only => [:show]
     resources :daily_logs, :only => [:index, :create]
     resources :histories, :only => [:index]
-    resources :users do
+    resources :users, :only => [:index, :show, :create, :update] do
       resources :projects, :only => [:index]
       post "available_time", action: "available_time", on: :collection
       put "update_state", action: "update_state", on: :member
