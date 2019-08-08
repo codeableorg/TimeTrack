@@ -1,4 +1,5 @@
 import React from "react";
+import { logout } from "../services/session";
 
 const UserContext = React.createContext();
 
@@ -13,7 +14,9 @@ function UserProvider({ children }) {
   }, [loggedIn]);
 
   const onLogin = userData => setLoggedIn(userData);
-  const onLogout = () => setLoggedIn(null);
+  const onLogout = () => {
+    logout().then(() => setLoggedIn(null));
+  };
 
   const value = {
     data: loggedIn,
