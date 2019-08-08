@@ -22,7 +22,6 @@ module Api
     end
 
     def destroy
-      # current_user.invalidate_token
       cookies.delete :auth_token
       head :ok
     end
