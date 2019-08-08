@@ -246,7 +246,7 @@ function AddMemberProject({ listMember, addMemberFn, closeModalFn }) {
               >
                 {listMember.map(value => (
                   <option value={value.id} key={value.id}>
-                    {value.name}
+                    {`${value.name} (${value.role})`}
                   </option>
                 ))}
               </select>

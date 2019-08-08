@@ -20,7 +20,9 @@ module Api
     end
 
     def update
+      @user.update(user_params)
       if @user.update(user_params)
+        @user.update(rate: @user.rate*100)
         render json: @user, status: :ok
       else
         render_errors(@user.errors.full_messages.join("\n"), :unprocessable_entity)
