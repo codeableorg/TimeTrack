@@ -3,7 +3,7 @@ require 'faker'
 #Create users
 
   owner = User.create(
-    name: "Diego Owner",
+    name: "Diego",
     email: "diegotc86@gmail.com",
     password: "123456",
     role: "Owner",
@@ -11,7 +11,7 @@ require 'faker'
   )
   
   manager1 = User.create(
-    name: "Brayan Manager",
+    name: "Brayan",
     email: "linzeur@hotmail.com",
     password: "123456",
     role: "Manager",
@@ -19,7 +19,7 @@ require 'faker'
   )
 
   manager2 = User.create(
-    name: "Frank Manager",
+    name: "Frank",
     email: "manager2@mail.com",
     password: "123456",
     role: "Manager",
@@ -28,7 +28,7 @@ require 'faker'
   )
   
   analyst1 = User.create(
-    name: "Jonathan Analyst",
+    name: "Jonathan",
     email: "jcmendozar10@gmail.com",
     password: "123456",
     role: "Analyst",
@@ -36,7 +36,7 @@ require 'faker'
   )
 
   analyst2 = User.create(
-    name: "Lian Analyst",
+    name: "Lian",
     email: "analyst2@mail.com",
     password: "123456",
     role: "Analyst",
@@ -44,7 +44,7 @@ require 'faker'
   )
 
   analyst3 = User.create(
-    name: "Carlos Analyst",
+    name: "Carlos",
     email: "analyst3@mail.com",
     password: "123456",
     role: "Analyst",
@@ -52,7 +52,7 @@ require 'faker'
   )
 
   analyst4 = User.create(
-    name: "Carmen Analyst",
+    name: "Carmen",
     email: "analyst4@mail.com",
     password: "123456",
     role: "Analyst",
@@ -341,7 +341,7 @@ require 'faker'
           DailyLog.create(
             project_member: member,
             date: day.to_s,
-            amount: (member.estimated_cost / duration * rand(0.75..1.75)).to_i
+            amount: (member.estimated_cost / duration * rand(0..1.85)).to_i
           )
         end
       }
@@ -360,7 +360,7 @@ require 'faker'
           DailyLog.create(
             project_member: member,
             date: day.to_s,
-            amount: (member.estimated_cost / duration * rand(0.75..1.75)).to_i
+            amount: (member.estimated_cost / duration * rand(0..1.85)).to_i
           )
         end
       }

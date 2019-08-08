@@ -1,5 +1,5 @@
 class UserAvailableTimeSerializer < ActiveModel::Serializer
-  attributes :id, :name, :rate, :availableTime, :isChosen
+  attributes :id, :name, :rate, :availableTime, :isChosen, :role
 
   def availableTime
     params = @instance_options[:option_name]
