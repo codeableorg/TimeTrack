@@ -21,7 +21,10 @@ function ListMemberProject({ nextFn, beforeFn }) {
 
   const titleProject = JSON.parse(sessionStorage.getItem("InfoNewProject"))
     .title;
-  const totalCost = listMemberAdded.reduce((sum, elem) => sum + elem.cost, 0);
+  const totalCost =
+    Math.round(
+      listMemberAdded.reduce((sum, elem) => sum + elem.cost, 0) * 100
+    ) / 100;
 
   function addMember(newMember) {
     let index = listMember.findIndex(element => element.id === newMember.id);

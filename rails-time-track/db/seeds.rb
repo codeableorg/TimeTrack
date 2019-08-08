@@ -63,7 +63,7 @@ require 'faker'
   #Create projects
 
   project1 = Project.create(
-    name: "Proyecto 1",
+    name: "Kampu",
     client: "Graña y Montero",
     category: "Category 1",
     start_date: "2019-07-08",
@@ -74,7 +74,7 @@ require 'faker'
   )
 
   project2 = Project.create(
-    name: "Proyecto 2",
+    name: "Line Balancing",
     client: "Interbank Group",
     category: "Category 2",
     start_date: "2019-07-08",
@@ -85,7 +85,7 @@ require 'faker'
   )
 
   project3 = Project.create(
-    name: "Proyecto 3",
+    name: "Shift me",
     client: "Essalud",
     category: "Category 3",
     start_date: "2019-07-08",
@@ -96,7 +96,7 @@ require 'faker'
   )
 
   project4 = Project.create(
-    name: "Proyecto 4",
+    name: "OverBooking",
     client: "Energia y Minas",
     category: "Category 1",
     start_date: "2019-07-08",
@@ -107,8 +107,8 @@ require 'faker'
   )
 
   project5 = Project.create(
-    name: "Proyecto 5",
-    client: "Banco Mundial",
+    name: "Codeable App",
+    client: "Able",
     category: "Category 2",
     start_date: "2019-07-08",
     end_date: "2019-09-30",

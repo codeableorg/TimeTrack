@@ -15,7 +15,12 @@ function UserProvider({ children }) {
 
   const onLogin = userData => setLoggedIn(userData);
   const onLogout = () => {
-    logout().then(() => setLoggedIn(null));
+    logout()
+      .then(() => setLoggedIn(null))
+      .catch(response => {
+        console.log(response);
+        setLoggedIn(null);
+      });
   };
 
   const value = {
