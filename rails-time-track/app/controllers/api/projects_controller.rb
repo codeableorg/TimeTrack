@@ -32,7 +32,7 @@ module Api
                             category: params[:category],
                             start_date: params[:start_date],
                             end_date: params[:end_date],
-                            estimated_cost: params[:estimated_cost],
+                            estimated_cost: params[:estimated_cost]*100,
                             real_cost: 0,
                             closed: false
                           )
@@ -40,7 +40,7 @@ module Api
         if params[:members].all? do |member|
           newMember = ProjectMember.new(
                                         user_id: member[:user_id],
-                                        estimated_cost: member[:estimated_cost],
+                                        estimated_cost: member[:estimated_cost]*100,
                                         real_cost: 0
                                         )
           newMember.project_id = project.id

@@ -38,7 +38,7 @@ class User < ApplicationRecord
   def availableTimeRange(startDate, endDate)
     workingDaysRange = (startDate..endDate).filter {|d| (1..5).include?(d.wday) }
     listProjectAssigned = self.project_members.includes(:project)
-    return Array.new(workingDaysRange.length, 100) if projects.size == 0
+    return Array.new(workingDaysRange.length, 100) if listProjectAssigned.size == 0
 
     listTimeByProject = listProjectAssigned.map do |project|
       projectTimeRange = (project.project.start_date..project.project.end_date).filter {|d| (1..5).include?(d.wday) }

@@ -213,7 +213,8 @@ function AddMemberProject({ listMember, addMemberFn, closeModalFn }) {
     let member = listMember[ddlEmployee.selectedIndex];
     let name = member.name;
     let time = +event.target.elements.txtTime.value;
-    let cost = (member.rate * member.availableTime.length * 8 * time) / 100;
+    let cost =
+      Math.round(member.rate * member.availableTime.length * 8 * time) / 100;
 
     addMemberFn({ id, name, time, cost });
     closeModalFn();
@@ -246,7 +247,7 @@ function AddMemberProject({ listMember, addMemberFn, closeModalFn }) {
               >
                 {listMember.map(value => (
                   <option value={value.id} key={value.id}>
-                    {value.name}
+                    {`${value.name} (${value.role})`}
                   </option>
                 ))}
               </select>

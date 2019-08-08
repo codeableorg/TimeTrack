@@ -19,7 +19,10 @@ function EditUser({ user_id }) {
   });
 
   React.useEffect(() => {
-    getUser(user_id).then(data => setUser(data));
+    getUser(user_id).then(data => {
+      data.rate /= 100;
+      setUser(data);
+    });
   }, []);
 
   function handleSubmit(e) {
